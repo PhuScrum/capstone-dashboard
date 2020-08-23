@@ -1,5 +1,51 @@
 <p>model-present works!</p>
 <p><b>Regression metrics</b></p>
-<p><b>Error outlook </b></p>
+
+<div nz-row>
+    <div nz-col nzSpan="6"><B>Error outlook</B></div>
+    <div nz-col nzSpan="6">
+        <nz-select ngModel="lucy">
+            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+          </nz-select>
+    </div>
+    <div nz-col nzSpan="6">
+        <nz-select ngModel="lucy">
+            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+          </nz-select>
+    </div>
+    <div nz-col nzSpan="6">
+        
+        <nz-select ngModel="lucy">
+            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+          </nz-select>
+    </div>
+</div>
+
 <div echarts [options]="chartOption" class="demo-chart"></div>
+
+<br/><br/><br/>
+
+<div nz-row>
+    <div nz-col nzSpan="8">
+        <p>R2</p>
+        <nz-progress nz-tooltip nzTitle="mockup" 
+        [nzPercent]="100" 
+        [nzSuccessPercent]="30">
+
+        </nz-progress>
+    </div>
+    <div nz-col nzSpan="8"></div>
+    <div nz-col nzSpan="8">
+        <p>RMSE</p>
+        <nz-progress nz-tooltip nzTitle="mockup" 
+        [nzPercent]="100" 
+        [nzSuccessPercent]="40">
+
+        </nz-progress>
+
+    </div>
+  </div>
 
