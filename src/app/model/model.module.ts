@@ -8,6 +8,7 @@ import { ModelPageComponent } from './model-page/model-page.component';
   declarations: [ModelPageComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [ModelPageComponent]
 })
 export class ModelModule { }
