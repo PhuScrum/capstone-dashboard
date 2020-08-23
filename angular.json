@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "capstone-agtuary-dashboard"
+  "defaultProject": "capstone-agtuary-dashboard",
+  "cli": {
+    "analytics": "c710eddc-cbb0-4112-9b0f-f55a1b2bc853"
+  }
 }

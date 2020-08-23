@@ -1,0 +1,87 @@
+.bg-green {
+  background-color: #135132!important;
+}
+
+/* .navbar {
+  padding: 2.25rem;
+} */
+
+.navbar-brand {
+  padding: 0;
+  margin-right: 2.25rem;
+}
+
+.nav-logo {
+  border-right: 2px solid white;
+}
+
+.nav-title{
+  margin-left: 2.25rem;
+}
+
+h3 {
+  margin-bottom: 0;
+  font-size: 34px ;
+  font-family: 'Montserrat', sans-serif;
+  color: #F4F4F4;
+  text-transform: capitalize;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.nav-title span {
+  font-size: 14px;
+  line-height: 1;
+  font-family: 'Montserrat', sans-serif;
+  color: #F4F4F4;
+  text-transform: capitalize;
+}
+
+.bottom-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: #F66D51;
+}
+
+
+
+.nav-item.active .nav-link {
+  border-bottom: 5px solid #135132;
+}
+
+.nav-link {
+  font-size: 24px;
+  line-height: 1;
+  font-family: 'Montserrat', sans-serif;
+  color: #000000;
+  font-weight: 500;
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
+
+@media (min-width: 992px){
+  .navbar-expand-lg .navbar-nav .nav-item {
+    padding-right: 80px;
+    padding-left: 80px;
+  }
+
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: .0;
+    padding-left: .0;
+  }
+
+  .navbar-expand-lg .navbar-nav .nav-item:first-child {
+    padding-left: 22px;
+  }
+  .navbar-expand-lg .navbar-nav .nav-item:last-child{
+    padding-right: 22px;
+  }
+
+  .navbar-expand-lg .navbar-nav.group-2 .nav-item {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
