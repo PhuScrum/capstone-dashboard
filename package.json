@@ -20,7 +20,6 @@
     "@angular/platform-browser-dynamic": "~10.0.4",
     "@angular/router": "~10.0.4",
     "echarts": "^4.8.0",
-    "ng-zorro-antd": "^9.3.0",
     "ngx-echarts": "^5.1.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

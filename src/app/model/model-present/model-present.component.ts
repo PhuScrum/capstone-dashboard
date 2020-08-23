@@ -22,8 +22,8 @@ export class ModelPresentComponent implements OnInit {
           data: ['expense', 'revenue']
       },
       grid: {
-          left: '0%',
-          right: '0%',
+          left: '6%',
+          right: '4%',
           bottom: '3%',
           containLabel: true
       },
