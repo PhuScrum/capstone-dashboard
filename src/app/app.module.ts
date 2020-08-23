@@ -14,7 +14,7 @@ import {ModelModule} from './model/model.module'
     BrowserModule,
     AppRoutingModule,
     NavbarModule,
-    ModelModule
+    ModelModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

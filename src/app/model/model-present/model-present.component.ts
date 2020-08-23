@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EChartOption } from 'echarts';
 
 @Component({
   selector: 'model-present',
@@ -6,8 +7,56 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./model-present.component.css']
 })
 export class ModelPresentComponent implements OnInit {
-
-  constructor() { }
+  chartOption: EChartOption = {
+  
+  };
+  constructor() { 
+    this.chartOption = {
+      title: {
+          text: 'Agtuary model presentation'
+      },
+      tooltip: {
+          trigger: 'axis'
+      },
+      legend: {
+          data: ['expense', 'revenue']
+      },
+      grid: {
+          left: '6%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+      },
+      toolbox: {
+          feature: {
+              saveAsImage: {}
+          }
+      },
+      xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: ['2010', '2011', '2012', '2013', '2014', '2015', '2016']
+      },
+      yAxis: {
+          type: 'value'
+      },
+      series: [
+          {
+              name: 'expense',
+              type: 'line',
+              stack: 'quantity',
+              data: [320, 332, 301, 334, 390, 330, 320]
+          },
+          {
+              name: 'revenue',
+              type: 'line',
+              stack: 'quantity',
+              data: [820, 932, 901, 934, 1290, 1330, 1320]
+          }
+      ]
+  };
+  
+  }
 
   ngOnInit(): void {
   }
