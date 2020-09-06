@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EChartOption } from 'echarts';
-
+import * as data from './model_random_forest.json'
 @Component({
   selector: 'model-present',
   templateUrl: './model-present.component.html',
@@ -59,6 +59,7 @@ export class ModelPresentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+      console.log(data)
   }
 
 }
