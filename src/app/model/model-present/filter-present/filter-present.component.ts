@@ -10,6 +10,7 @@ export class FilterPresentComponent implements OnInit {
   @Input() taget;
   @Input() type;
   @Input() state;
+  selectedType: string = 'default';
 
   @Output() selectType:EventEmitter <any> = new EventEmitter()
   inputData = {}
@@ -19,8 +20,10 @@ export class FilterPresentComponent implements OnInit {
     console.log('passingdata: ', this.taget)
   }
 
-  sendType(type: string){
+  sendType(type){
+    console.log('sendtype: ')
     console.log(type)
+    this.selectedType =type
     this.selectType.emit(type)
   }
 
