@@ -1,8 +1,11 @@
 <p><b>Regression metrics</b></p>
 
 <error-outlook></error-outlook>
-<filter-present [data]='data'></filter-present>
-
+<filter-present [taget]='taget' [state]='state' [type]='type' (selectType) = "selectType(type)" ></filter-present>
+abc
+<h4 *ngFor='let item of data.taget'>
+    {{item}}
+</h4>
 <div echarts [options]="chartOption" class="demo-chart"></div>
 
 <br/><br/><br/>
