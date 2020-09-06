@@ -8,10 +8,12 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { FilterPresentComponent } from './model-present/filter-present/filter-present.component';
+import { ErrorOutlookComponent } from './model-present/error-outlook/error-outlook.component';
 
 
 @NgModule({
-  declarations: [ModelPageComponent, ModelSelectComponent, ModelPresentComponent],
+  declarations: [ModelPageComponent, ModelSelectComponent, ModelPresentComponent, FilterPresentComponent, ErrorOutlookComponent],
   imports: [
     CommonModule,
     NzProgressModule,
