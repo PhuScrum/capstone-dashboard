@@ -1,33 +1,32 @@
-<p><b>Regression metrics</b></p>
+<p>
+  <b>Regression metrics</b>
+</p>
 
 <error-outlook></error-outlook>
-<filter-present [taget]='taget' [state]='state' [type]='type' (selectTarget) = "selectTarget($event)" ></filter-present>
+<filter-present [taget]='taget' [state]='state' [type]='type' (selectTarget)="selectTarget($event)"></filter-present>
 abc
 <h4 *ngFor='let item of data.taget'>
-    {{item}}
+  {{item}}
 </h4>
 <div echarts [options]="chartOption" class="demo-chart"></div>
 
-<br/><br/><br/>
+<br/>
+<br/>
+<br/>
 
 <div nz-row>
-    <div nz-col nzSpan="8">
-        <p>R2</p>
-        <nz-progress nz-tooltip nzTitle="mockup"
-        [nzPercent]="100"
-        [nzSuccessPercent]="30">
+  <div nz-col nzSpan="8">
+    <p>R2</p>
+    <nz-progress nz-tooltip nzTitle="mockup" [nzPercent]="100" [nzSuccessPercent]="r2Score">
 
-        </nz-progress>
-    </div>
-    <div nz-col nzSpan="8"></div>
-    <div nz-col nzSpan="8">
-        <p>RMSE</p>
-        <nz-progress nz-tooltip nzTitle="mockup"
-        [nzPercent]="100"
-        [nzSuccessPercent]="40">
-
-        </nz-progress>
-
-    </div>
+    </nz-progress>
   </div>
+  <div nz-col nzSpan="8"></div>
+  <div nz-col nzSpan="8">
+    <p>RMSE</p>
+    <nz-progress nz-tooltip nzTitle="mockup" [nzPercent]="100" [nzSuccessPercent]="rmse">
 
+    </nz-progress>
+
+  </div>
+</div>
