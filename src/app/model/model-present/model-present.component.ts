@@ -69,4 +69,14 @@ export class ModelPresentComponent implements OnInit {
       console.log('file json: ',data.name, data.RMSE, data.taget)
   }
 
+  selectState(state): void{
+    this.present.state = state
+  }
+  selectType(){
+
+  }
+  selectTarget(){
+
+  }
+
 }
