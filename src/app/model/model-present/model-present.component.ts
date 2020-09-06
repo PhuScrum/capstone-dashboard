@@ -10,6 +10,13 @@ export class ModelPresentComponent implements OnInit {
   chartOption: EChartOption = {
   
   };
+
+  data = data
+  present ={
+      state: '',
+      type: '',
+      target: ''
+  }
   constructor() { 
     this.chartOption = {
       title: {
@@ -59,7 +66,7 @@ export class ModelPresentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      console.log(data)
+      console.log('file json: ',data.name, data.RMSE, data.taget)
   }
 
 }

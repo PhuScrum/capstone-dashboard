@@ -1,22 +1,14 @@
+
+<h4 *ngFor="let item of _data.taget">
+    {{item}}
+</h4>
 <div nz-row>
-    <div nz-col nzSpan="6"><B>Filter</B></div>
-    <div nz-col nzSpan="6">
-        <nz-select ngModel="state">
-            <nz-option nzValue="nsw" nzLabel="NSW"></nz-option>
-            <nz-option nzValue="vic" nzLabel="VIC"></nz-option>
-          </nz-select>
-    </div>
-    <div nz-col nzSpan="6">
-        <nz-select ngModel="type">
-            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-          </nz-select>
-    </div>
-    <div nz-col nzSpan="6">
-        
-        <nz-select ngModel="target">
-            <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-            <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-          </nz-select>
+    <div nz-col nzSpan="6"><B>Filter123</B></div>
+        <div nz-col nzSpan="6">
+            <nz-select ngModel="type">
+                <div *ngFor='let item of _data.taget'>
+                <nz-option nzValue="{{item}}" nzLabel="{{item}}"></nz-option>
+                </div>  
+            </nz-select>
     </div>
 </div>
