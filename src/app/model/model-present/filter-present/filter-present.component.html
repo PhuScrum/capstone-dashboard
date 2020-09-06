@@ -3,11 +3,18 @@
     {{item}}
 </h4>
 <div nz-row>
-    <div nz-col nzSpan="6"><B>Filter</B></div>
-    <div class="form-group">
+  <div nz-col nzSpan="6"><B>Filter</B></div>
+    <!-- <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
         <label for="sel1">Select list:</label>
-        <select class="form-control" id="sel1">
-          <option *ngFor='let item of taget' (click)='sendType(item)'>{{item}}</option>
+        <select class="form-control" id="sel1" [(ngModel)]="selectedType" (change)="onTargetChange()" [ngModelOptions]="{standalone: true}">
+          <option [ngValue]="null" disabled>Choose your profile</option>
+          <option *ngFor='let item of taget' >{{item}}</option>
         </select>
       </div>
-    </div>
+
+    </form> -->
+    <nz-select [(ngModel)]="selectedType"  (ngModelChange)="onSelectTarget($event)" nzAllowClear nzPlaceHolder="Choose">
+      <nz-option *ngFor="let option of taget" [nzValue]="option" [nzLabel]="option"></nz-option>
+    </nz-select>
+</div>

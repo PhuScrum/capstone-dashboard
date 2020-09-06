@@ -7,12 +7,13 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 })
 export class FilterPresentComponent implements OnInit {
 
-  @Input() taget;
+  @Input() taget = [];
   @Input() type;
   @Input() state;
-  selectedType: string = 'default';
 
-  @Output() selectType:EventEmitter <any> = new EventEmitter()
+  selectedType: string;
+
+  @Output() selectTarget:EventEmitter <any> = new EventEmitter()
   inputData = {}
   constructor() { }
 
@@ -20,11 +21,23 @@ export class FilterPresentComponent implements OnInit {
     console.log('passingdata: ', this.taget)
   }
 
-  sendType(type){
+  onSubmit(): void {
+    console.log(this.selectedType)
+  }
+
+  onTargetChange(): void{
+    console.log(this.selectedType)
+  }
+
+  onSelectTarget(type: string): void{
     console.log('sendtype: ')
     console.log(type)
-    this.selectedType =type
-    this.selectType.emit(type)
+    this.selectedType = type
+    this.selectTarget.emit(type)
+  }
+
+  log(value: string): void {
+    console.log(value);
   }
 
 }

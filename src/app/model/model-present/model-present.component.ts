@@ -8,19 +8,19 @@ import * as data from './model_random_forest.json'
 })
 export class ModelPresentComponent implements OnInit {
   chartOption: EChartOption = {
-  
+
   };
 
   data = data
   taget= data.taget
   state= data.data.state
   type= data.type
-  present ={
+  present = {
       state: 'VIC',
       type: 'Conola',
       target: 'Yield'
   }
-  constructor() { 
+  constructor() {
     this.data = data
     this.chartOption = {
       title: {
@@ -66,7 +66,7 @@ export class ModelPresentComponent implements OnInit {
           }
       ]
   };
-  
+
   }
 
   ngOnInit(): void {
@@ -76,11 +76,12 @@ export class ModelPresentComponent implements OnInit {
   selectState(state: string): void{
     this.present.state = state
   }
-  selectType(type: string): void{
-     this.present.type = type
-  }
-  selectTarget(){
+  selectTarget(target: string): void{
+     console.log(target)
+     this.present.target = target
+     console.log(this.present.target)
 
   }
+
 
 }

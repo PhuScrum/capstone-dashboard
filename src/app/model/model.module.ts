@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { ModelPageComponent } from './model-page/model-page.component';
 import { ModelSelectComponent } from './model-select/model-select.component';
 import { ModelPresentComponent } from './model-present/model-present.component';
@@ -16,6 +18,7 @@ import { ErrorOutlookComponent } from './model-present/error-outlook/error-outlo
   declarations: [ModelPageComponent, ModelSelectComponent, ModelPresentComponent, FilterPresentComponent, ErrorOutlookComponent],
   imports: [
     CommonModule,
+    FormsModule,
     NzProgressModule,
     NzGridModule,
     NzSelectModule,

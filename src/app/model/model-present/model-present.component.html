@@ -1,7 +1,7 @@
 <p><b>Regression metrics</b></p>
 
 <error-outlook></error-outlook>
-<filter-present [taget]='taget' [state]='state' [type]='type' (selectType) = "selectType(type)" ></filter-present>
+<filter-present [taget]='taget' [state]='state' [type]='type' (selectTarget) = "selectTarget($event)" ></filter-present>
 abc
 <h4 *ngFor='let item of data.taget'>
     {{item}}
@@ -13,8 +13,8 @@ abc
 <div nz-row>
     <div nz-col nzSpan="8">
         <p>R2</p>
-        <nz-progress nz-tooltip nzTitle="mockup" 
-        [nzPercent]="100" 
+        <nz-progress nz-tooltip nzTitle="mockup"
+        [nzPercent]="100"
         [nzSuccessPercent]="30">
 
         </nz-progress>
@@ -22,8 +22,8 @@ abc
     <div nz-col nzSpan="8"></div>
     <div nz-col nzSpan="8">
         <p>RMSE</p>
-        <nz-progress nz-tooltip nzTitle="mockup" 
-        [nzPercent]="100" 
+        <nz-progress nz-tooltip nzTitle="mockup"
+        [nzPercent]="100"
         [nzSuccessPercent]="40">
 
         </nz-progress>
