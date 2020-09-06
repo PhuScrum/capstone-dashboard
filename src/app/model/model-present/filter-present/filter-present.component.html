@@ -1,13 +1,13 @@
 
-<h4 *ngFor="let item of _data.taget">
+<h4 *ngFor="let item of taget">
     {{item}}
 </h4>
 <div nz-row>
-    <div nz-col nzSpan="6"><B>Filter123</B></div>
+    <div nz-col nzSpan="6"><B>Filter</B></div>
         <div nz-col nzSpan="6">
             <nz-select ngModel="type">
-                <div *ngFor='let item of _data.taget'>
-                <nz-option nzValue="{{item}}" nzLabel="{{item}}"></nz-option>
+                <div *ngFor='let item of taget'>
+                <nz-option nzValue="{{item}}" nzLabel="{{item}}" (click)='sendType(item)'></nz-option>
                 </div>  
             </nz-select>
     </div>

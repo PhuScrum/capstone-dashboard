@@ -12,12 +12,16 @@ export class ModelPresentComponent implements OnInit {
   };
 
   data = data
+  taget= data.taget
+  state= data.data.state
+  type= data.type
   present ={
-      state: '',
-      type: '',
-      target: ''
+      state: 'VIC',
+      type: 'Conola',
+      target: 'Yield'
   }
   constructor() { 
+    this.data = data
     this.chartOption = {
       title: {
           text: 'Agtuary model presentation'
@@ -69,11 +73,11 @@ export class ModelPresentComponent implements OnInit {
       console.log('file json: ',data.name, data.RMSE, data.taget)
   }
 
-  selectState(state): void{
+  selectState(state: string): void{
     this.present.state = state
   }
-  selectType(){
-
+  selectType(type: string): void{
+     this.present.type = type
   }
   selectTarget(){
 

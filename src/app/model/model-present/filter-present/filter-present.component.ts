@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'filter-present',
@@ -7,27 +7,21 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class FilterPresentComponent implements OnInit {
 
-    _data;
+  @Input() taget;
+  @Input() type;
+  @Input() state;
 
-  get data(){
-    return this._data;
-  }
-
-  @Input() set data(data) {
-    if(data) {
-     this._data = data;
-    }
-  }
-
-
-
+  @Output() selectType:EventEmitter <any> = new EventEmitter()
   inputData = {}
   constructor() { }
 
   ngOnInit(): void {
-    this.inputData = this.data
-    console.log('passingdata: ', this.inputData, this.data, this._data)
+    console.log('passingdata: ', this.taget)
+  }
 
+  sendType(type: string){
+    console.log(type)
+    this.selectType.emit(type)
   }
 
 }
