@@ -1,6 +1,6 @@
 interface Predict {
-  "year": Array<Number>,
-  "data":Array<Crop>
+  year: Array<Number>,
+  data: Array<Crop>
 }
 
 interface Crop {
