@@ -14,7 +14,7 @@ export class ModelPresentComponent implements OnInit {
   data = data
   taget= data.taget
   r2Score= parseFloat(data.R2_Score) * 100
-  rmse= parseFloat(data.RMSE)
+  rmse= parseFloat(data.RMSE).toFixed(2)
   state= data.data.state
   type= data.type
   present = {
