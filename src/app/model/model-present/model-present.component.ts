@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { EChartOption } from 'echarts';
+
 import * as data from './model_random_forest.json'
+
+
+
+// import * as fs from 'file-system'
+
+import { ModelPresentService } from './model-present.service';
+import { Data as DataType } from 'src/data/dataType';
+
+
 @Component({
   selector: 'model-present',
   templateUrl: './model-present.component.html',
@@ -10,6 +20,8 @@ export class ModelPresentComponent implements OnInit {
   chartOption: EChartOption = {
 
   };
+
+  dataList: DataType[] = [];
 
   data = data
   taget= data.taget
@@ -22,7 +34,9 @@ export class ModelPresentComponent implements OnInit {
       type: 'Conola',
       target: 'Yield'
   }
-  constructor() {
+  constructor(
+      private modelPresentService: ModelPresentService
+  ) {
     this.data = data
     this.chartOption = {
       title: {
@@ -72,7 +86,11 @@ export class ModelPresentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      console.log('file json: ',data.name, data.RMSE, data.taget)
+      console.log('file json: ',data.name, data.RMSE, data.taget);
+
+      this.dataList = this.modelPresentService.getData();
+      console.log(this.dataList)
+
   }
 
   selectState(state: string): void{
