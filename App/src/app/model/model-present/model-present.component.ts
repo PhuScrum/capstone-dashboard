@@ -7,7 +7,7 @@ import * as data from './model_random_forest.json'
 
 // import * as fs from 'file-system'
 
-import { ModelPresentService } from './model-present.service';
+import { ModelService } from '../model.service';
 import { Data as DataType } from 'src/data/dataType';
 
 
@@ -35,7 +35,7 @@ export class ModelPresentComponent implements OnInit {
       target: 'Yield'
   }
   constructor(
-      private modelPresentService: ModelPresentService
+      private modelService: ModelService
   ) {
     this.data = data
     this.chartOption = {
@@ -87,9 +87,9 @@ export class ModelPresentComponent implements OnInit {
 
   ngOnInit(): void {
       console.log('file json: ',data.name, data.RMSE, data.taget);
-
-      this.dataList = this.modelPresentService.getData();
-      console.log(this.dataList)
+        console.log(this.data)
+     this.dataList = this.modelService.getData();
+    //   console.log(this.dataList)
 
   }
 

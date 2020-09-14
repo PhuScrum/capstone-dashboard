@@ -6,7 +6,9 @@ import * as vic from './rfrVIC.json';
 import * as wa from './rfrWA.json';
 // import { writeFileSync, readFileSync, readdir } from 'fs';
 
-const data = [
+import { Data } from './dataType'
+
+const data: Data[] = [
     nsw,
     qld,
     sa,
