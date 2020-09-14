@@ -18,8 +18,8 @@ export class ModelSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataList = this.modelService.getData();
-
+    this.modelService.getData()
+    .subscribe(data => this.dataList = data)
     console.log(this.dataList)
   }
 

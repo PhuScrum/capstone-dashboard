@@ -8,13 +8,9 @@ import * as wa from './rfrWA.json';
 
 import { Data } from './dataType'
 
-const data: Data[] = [
-    nsw,
-    qld,
-    sa,
-    tas,
-    vic,
-    wa
+const data1 = JSON.parse(JSON.stringify(nsw)).default
+
+export const data: Data[] = [
+  data1
 ]
 
-export default data
