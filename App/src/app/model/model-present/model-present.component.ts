@@ -42,8 +42,7 @@ export class ModelPresentComponent implements OnInit, OnChanges {
 
       const { r2_score = 0, rmse = 0, data_by_crops = [] } = this.model || {};
       this.r2Score = Number(parseFloat(r2_score.toString()) * 100);
-      this.rmse = Number((parseFloat(rmse.toString()) * 100).toFixed(2));
-      this.r2ScoreShow = this.r2Score < 0 ? 0 : this.r2Score;
+      this.rmse = Number(parseFloat(rmse.toString()).toFixed(2));
       this.formatRMSETitle = () => this.rmse;;
       // create list of crop types
       this.cropType = data_by_crops.map(item => item.name);
