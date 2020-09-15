@@ -33,7 +33,7 @@ const createHashMap = function (year: number[], values: number[]): any[] {
 }
 
 //function to generate echart options
-export const generateEchartOption = function (data: Crop): EChartOption {
+export const generateEchartOption = function (data: Crop, targetType: string): EChartOption {
   let options: EChartOption = {};
 
   options = {
@@ -71,7 +71,7 @@ export const generateEchartOption = function (data: Crop): EChartOption {
         type: 'line',
         stack: 'quantity',
         // data: this.model.data_by_crops[0].data.production
-        data: createHashMap(data.data.year, data.data.production)
+        data: createHashMap(data.data.year, data.data[targetType])
       },
       {
         name: 'prediction',
@@ -80,7 +80,7 @@ export const generateEchartOption = function (data: Crop): EChartOption {
         lineStyle: {
           type: 'dashed'
         },
-        data: createHashMap(data.prediction.year, data.prediction.production)
+        data: createHashMap(data.prediction.year, data.prediction[targetType])
       }
     ]
   };

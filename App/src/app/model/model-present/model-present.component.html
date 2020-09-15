@@ -8,7 +8,9 @@
   [selectedCropType]='filterOptions.crop'
   (selectCropType)="selectCropType($event)"
 
-  [targetType]=''
+  [targetType]='targetType'
+  [selectedTarget]='filterOptions.target'
+  (selectTargetType)="selectTargetType($event)"
 
 ></filter-present>
 

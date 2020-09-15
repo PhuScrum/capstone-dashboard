@@ -17,15 +17,16 @@ export class ModelPresentComponent implements OnInit, OnChanges {
   cropType: string[] = [];
   cropData: Crop;
 
+  targetType: string[] = [];
+
   filterOptions = {
     crop: '',
-    target: 'production'
+    target: ''
   }
 
   // model metrics
   r2Score: number = 0;
   rmse: number = 0;
-
 
   constructor() {}
 
@@ -43,8 +44,15 @@ export class ModelPresentComponent implements OnInit, OnChanges {
       // filter crop by crop name
       this.cropData = this.model.data_by_crops.find(item => item.name === this.filterOptions.crop);
 
+      // create list of target Type
+      this.targetType = Object.keys(this.cropData.data).filter(item=> item !== "year");
+
+      // set default target filter options
+      this.filterOptions.target = this.targetType[0];
+
       // generate echart options
-      this.chartOption = generateEchartOption(this.cropData);
+      this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target);
+
     }
 
 
@@ -56,7 +64,14 @@ export class ModelPresentComponent implements OnInit, OnChanges {
     this.filterOptions.crop = crop;
     this.cropData = this.model.data_by_crops.find(item => item.name === this.filterOptions.crop);
     // generate echart options
-    this.chartOption = generateEchartOption(this.cropData);
+    this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target);
+  }
+
+  selectTargetType(target: string): void {
+    this.filterOptions.target = target;
+    // this.cropData = this.model.data_by_crops.find(item => item.name === this.filterOptions.crop);
+    // generate echart options
+    this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target);
   }
 
 
