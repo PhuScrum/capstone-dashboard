@@ -22,13 +22,11 @@ export class ModelPageComponent implements OnInit {
     .subscribe(data => {
       this.dataList = data;
       this.singleData = data[0];
-      console.log(this.singleData);
     });
   }
 
-  parentFunction(data): void {
+  parentFunction(data: DataType): void {
     this.singleData = data;
-    console.log(this.singleData)
   }
 
 }

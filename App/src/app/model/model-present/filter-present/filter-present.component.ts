@@ -9,33 +9,18 @@ export class FilterPresentComponent implements OnInit {
 
   @Input() cropType!: string[];
 
+  @Output() selectTarget:EventEmitter <any> = new EventEmitter()
+
   selectedType: string;
 
-  @Output() selectTarget:EventEmitter <any> = new EventEmitter()
-  
-  inputData = {}
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(): void {
-    console.log(this.selectedType)
-  }
-
-  onTargetChange(): void{
-    console.log(this.selectedType)
-  }
-
-  onSelectTarget(type: string): void{
-    console.log('sendtype: ')
-    console.log(type)
+  onSelectCropType(type: string): void{
     this.selectedType = type
     this.selectTarget.emit(type)
-  }
-
-  log(value: string): void {
-    console.log(value);
   }
 
 }

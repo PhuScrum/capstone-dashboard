@@ -4,7 +4,7 @@ interface CropData {
     yield: number[]
 }
 
-interface Crop {
+export interface Crop {
     name: string,
     data: CropData,
     prediction: CropData

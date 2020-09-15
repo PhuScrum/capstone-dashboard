@@ -1,11 +1,9 @@
 <p>
   <b>Regression metrics</b>
-</p>
-
-<p>{{model.name}}</p>
+</p>  
 
 <error-outlook></error-outlook>
-<filter-present [cropType]='cropType' (selectTarget)="selectTarget($event)"></filter-present>
+<filter-present [cropType]='cropType' (selectTarget)="selectCropType($event)"></filter-present>
 
 <div echarts [options]="chartOption" class="demo-chart"></div>
 
@@ -16,6 +14,7 @@
 <div nz-row>
   <div nz-col nzSpan="8">
     <p>R2</p>
+    <p>{{r2Score}}</p>
     <nz-progress nz-tooltip nzTitle="mockup" [nzPercent]="100" [nzSuccessPercent]="r2Score">
 
     </nz-progress>

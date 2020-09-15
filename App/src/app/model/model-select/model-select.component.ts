@@ -10,7 +10,7 @@ import { Data as DataType } from '../../../data/dataType'
   styleUrls: ['./model-select.component.css']
 })
 export class ModelSelectComponent implements OnInit {
-  
+
   @Input() dataList: DataType[] = [];
 
   @Output() onSubmit: EventEmitter<any> = new EventEmitter<DataType>();
@@ -20,12 +20,9 @@ export class ModelSelectComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-  //  this.dataList = this.inputData;
-    console.log(this.dataList)
-  }
+  ngOnInit(): void {}
 
-  onSelectModel(model): void { 
+  onSelectModel(model: DataType): void {
     this.onSubmit.emit(model)
   }
 
