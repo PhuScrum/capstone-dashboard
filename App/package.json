@@ -22,6 +22,7 @@
     "bootstrap": "^4.5.2",
     "echarts": "^4.8.0",
     "jquery": "^3.5.1",
+    "lodash": "^4.17.20",
     "ng-zorro-antd": "^9.3.0",
     "ngx-echarts": "^5.1.2",
     "rxjs": "~6.5.5",

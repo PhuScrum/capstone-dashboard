@@ -24,17 +24,16 @@
   <div nz-col nzSpan="8">
     <p>R2</p>
     <p>{{r2Score}}</p>
-    <nz-progress nz-tooltip nzTitle="mockup" [nzPercent]="100" [nzSuccessPercent]="r2Score">
+    <nz-progress nz-tooltip nzTitle="mockup" [nzPercent]="100" [nzSuccessPercent]="r2ScoreShow">
 
     </nz-progress>
   </div>
   <div nz-col nzSpan="8"></div>
   <div nz-col nzSpan="8">
     <p>RMSE: </p>
-    <p style="font-weight: bolder" >{{rmse}}</p>
-    <!-- <nz-progress nz-tooltip nzTitle="mockup" [nzPercent]="100" [nzSuccessPercent]="rmse">
+    <nz-progress [nzPercent]="100" [nzSuccessPercent]="100" nzType="circle" [nzFormat]="formatRMSETitle" [nzWidth]="80" [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }">
 
-    </nz-progress> -->
+    </nz-progress>
 
   </div>
 </div>

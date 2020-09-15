@@ -18,6 +18,11 @@ export class ModelPresentComponent implements OnInit, OnChanges {
   cropData: Crop;
 
   targetType: string[] = [];
+  present = {
+    state: 'VIC',
+    crop: 'Conola',
+    target: 'Yield'
+  }
 
   filterOptions = {
     crop: '',
@@ -26,26 +31,30 @@ export class ModelPresentComponent implements OnInit, OnChanges {
 
   // model metrics
   r2Score: number = 0;
+  r2ScoreShow: number = 0;
   rmse: number = 0;
+  formatRMSETitle: Function;
 
-  constructor() {}
+  constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(this.model) {
-      this.r2Score = parseFloat(this.model.r2_score.toString()) * 100;
-      this.rmse = Number(parseFloat(this.model.rmse.toString()).toFixed(2));
+    if (this.model) {
 
+      const { r2_score = 0, rmse = 0, data_by_crops = [] } = this.model || {};
+      this.r2Score = Number(parseFloat(r2_score.toString()) * 100);
+      this.rmse = Number((parseFloat(rmse.toString()) * 100).toFixed(2));
+      this.r2ScoreShow = this.r2Score < 0 ? 0 : this.r2Score;
+      this.formatRMSETitle = () => this.rmse;;
       // create list of crop types
-      this.cropType = this.model.data_by_crops.map(item => item.name);
+      this.cropType = data_by_crops.map(item => item.name);
 
       // set default crop filter options
       this.filterOptions.crop = this.cropType[0];
 
       // filter crop by crop name
-      this.cropData = this.model.data_by_crops.find(item => item.name === this.filterOptions.crop);
-
+      this.cropData = data_by_crops.find(item => item.name === this.filterOptions.crop);
       // create list of target Type
-      this.targetType = Object.keys(this.cropData.data).filter(item=> item !== "year");
+      this.targetType = Object.keys(this.cropData.data).filter(item => item !== "year");
 
       // set default target filter options
       this.filterOptions.target = this.targetType[0];
@@ -58,7 +67,7 @@ export class ModelPresentComponent implements OnInit, OnChanges {
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   selectCropType(crop: string): void {
     this.filterOptions.crop = crop;

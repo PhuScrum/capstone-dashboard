@@ -1,7 +1,8 @@
 import { EChartOption } from 'echarts';
+import { get } from 'lodash';
 import { Crop } from '../../../data/dataType';
 
-const totalYearAxis = function (year1: number[], year2: number[]): number[] {
+const totalYearAxis = function (year1: number[] = [], year2: number[] = []): number[] {
   let totalYear: number[] = [];
   let result: number[] = [];
 
@@ -14,7 +15,7 @@ const totalYearAxis = function (year1: number[], year2: number[]): number[] {
   return result;
 }
 
-const createHashMap = function (year: number[], values: number[]): any[] {
+const createHashMap = function (year: number[] = [], values: number[] = []): any[] {
   let seriesData = [];
   let unitSerie = [];
 
@@ -35,7 +36,11 @@ const createHashMap = function (year: number[], values: number[]): any[] {
 //function to generate echart options
 export const generateEchartOption = function (data: Crop, targetType: string): EChartOption {
   let options: EChartOption = {};
-
+  console.log('data: ', data);
+  const dataYear = get(data, 'data.year');
+  const predictionYear = get(data, 'prediction.year');
+  const dataTargetType = get(data, `data.${targetType}`);
+  const predictionTargetType = get(data, `prediction.${targetType}`);
   options = {
     title: {
       text: 'Agtuary model presentation'
@@ -60,7 +65,7 @@ export const generateEchartOption = function (data: Crop, targetType: string): E
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: totalYearAxis(data.data.year, data.prediction.year)
+      data: totalYearAxis(dataYear, predictionYear)
     },
     yAxis: {
       type: 'value'
@@ -71,7 +76,7 @@ export const generateEchartOption = function (data: Crop, targetType: string): E
         type: 'line',
         stack: 'quantity',
         // data: this.model.data_by_crops[0].data.production
-        data: createHashMap(data.data.year, data.data[targetType])
+        data: createHashMap(dataYear, dataTargetType)
       },
       {
         name: 'prediction',
@@ -80,7 +85,7 @@ export const generateEchartOption = function (data: Crop, targetType: string): E
         lineStyle: {
           type: 'dashed'
         },
-        data: createHashMap(data.prediction.year, data.prediction[targetType])
+        data: createHashMap(predictionYear, predictionTargetType)
       }
     ]
   };
