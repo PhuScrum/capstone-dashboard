@@ -16,8 +16,10 @@ import { Data as DataType } from 'src/data/dataType';
   templateUrl: './model-present.component.html',
   styleUrls: ['./model-present.component.css']
 })
-export class ModelPresentComponent implements OnInit, OnChanges {
-    @Input() model: DataType;
+export class ModelPresentComponent implements OnInit {
+    @Input() model!: DataType;
+
+    currentModel: any;
 
 
   chartOption: EChartOption = {
@@ -84,10 +86,6 @@ export class ModelPresentComponent implements OnInit, OnChanges {
       ]
   };
 
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
   }
 
   ngOnInit(): void {
