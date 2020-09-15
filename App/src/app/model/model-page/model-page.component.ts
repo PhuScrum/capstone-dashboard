@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ModelService } from '../model.service';
+import { Data as DataType } from '../../../data/dataType'
+
 @Component({
   selector: 'model-page',
   templateUrl: './model-page.component.html',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModelPageComponent implements OnInit {
 
-  constructor() { }
+  dataList: DataType[] = [];
+  singleData: DataType;
+
+  constructor(
+    private modelService: ModelService
+  ) { }
 
   ngOnInit(): void {
+    this.modelService.getData()
+    .subscribe(data => {
+      this.dataList = data;
+      this.singleData = data[0];
+      console.log(this.singleData);
+    });
+  }
+
+  parentFunction(data): void {
+    this.singleData = data;
+    console.log(this.singleData)
   }
 
 }

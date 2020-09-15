@@ -1,8 +1,8 @@
 <div nz-row>
     <div nz-col nzSpan="12">
-        <model-select></model-select>
+        <model-select [dataList]='dataList' (onSubmit)='parentFunction($event)'></model-select>
     </div>
     <div nz-col nzSpan="12">
-        <model-present></model-present>
+        <model-present [model]='singleData'></model-present>
     </div>
   </div>

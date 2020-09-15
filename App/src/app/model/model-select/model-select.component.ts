@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { ModelService } from '../model.service';
 import { Data as DataType } from '../../../data/dataType'
@@ -10,7 +10,10 @@ import { Data as DataType } from '../../../data/dataType'
   styleUrls: ['./model-select.component.css']
 })
 export class ModelSelectComponent implements OnInit {
-  dataList: DataType[] = [];
+  
+  @Input() dataList: DataType[] = [];
+
+  @Output() onSubmit: EventEmitter<any> = new EventEmitter<DataType>();
 
   constructor(
     private modelService: ModelService
@@ -18,9 +21,12 @@ export class ModelSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.modelService.getData()
-    .subscribe(data => this.dataList = data)
+  //  this.dataList = this.inputData;
     console.log(this.dataList)
+  }
+
+  onSelectModel(model): void { 
+    this.onSubmit.emit(model)
   }
 
 }

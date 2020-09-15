@@ -1,20 +1,22 @@
 <div nz-row class="model-select">
-    <div nz-col nzSpan="12" style="padding: 0 40px;">
-        <B style="display: block;float: left;">Model</B>
-        <nz-select ngModel="lucy" style="width: 120px;display: block;float: right;" aria-placeholder="Choose">
-        </nz-select>
-    </div>
-    <div nz-col nzSpan="12" style="text-align: right; padding-right: 60px;">
-        <button type="button" class="btn" style="width: 120px;">Add Model</button>
-    </div>
+  <div nz-col nzSpan="12" style="padding: 0 40px;">
+    <B style="display: block;float: left;">Model</B>
+    <nz-select ngModel="lucy" style="width: 120px;display: block;float: right;" aria-placeholder="Choose">
+    </nz-select>
+  </div>
+  <div nz-col nzSpan="12" style="text-align: right; padding-right: 60px;">
+    <button type="button" class="btn" style="width: 120px;">Add Model</button>
+  </div>
 
-    <ul class="list-group" >
-        <li class="list-group-item" *ngFor="let item of dataList">{{item.name}}</li>
-        
-      </ul>
+  <ul class="list-group">
+    <button type="button" class="list-group-item list-group-item-action" *ngFor="let item of dataList"
+      (click)='onSelectModel(item)'>
+      {{item.name}}
+    </button>
+  </ul>
 
 
-    <!-- <div nz-col nzSpan="10" class="model right">
+  <!-- <div nz-col nzSpan="10" class="model right">
         <div nz-row>
             <div nz-col nzSpan="12" class="float-left" ><B>Model 1</B></div>
             <div nz-col nzSpan="12" class="float-right" style="justify-content: flex-end;" ><a class="model-link">View</a></div>

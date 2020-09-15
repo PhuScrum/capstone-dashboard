@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { EChartOption } from 'echarts';
 
 import * as data from './model_random_forest.json'
@@ -16,7 +16,10 @@ import { Data as DataType } from 'src/data/dataType';
   templateUrl: './model-present.component.html',
   styleUrls: ['./model-present.component.css']
 })
-export class ModelPresentComponent implements OnInit {
+export class ModelPresentComponent implements OnInit, OnChanges {
+    @Input() model: DataType;
+
+
   chartOption: EChartOption = {
 
   };
@@ -34,9 +37,7 @@ export class ModelPresentComponent implements OnInit {
       type: 'Conola',
       target: 'Yield'
   }
-  constructor(
-      private modelService: ModelService
-  ) {
+  constructor() {
     this.data = data
     this.chartOption = {
       title: {
@@ -85,10 +86,14 @@ export class ModelPresentComponent implements OnInit {
 
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+  }
+
   ngOnInit(): void {
       console.log('file json: ',data.name, data.RMSE, data.taget);
-        console.log(this.data)
-     this.dataList = this.modelService.getData();
+        // console.log(this.data)
+    //  this.dataList = this.modelService.getData();
     //   console.log(this.dataList)
 
   }

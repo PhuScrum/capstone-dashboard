@@ -7,6 +7,7 @@ const path = require('path')
 
 app.use(bodyParser.json({ limit: '10mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
+app.use(cors())
 
 // const uri = "mongodb+srv://admin:123@cluster0-ym27l.mongodb.net/mtask-app?retryWrites=true";
 // mongoose.connect(uri, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true, useCreateIndex: true })
