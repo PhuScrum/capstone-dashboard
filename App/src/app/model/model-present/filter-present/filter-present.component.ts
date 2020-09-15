@@ -7,18 +7,16 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 })
 export class FilterPresentComponent implements OnInit {
 
-  @Input() taget = [];
-  @Input() type;
-  @Input() state;
+  @Input() cropType!: string[];
 
   selectedType: string;
 
   @Output() selectTarget:EventEmitter <any> = new EventEmitter()
+  
   inputData = {}
   constructor() { }
 
   ngOnInit(): void {
-    console.log('passingdata: ', this.taget)
   }
 
   onSubmit(): void {

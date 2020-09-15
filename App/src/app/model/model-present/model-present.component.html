@@ -5,11 +5,8 @@
 <p>{{model.name}}</p>
 
 <error-outlook></error-outlook>
-<filter-present [taget]='taget' [state]='state' [type]='type' (selectTarget)="selectTarget($event)"></filter-present>
-abc
-<h4 *ngFor='let item of data.taget'>
-  {{item}}
-</h4>
+<filter-present [cropType]='cropType' (selectTarget)="selectTarget($event)"></filter-present>
+
 <div echarts [options]="chartOption" class="demo-chart"></div>
 
 <br/>

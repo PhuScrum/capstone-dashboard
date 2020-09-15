@@ -21,19 +21,15 @@ export class ModelPresentComponent implements OnInit, OnChanges {
     @Input() model!: DataType;
 
     currentModel: any;
-
-
-  chartOption: EChartOption = {
-
-  }
-
+  chartOption: EChartOption = {}
   dataList: DataType[] = [];
 
+  cropType: string[] = [];
+
   data = data
-  taget= data.taget
 
   r2Score= parseFloat(data.R2_Score) * 100
-  rmse= parseFloat(data.RMSE).toFixed(2)
+    rmse= parseFloat(data.RMSE).toFixed(2)
   state= data.data.state
   type= data.type
   present = {
@@ -72,7 +68,8 @@ export class ModelPresentComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-     console.log(this.createHashMap(this.model.data_by_crops[0].data.year, this.model.data_by_crops[0].data.production))
+      this.cropType = this.model.data_by_crops.map(item => item.name)
+    console.log(this.cropType)
     this.chartOption = {
         title: {
             text: 'Agtuary model presentation'
@@ -121,6 +118,8 @@ export class ModelPresentComponent implements OnInit, OnChanges {
             }
         ]
     };
+
+    
   }
 
   ngOnInit(): void {
