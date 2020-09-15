@@ -67,7 +67,6 @@ export class ModelPresentComponent implements OnInit, OnChanges {
             unitSerie = [year[i].toString(), values[i]];
             seriesData.push(unitSerie);
         }
-
         return seriesData;
     }
   }
@@ -118,10 +117,7 @@ export class ModelPresentComponent implements OnInit, OnChanges {
                 lineStyle: {
                     type: 'dashed'
                 },
-                
                 data: this.createHashMap(this.model.data_by_crops[0].prediction.year, this.model.data_by_crops[0].prediction.production)
-
-
             }
         ]
     };

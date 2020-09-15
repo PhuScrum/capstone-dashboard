@@ -16,6 +16,6 @@ export class ModelService {
   ) { }
 
   getData(): Observable<DataType[]> {
-    return this.http.get<DataType[]>('/api/model-data');
+    return this.http.get<DataType[]>('http://localhost:8080/api/model-data');
   }
 }
