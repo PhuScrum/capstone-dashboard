@@ -1,9 +1,16 @@
 <p>
   <b>Regression metrics</b>
-</p>  
+</p>
 
 <error-outlook></error-outlook>
-<filter-present [cropType]='cropType' (selectTarget)="selectCropType($event)"></filter-present>
+<filter-present
+  [cropType]='cropType'
+  [selectedCropType]='filterOptions.crop'
+  (selectCropType)="selectCropType($event)"
+
+  [targetType]=''
+
+></filter-present>
 
 <div echarts [options]="chartOption" class="demo-chart"></div>
 

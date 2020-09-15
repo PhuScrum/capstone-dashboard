@@ -10,7 +10,11 @@
       </div>
 
     </form> -->
-    <nz-select [(ngModel)]="selectedType"  (ngModelChange)="onSelectCropType($event)" nzAllowClear nzPlaceHolder="Choose">
+    <nz-select [(ngModel)]="selectedCropType"  (ngModelChange)="onSelectCropType($event)" nzAllowClear nzPlaceHolder="Choose">
       <nz-option *ngFor="let option of cropType" [nzValue]="option" [nzLabel]="option"></nz-option>
+    </nz-select>
+
+    <nz-select [(ngModel)]="selectedTarget"  (ngModelChange)="onSelectTargetType($event)" nzAllowClear nzPlaceHolder="Choose">
+      <nz-option *ngFor="let option of targetType" [nzValue]="option" [nzLabel]="option"></nz-option>
     </nz-select>
 </div>
