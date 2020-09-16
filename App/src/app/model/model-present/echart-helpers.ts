@@ -34,16 +34,17 @@ const createHashMap = function (year: number[] = [], values: number[] = []): any
 }
 
 //function to generate echart options
-export const generateEchartOption = function (data: Crop, targetType: string): EChartOption {
+export const generateEchartOption = function (data: Crop, targetType: string, title: string = 'Agtuary model presentation'): EChartOption {
   let options: EChartOption = {};
-  console.log('data: ', data);
+
   const dataYear = get(data, 'data.year');
   const predictionYear = get(data, 'prediction.year');
   const dataTargetType = get(data, `data.${targetType}`);
   const predictionTargetType = get(data, `prediction.${targetType}`);
+
   options = {
     title: {
-      text: 'Agtuary model presentation'
+      text: title
     },
     tooltip: {
       trigger: 'axis'

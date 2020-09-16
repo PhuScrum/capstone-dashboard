@@ -1,5 +1,5 @@
 <div class="model-select">
-  <div nz-row>
+  <div nz-row class="mb-3">
     <div nz-col nzSpan="12" style="padding: 0 40px;">
       <B style="display: block;float: left;">Model</B>
       <nz-select ngModel="lucy" style="width: 120px;display: block;float: right;" aria-placeholder="Choose">
@@ -10,18 +10,12 @@
     </div>
   </div>
 
-  <ul class="list-group">
-    <button type="button" class="list-group-item list-group-item-action" *ngFor="let item of dataList"
-      (click)='onSelectModel(item)'>
-      {{item.name}}
-    </button>
-  </ul>
-
   <div nz-row [nzGutter]="[hGutter, vGutter]">
-    <div nz-col nzSpan="12" class="model gutter-row" *ngFor="let item of dataList">
-      <div nz-row>
+    <div nz-col nzSpan="12" *ngFor="let item of dataList">
+      <div class="model">
+        <div nz-row>
           <div nz-col nzSpan="12" class="float-left" ><B>Model {{item.name}}</B></div>
-          <div nz-col nzSpan="12" class="float-right" style="justify-content: flex-end;" ><a class="model-link">View</a></div>
+          <div nz-col nzSpan="12" class="float-right" style="justify-content: flex-end;" ><a (click)='onSelectModel(item)' class="model-link">View</a></div>
           <div nz-col nzSpan="12" class="float-left" >Type</div>
           <div nz-col nzSpan="12" class="float-right" >LinearRegression</div>
           <div nz-col nzSpan="12" class="float-left" >Model Grade</div>
@@ -33,6 +27,7 @@
           <div nz-col nzSpan="24" >
               <button type="button" class="btn submit-model" style="width: 100%;"> </button>
           </div>
+      </div>
       </div>
   </div>
   </div>
