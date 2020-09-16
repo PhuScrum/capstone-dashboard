@@ -42,6 +42,9 @@ export const generateEchartOption = function (data: Crop, targetType: string, ti
   const dataTargetType = get(data, `data.${targetType}`);
   const predictionTargetType = get(data, `prediction.${targetType}`);
 
+  console.log(predictionTargetType)
+  console.log(dataTargetType)
+
   options = {
     title: {
       text: title
@@ -75,14 +78,14 @@ export const generateEchartOption = function (data: Crop, targetType: string, ti
       {
         name: 'real',
         type: 'line',
-        stack: 'quantity',
+        stack: 'real',
         // data: this.model.data_by_crops[0].data.production
         data: createHashMap(dataYear, dataTargetType)
       },
       {
         name: 'prediction',
         type: 'line',
-        stack: 'quantity',
+        stack: 'prediction',
         lineStyle: {
           type: 'dashed'
         },
