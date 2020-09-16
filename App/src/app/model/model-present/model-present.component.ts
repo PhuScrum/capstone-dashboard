@@ -39,11 +39,15 @@ export class ModelPresentComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.model) {
+      const { r2_score, rmse, data_by_crops } = this.model || {};
 
-      const { r2_score = 0, rmse = 0, data_by_crops = [] } = this.model || {};
       this.r2Score = Number(parseFloat(r2_score.toString()) * 100);
+      this.r2ScoreShow = this.r2Score < 0 ? 0 : this.r2Score;
+
       this.rmse = Number(parseFloat(rmse.toString()).toFixed(2));
-      this.formatRMSETitle = () => this.rmse;;
+
+      this.formatRMSETitle = () => this.rmse;
+
       // create list of crop types
       this.cropType = data_by_crops.map(item => item.name);
 
@@ -52,6 +56,7 @@ export class ModelPresentComponent implements OnInit, OnChanges {
 
       // filter crop by crop name
       this.cropData = data_by_crops.find(item => item.name === this.filterOptions.crop);
+
       // create list of target Type
       this.targetType = Object.keys(this.cropData.data).filter(item => item !== "year");
 
@@ -62,8 +67,6 @@ export class ModelPresentComponent implements OnInit, OnChanges {
       this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target);
 
     }
-
-
   }
 
   ngOnInit(): void { }

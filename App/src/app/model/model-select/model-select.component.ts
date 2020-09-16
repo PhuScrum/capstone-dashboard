@@ -10,6 +10,8 @@ import { Data as DataType } from '../../../data/dataType'
   styleUrls: ['./model-select.component.css']
 })
 export class ModelSelectComponent implements OnInit {
+  hGutter = 16;
+  vGutter = 16;
 
   @Input() dataList: DataType[] = [];
 

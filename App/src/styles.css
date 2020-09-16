@@ -24,10 +24,10 @@ button.btn {
 }
 
 .model {
-    position: absolute;
+    /* position: absolute;
     width: 400px;
     top: 70px;
-    height: 319px;
+    height: 319px; */
     background: #FFFFFF;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
     border-radius: 10px;

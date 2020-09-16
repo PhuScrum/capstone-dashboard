@@ -19,7 +19,7 @@ export class FilterPresentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.selectedCropType  = this.cropType[0];
+    if(this.cropType) { this.selectedCropType  = this.cropType[0]; }
   }
 
   onSelectCropType(type: string): void {

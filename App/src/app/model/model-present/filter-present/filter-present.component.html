@@ -1,20 +1,10 @@
 <div nz-row>
   <div nz-col nzSpan="6"><B>Filter</B></div>
-    <!-- <form (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="sel1">Select list:</label>
-        <select class="form-control" id="sel1" [(ngModel)]="selectedType" (change)="onTargetChange()" [ngModelOptions]="{standalone: true}">
-          <option [ngValue]="null" disabled>Choose your profile</option>
-          <option *ngFor='let item of taget' >{{item}}</option>
-        </select>
-      </div>
-
-    </form> -->
-    <nz-select [(ngModel)]="selectedCropType"  (ngModelChange)="onSelectCropType($event)" nzAllowClear nzPlaceHolder="Choose">
+    <nz-select [(ngModel)]="selectedCropType"  (ngModelChange)="onSelectCropType($event)" nzPlaceHolder="Choose">
       <nz-option *ngFor="let option of cropType" [nzValue]="option" [nzLabel]="option"></nz-option>
     </nz-select>
 
-    <nz-select [(ngModel)]="selectedTarget"  (ngModelChange)="onSelectTargetType($event)" nzAllowClear nzPlaceHolder="Choose">
+    <nz-select [(ngModel)]="selectedTarget"  (ngModelChange)="onSelectTargetType($event)" nzPlaceHolder="Choose">
       <nz-option *ngFor="let option of targetType" [nzValue]="option" [nzLabel]="option"></nz-option>
     </nz-select>
 </div>

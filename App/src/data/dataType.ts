@@ -11,12 +11,6 @@ export interface Crop {
 }
 
 export interface Data {
-    // id: string,
-    // name: string,
-    // description: string,
-    // price: number,
-    // views: number
-
     name: string,
     r2_score: number,
     rmse: number,
