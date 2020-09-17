@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 
 import { ModelPageComponent } from './model-page/model-page.component';
@@ -21,6 +21,7 @@ import { ErrorOutlookComponent } from './model-present/error-outlook/error-outlo
     HttpClientModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     NzProgressModule,
     NzGridModule,
     NzSelectModule,

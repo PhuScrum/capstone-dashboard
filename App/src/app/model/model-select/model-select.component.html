@@ -1,14 +1,15 @@
 <div class="model-select">
-  <div nz-row class="mb-3">
-    <div nz-col nzSpan="12" style="padding: 0 40px;">
-      <B style="display: block;float: left;">Model</B>
-      <nz-select ngModel="lucy" style="width: 120px;display: block;float: right;" aria-placeholder="Choose">
+  <form class="form-inline mb-3">
+    <div class="form-group mr-auto">
+      <B style="display: block;float: left;margin-right: 5px;">Model</B>
+      <nz-select style="width: 120px;display: block;float: right;" aria-placeholder="Choose">
       </nz-select>
     </div>
-    <div nz-col nzSpan="12" style="text-align: right; padding-right: 60px;">
-      <button type="button" class="btn" style="width: 120px;">Add Model</button>
+    <div class="model-input form-group">
+      <button type="button" class="btn" style="width: 120px;" (click)="filePicker.click()">Add Model</button>
+      <input type="file" #filePicker (change)="onModelPicked($event)" >
     </div>
-  </div>
+  </form>
 
   <div nz-row [nzGutter]="[hGutter, vGutter]">
     <div nz-col nzSpan="12" *ngFor="let item of dataList">

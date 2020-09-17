@@ -78,7 +78,7 @@ color: #000000;
     font-size: 18px;
     line-height: 140.62%;
     /* or 25px */
-    display: inline-block;
+    display: block;
     display: flex;
     align-items: center;
     text-decoration-line: underline !important;
@@ -86,3 +86,17 @@ color: #000000;
 
     color: #F66D51 !important;
 }
+
+.model-input {
+    position: relative;
+}
+
+.model-input input{
+    position: absolute;
+    
+}
+
+input[type="file"]{
+    visibility: hidden;
+  }
+
