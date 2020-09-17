@@ -25,6 +25,8 @@ app.get('/api', (req, res) => {
 app.route('/api/model-data')
     .get(ml_model_API.crud.getModelData)
 
+app.route('/api/save-model', upload.single('modelData'), ml_model_API.crud.uploadModel)
+
 
 var port = process.env.PORT || 8080
   app.listen(port, () => {
