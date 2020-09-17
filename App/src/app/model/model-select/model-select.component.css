@@ -1,0 +1,102 @@
+.model-select {
+    position: relative;
+}
+
+.submit-model {
+    background: #F66D51;
+    border-radius: 50px;
+}
+
+.model {
+    /* position: absolute;
+    width: 400px;
+    top: 70px;
+    height: 319px; */
+    background: #FFFFFF;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    height: 319px;
+}
+
+.model > .ant-row {
+    height: 100%;
+    padding: 10px;
+}
+
+.model .ant-col.float-left {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 140.62%;
+    /* or 25px */
+    
+    display: flex;
+    align-items: center;
+    font-variant: small-caps;
+    
+    color: #A5A5A5;
+    text-align: left;
+}
+.model .ant-col.float-right {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 140.62%;
+    /* or 25px */
+    
+    display: flex;
+    align-items: center;
+    text-align: left;
+    color: #000000;
+    text-align: right;
+}
+
+.model .ant-col b {
+    
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 140.62%;
+/* identical to box height, or 34px */
+
+display: flex;
+align-items: center;
+
+color: #000000;
+}
+
+.model.right {
+    left: 36px;
+}
+.model.left {
+    left: 498px;
+}
+
+.model-link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 140.62%;
+    /* or 25px */
+    display: block;
+    display: flex;
+    align-items: center;
+    text-decoration-line: underline !important;
+    float: right;
+
+    color: #F66D51 !important;
+}
+
+.model-input {
+    position: relative;
+}
+
+.model-input input{
+    position: absolute;
+    
+}
+
+input[type="file"]{
+    visibility: hidden;
+  }
+

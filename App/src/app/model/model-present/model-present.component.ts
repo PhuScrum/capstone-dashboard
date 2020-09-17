@@ -14,6 +14,8 @@ export class ModelPresentComponent implements OnInit, OnChanges {
   @Input() model!: DataType;
 
   chartOption: EChartOption = {};
+  chartTitle: string = '';
+
   cropType: string[] = [];
   cropData: Crop;
 
@@ -40,6 +42,7 @@ export class ModelPresentComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (this.model) {
       const { r2_score, rmse, data_by_crops } = this.model || {};
+      this.chartTitle = 'Agtuary model ' + this.model.name;
 
       this.r2Score = Number(parseFloat(r2_score.toString()) * 100);
       this.r2ScoreShow = this.r2Score < 0 ? 0 : this.r2Score;
@@ -64,7 +67,7 @@ export class ModelPresentComponent implements OnInit, OnChanges {
       this.filterOptions.target = this.targetType[0];
 
       // generate echart options
-      this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target);
+      this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
 
     }
   }
@@ -75,14 +78,16 @@ export class ModelPresentComponent implements OnInit, OnChanges {
     this.filterOptions.crop = crop;
     this.cropData = this.model.data_by_crops.find(item => item.name === this.filterOptions.crop);
     // generate echart options
-    this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target);
+    this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
+
   }
 
   selectTargetType(target: string): void {
     this.filterOptions.target = target;
     // this.cropData = this.model.data_by_crops.find(item => item.name === this.filterOptions.crop);
     // generate echart options
-    this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target);
+    this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
+
   }
 
 

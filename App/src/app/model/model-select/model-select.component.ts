@@ -13,6 +13,7 @@ export class ModelSelectComponent implements OnInit {
   hGutter = 16;
   vGutter = 16;
 
+
   @Input() dataList: DataType[] = [];
 
   @Output() onSubmit: EventEmitter<any> = new EventEmitter<DataType>();
@@ -26,6 +27,12 @@ export class ModelSelectComponent implements OnInit {
 
   onSelectModel(model: DataType): void {
     this.onSubmit.emit(model)
+  }
+
+  onModelPicked(event: Event): void {
+    const file = (event.target as HTMLInputElement).files[0];
+
+    this.modelService.onSaveModelFile(file);
   }
 
 }

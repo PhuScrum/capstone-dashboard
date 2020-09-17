@@ -2,7 +2,8 @@
   <b>Regression metrics</b>
 </p>
 
-<error-outlook></error-outlook>
+<!-- <error-outlook></error-outlook> -->
+
 <filter-present
   [cropType]='cropType'
   [selectedCropType]='filterOptions.crop'
@@ -11,16 +12,11 @@
   [targetType]='targetType'
   [selectedTarget]='filterOptions.target'
   (selectTargetType)="selectTargetType($event)"
-
 ></filter-present>
 
 <div echarts [options]="chartOption" class="demo-chart"></div>
 
-<br/>
-<br/>
-<br/>
-
-<div nz-row>
+<div nz-row class="mt-3">
   <div nz-col nzSpan="8">
     <p>R2</p>
     <p>{{r2Score}}</p>
@@ -31,7 +27,7 @@
   <div nz-col nzSpan="8"></div>
   <div nz-col nzSpan="8">
     <p>RMSE: </p>
-    <p style="font-weight: bolder" >{{rmse}}</p>
+    <p style="font-weight: bolder">{{rmse}}</p>
     <!-- <nz-progress [nzPercent]="100" [nzSuccessPercent]="100" nzType="circle" [nzFormat]="formatRMSETitle" [nzWidth]="80" [nzStrokeColor]="{ '0%': '#108ee9', '50%': '#2db7f5', '100%': '#87d068' }">
 
     </nz-progress> -->

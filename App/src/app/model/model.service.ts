@@ -26,4 +26,8 @@ export class ModelService {
   getDataListUpdateListener() {
     return this.dataListUpdated.asObservable();
   }
+
+  onSaveModelFile(model: File): void {
+    console.log(model);
+  }
 }
