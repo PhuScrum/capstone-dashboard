@@ -42,9 +42,6 @@ export const generateEchartOption = function (data: Crop, targetType: string, ti
   const dataTargetType = get(data, `data.${targetType}`);
   const predictionTargetType = get(data, `prediction.${targetType}`);
 
-  console.log(predictionTargetType)
-  console.log(dataTargetType)
-
   options = {
     title: {
       text: title

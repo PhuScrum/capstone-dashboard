@@ -20,7 +20,7 @@ export class ModelPageComponent implements OnInit, OnDestroy {
     private modelService: ModelService
   ) { }
 
-  ngOnInit(): void {
+  fetchData(): void {
     this.modelService.getData();
     this.dataListSub = this.modelService.getDataListUpdateListener()
     .subscribe((data: DataType[]) => {
@@ -29,14 +29,23 @@ export class ModelPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngOnInit(): void {
+    this.fetchData();
+  }
+
   parentFunction(data: DataType): void {
     this.singleData = data;
   }
+  
+  onUploadModel(model: File): void {
+    this.modelService.onSaveModelFile(model).subscribe(result=> {
+      this.fetchData();
+    });
+  }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.dataListSub.unsubscribe()
   }
+
 
 }

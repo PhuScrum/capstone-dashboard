@@ -16,6 +16,7 @@ app.use(cors())
 
 const useCase_API = require('./controller/use_case')
 const ml_model_API = require('./controller/ml_model')
+const upload = require('./controller/ml_model/crud/multer')
 
 //Test Server
 app.get('/api', (req, res) => {
@@ -25,7 +26,7 @@ app.get('/api', (req, res) => {
 app.route('/api/model-data')
     .get(ml_model_API.crud.getModelData)
 
-app.route('/api/save-model', upload.single('modelData'), ml_model_API.crud.uploadModel)
+app.post('/api/model-data', upload.single('modelData'), ml_model_API.crud.uploadModel)
 
 
 var port = process.env.PORT || 8080

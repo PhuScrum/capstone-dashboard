@@ -15,7 +15,7 @@
     <div nz-col nzSpan="12" *ngFor="let item of dataList">
       <div class="model">
         <div nz-row>
-          <div nz-col nzSpan="12" class="float-left" ><B>Model {{item.name}}</B></div>
+          <div nz-col nzSpan="12" class="float-left" ><B>{{item.name}}</B></div>
           <div nz-col nzSpan="12" class="float-right" style="justify-content: flex-end;" ><a (click)='onSelectModel(item)' class="model-link">View</a></div>
           <div nz-col nzSpan="12" class="float-left" >Type</div>
           <div nz-col nzSpan="12" class="float-right" >LinearRegression</div>
