@@ -54,17 +54,19 @@ export class ModelPresentComponent implements OnInit, OnChanges {
       // create list of crop types
       this.cropType = data_by_crops.map(item => item.name);
 
-      // set default crop filter options
-      this.filterOptions.crop = this.cropType[0];
 
       // filter crop by crop name
-      this.cropData = data_by_crops.find(item => item.name === this.filterOptions.crop);
+      this.cropData = data_by_crops.find(item => item.name === this.cropType[0]);
 
       // create list of target Type
       this.targetType = Object.keys(this.cropData.data).filter(item => item !== "year");
 
+      // set default crop filter options
       // set default target filter options
-      this.filterOptions.target = this.targetType[0];
+      this.filterOptions = {
+        target: this.targetType[0],
+        crop: this.cropType[0],
+      };
 
       // generate echart options
       this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
@@ -75,19 +77,24 @@ export class ModelPresentComponent implements OnInit, OnChanges {
   ngOnInit(): void { }
 
   selectCropType(crop: string): void {
-    this.filterOptions.crop = crop;
-    this.cropData = this.model.data_by_crops.find(item => item.name === this.filterOptions.crop);
+    this.filterOptions = {
+      crop,
+      ...this.filterOptions,
+    };
+    this.cropData = this.model.data_by_crops.find(item => item.name === crop);
     // generate echart options
     this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
 
   }
 
   selectTargetType(target: string): void {
-    this.filterOptions.target = target;
+    this.filterOptions = {
+      ...this.filterOptions,
+      target,
+    };
     // this.cropData = this.model.data_by_crops.find(item => item.name === this.filterOptions.crop);
     // generate echart options
     this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
-
   }
 
 

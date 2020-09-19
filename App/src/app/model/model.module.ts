@@ -14,9 +14,14 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FilterPresentComponent } from './model-present/filter-present/filter-present.component';
 import { ErrorOutlookComponent } from './model-present/error-outlook/error-outlook.component';
 
-
 @NgModule({
-  declarations: [ModelPageComponent, ModelSelectComponent, ModelPresentComponent, FilterPresentComponent, ErrorOutlookComponent],
+  declarations: [
+    ModelPageComponent,
+    ModelSelectComponent,
+    ModelPresentComponent,
+    FilterPresentComponent,
+    ErrorOutlookComponent
+  ],
   imports: [
     HttpClientModule,
     CommonModule,
@@ -32,8 +37,12 @@ import { ErrorOutlookComponent } from './model-present/error-outlook/error-outlo
        * please refer to [Custom Build] section.
        */
       echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
-    })
+    }),
   ],
-  exports: [ModelPageComponent, ModelPresentComponent]
+  exports: [
+    ModelPageComponent,
+    ModelPresentComponent,
+  ]
 })
+
 export class ModelModule { }

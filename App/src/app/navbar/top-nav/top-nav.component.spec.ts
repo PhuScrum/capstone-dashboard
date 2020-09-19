@@ -8,14 +8,14 @@ describe('TopNavComponent', () => {
 
   // console.log('component: ', component);
   // console.log('fixture: ', fixture);
-  // const increaseHeight = (componentRef) => {
-  //   const { nativeElement = {} } = componentRef || {};
-  //   const newEleRef = { ...componentRef };
-  //   if (nativeElement && nativeElement.style) {
-  //     newEleRef.nativeElement.style.height = 1000;
-  //   }
-  //   return newEleRef;
-  // };
+  const increaseHeight = (componentRef) => {
+    const { nativeElement = {} } = componentRef || {};
+    const newEleRef = { ...componentRef };
+    if (nativeElement && nativeElement.style) {
+      newEleRef.nativeElement.style.height = 1000;
+    }
+    return newEleRef;
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,13 +29,7 @@ describe('TopNavComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the top navbar component', () => {
     expect(component).toBeTruthy();
   });
-
-  // it('expect height increase', () => {
-  //   component = increaseHeight(fixture.elementRef);
-  //   console.log('hihi: ', component);
-  //   expect(component).toBe(1000);
-  // });
 });

@@ -7,15 +7,13 @@ import { Data as DataType } from '../../../data/dataType'
 @Component({
   selector: 'model-select',
   templateUrl: './model-select.component.html',
-  styleUrls: ['./model-select.component.css']
+  styleUrls: ['./model-select.component.css'],
 })
 export class ModelSelectComponent implements OnInit {
   hGutter = 16;
   vGutter = 16;
 
-
   @Input() dataList: DataType[] = [];
-
   @Output() onSubmit: EventEmitter<any> = new EventEmitter<DataType>();
   @Output() onUploadModel: EventEmitter<any> = new EventEmitter<File>();
 
