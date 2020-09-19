@@ -41,7 +41,7 @@ export class ModelPresentComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.model) {
-      const { r2_score, rmse, data_by_crops } = this.model || {};
+      const { r2_score = 0, rmse = 0, data_by_crops = [] } = this.model || {};
       this.chartTitle = 'Agtuary model ' + this.model.name;
 
       this.r2Score = Number(parseFloat(r2_score.toString()) * 100);

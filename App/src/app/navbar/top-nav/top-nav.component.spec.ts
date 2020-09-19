@@ -6,11 +6,21 @@ describe('TopNavComponent', () => {
   let component: TopNavComponent;
   let fixture: ComponentFixture<TopNavComponent>;
 
+  // console.log('component: ', component);
+  // console.log('fixture: ', fixture);
+  // const increaseHeight = (componentRef) => {
+  //   const { nativeElement = {} } = componentRef || {};
+  //   const newEleRef = { ...componentRef };
+  //   if (nativeElement && nativeElement.style) {
+  //     newEleRef.nativeElement.style.height = 1000;
+  //   }
+  //   return newEleRef;
+  // };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopNavComponent ]
-    })
-    .compileComponents();
+      declarations: [TopNavComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +32,10 @@ describe('TopNavComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('expect height increase', () => {
+  //   component = increaseHeight(fixture.elementRef);
+  //   console.log('hihi: ', component);
+  //   expect(component).toBe(1000);
+  // });
 });

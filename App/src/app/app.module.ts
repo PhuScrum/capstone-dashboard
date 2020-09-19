@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {NavbarModule} from './navbar/navbar.module'
-import {ModelModule} from './model/model.module';
+import { NavbarModule } from './navbar/navbar.module'
+import { ModelModule } from './model/model.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +14,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en'
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 // import { NzAnchorModule } from 'ng-zorro-antd/anchor';
 
 registerLocaleData(en);
@@ -32,6 +33,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     NzButtonModule,
     NzDropDownModule,
+    NgZorroAntdModule,
     // NzAnchorModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
