@@ -33,23 +33,31 @@ export class ModelPresentComponent implements OnInit, OnChanges {
 
   // model metrics
   r2Score: number = 0;
-  r2ScoreShow: number = 0;
   rmse: number = 0;
-  formatRMSETitle: Function;
+  mse: number = 0;
+  median_absolute_error: number = 0;
+  mae: number = 0;
+
+  generateOutputNumber(value: number): number {
+    return Number(parseFloat(value.toString()).toFixed(2));
+  }
 
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.model) {
-      const { r2_score = 0, rmse = 0, data_by_crops = [] } = this.model || {};
+      const {
+        r2_score = 0, rmse = 0, mse = 0, mae = 0,
+        data_by_crops = [], median_absolute_error = 0,
+      } = this.model || {};
       this.chartTitle = 'Agtuary model ' + this.model.name;
 
+      //Model metrics
       this.r2Score = Number(parseFloat(r2_score.toString()) * 100);
-      this.r2ScoreShow = this.r2Score < 0 ? 0 : this.r2Score;
-
-      this.rmse = Number(parseFloat(rmse.toString()).toFixed(2));
-
-      this.formatRMSETitle = () => this.rmse;
+      this.mae = this.generateOutputNumber(mae)
+      this.mse = this.generateOutputNumber(mse)
+      this.median_absolute_error = this.generateOutputNumber(median_absolute_error)
+      this.rmse = this.generateOutputNumber(rmse)
 
       // create list of crop types
       this.cropType = data_by_crops.map(item => item.name);
