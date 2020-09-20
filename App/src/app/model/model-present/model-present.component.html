@@ -19,22 +19,22 @@
 <div nz-row class="mt-3">
   <div nz-col nzSpan="8">
     <p>MSE</p>
-    <p style="font-weight: bolder">{{mse}}</p>
+    <p class = "font-weight-bolder">{{mse}}</p>
   </div>
   <div nz-col nzSpan="8">
     <p>MAE</p>
-    <p style="font-weight: bolder">{{mae}}</p>
+    <p class = "font-weight-bolder">{{mae}}</p>
   </div>
   <div nz-col nzSpan="8">
     <p>Meadian Absolute Error</p>
-    <p style="font-weight: bolder">{{median_absolute_error}}</p>
+    <p class = "font-weight-bolder">{{median_absolute_error}}</p>
   </div>
 </div>
 
 <div nz-row class="mt-4">
   <div nz-col nzSpan="8">
     <p>R2</p>
-    <p style="font-weight: bolder">{{r2Score}}</p>
+    <p class = "font-weight-bolder">{{r2Score}}</p>
     <div *ngIf="r2Score > 0">
       <nz-progress nz-tooltip nzTitle="mockup" [nzPercent]="100" [nzSuccessPercent]="r2Score" ></nz-progress>
     </div>
@@ -42,6 +42,6 @@
   <div nz-col nzSpan="8"></div>
   <div nz-col nzSpan="8">
     <p>RMSE:</p>
-    <p style="font-weight: bolder">{{rmse}}</p>
+    <p class = "font-weight-bolder">{{rmse}}</p>
   </div>
 </div>
