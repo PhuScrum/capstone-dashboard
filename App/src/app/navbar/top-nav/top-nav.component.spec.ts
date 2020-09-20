@@ -29,7 +29,10 @@ describe('TopNavComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create the top navbar component', () => {
-    expect(component).toBeTruthy();
+  it('should create the top navbar component', () => expect(component).toBeTruthy());
+
+  it('should render title Hello user', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('.account h3').textContent).toContain('Hello Jack');
   });
 });

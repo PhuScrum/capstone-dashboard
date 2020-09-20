@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'filter-present',
@@ -13,18 +13,18 @@ export class FilterPresentComponent implements OnInit {
   @Input() targetType: string[];
   @Input() selectedTarget: string;
 
-  @Output() selectCropType:EventEmitter <any> = new EventEmitter()
-  @Output() selectTargetType:EventEmitter <any> = new EventEmitter()
+  @Output() selectCropType: EventEmitter<any> = new EventEmitter()
+  @Output() selectTargetType: EventEmitter<any> = new EventEmitter()
 
   constructor() { }
 
   ngOnInit(): void {
-    if(this.cropType) { this.selectedCropType  = this.cropType[0]; }
+    if (this.cropType) { this.selectedCropType = this.cropType[0]; }
   }
 
   onSelectCropType(type: string): void {
-    this.selectedCropType = type
-    this.selectCropType.emit(type)
+    this.selectedCropType = type;
+    this.selectCropType.emit(type);
   }
 
   onSelectTargetType(target: string): void {

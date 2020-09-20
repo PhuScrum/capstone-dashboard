@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NavbarModule } from './navbar/navbar.module';
 import { ModelModule } from './model/model.module';
+import './app.component.css';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -33,8 +34,4 @@ describe('AppComponent', () => {
 
   it(`should have as title 'capstone-agtuary-dashboard'`, () => expect(component.title).toEqual('capstone-agtuary-dashboard'));
 
-  // it('should render title', () => {
-  //   const compiled = fixture.nativeElement;
-  //   expect(compiled.querySelector('.content span').textContent).toContain('capstone-agtuary-dashboard app is running!');
-  // });
 });

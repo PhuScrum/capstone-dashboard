@@ -29,4 +29,10 @@ describe('ModelPageComponent', () => {
   it('should create the model page component', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have model-present', () => {
+    const compiled = fixture.nativeElement;
+    console.log('compiled 2: ', compiled);
+    expect(compiled.querySelector('model-present')).toBeDefined();
+  });
 });
