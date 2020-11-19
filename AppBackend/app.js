@@ -8,7 +8,7 @@ const path = require('path')
 
 app.use(bodyParser.json({ limit: '10mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
-app.use(cors())
+
 
 //Morgan middleware
 app.use(morgan('dev'))
