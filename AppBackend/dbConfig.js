@@ -4,6 +4,6 @@ require('dotenv').config()
 const faunadb = require('faunadb');
 const secret = process.env.FAUNADB_SECRET_KEY;
 const q = faunadb.query;
-const client = new faunadb.Client({ secret });
+const client = new faunadb.Client({ secret }); //guest client
 
 module.exports = {q, client};

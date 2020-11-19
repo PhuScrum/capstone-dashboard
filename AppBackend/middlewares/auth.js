@@ -1,4 +1,5 @@
 const { q, client } = require('../dbConfig')
+const faunadb = require('faunadb');
 
 exports.authMiddleware = async (req, res, next) => {
     try {
@@ -19,4 +20,8 @@ exports.authMiddleware = async (req, res, next) => {
     } catch(e) {
         res.status(500).json({ error: e.message })
     }
+}
+
+exports.authClient = (secret) => {
+    return new faunadb.Client({secret})
 }
