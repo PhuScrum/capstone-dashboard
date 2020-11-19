@@ -1,0 +1,36 @@
+<div class="model-select">
+  <form class="form-inline mb-3">
+    <div class="form-group mr-auto">
+      <B style="display: block;float: left;margin-right: 5px;">Model</B>
+      <nz-select style="width: 120px;display: block;float: right;" aria-placeholder="Choose">
+      </nz-select>
+    </div>
+    <div class="model-input form-group">
+      <button type="button" class="btn" style="width: 120px;" (click)="filePicker.click()">Add Model</button>
+      <input type="file" #filePicker (change)="onModelPicked($event)" >
+    </div>
+  </form>
+
+  <div nz-row [nzGutter]="[hGutter, vGutter]">
+    <div nz-col nzSpan="12" *ngFor="let item of dataList">
+      <div class="model">
+        <div nz-row>
+          <div nz-col nzSpan="12" class="float-left" ><B>{{item.name}}</B></div>
+          <div nz-col nzSpan="12" class="float-right" style="justify-content: flex-end;" ><a (click)='onSelectModel(item)' class="model-link">View</a></div>
+          <div nz-col nzSpan="12" class="float-left" >Type</div>
+          <div nz-col nzSpan="12" class="float-right" >LinearRegression</div>
+          <div nz-col nzSpan="12" class="float-left" >Model Grade</div>
+          <div nz-col nzSpan="12" class="float-right" >Great</div>
+          <div nz-col nzSpan="12" class="float-left" >Month</div>
+          <div nz-col nzSpan="12" class="float-right" >7</div>
+          <div nz-col nzSpan="12" class="float-left" >Target</div>
+          <div nz-col nzSpan="12" class="float-right" >Wheat yield</div>
+          <div nz-col nzSpan="24" >
+              <button type="button" class="btn submit-model" style="width: 100%;"> </button>
+          </div>
+      </div>
+      </div>
+  </div>
+  </div>
+
+</div>

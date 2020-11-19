@@ -1,0 +1,10 @@
+<div nz-row class="mb-3">
+  <div nz-col nzSpan="6"><B>Filter</B></div>
+    <nz-select [(ngModel)]="selectedCropType"  (ngModelChange)="onSelectCropType($event)" nzPlaceHolder="Choose">
+      <nz-option *ngFor="let option of cropType" [nzValue]="option" [nzLabel]="option"></nz-option>
+    </nz-select>
+
+    <nz-select [(ngModel)]="selectedTarget"  (ngModelChange)="onSelectTargetType($event)" nzPlaceHolder="Choose">
+      <nz-option *ngFor="let option of targetType" [nzValue]="option" [nzLabel]="option"></nz-option>
+    </nz-select>
+</div>
