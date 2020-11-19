@@ -2,9 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './auth/auth.module'
 import { AppComponent } from './app.component';
 import { NavbarModule } from './navbar/navbar.module'
 import { ModelModule } from './model/model.module';
+import { ProfileModule } from './profile/profile.module'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,8 +17,6 @@ import en from '@angular/common/locales/en'
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
 // import { NzAnchorModule } from 'ng-zorro-antd/anchor';
 
 registerLocaleData(en);
@@ -24,12 +24,13 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPageComponent,
-    ProfilePageComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AuthModule,
+    ProfileModule,
     NavbarModule,
     ModelModule,
     FormsModule,
