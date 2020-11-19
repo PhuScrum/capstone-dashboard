@@ -15,6 +15,7 @@ import en from '@angular/common/locales/en'
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { LoginPageComponent } from './login-page/login-page.component';
 // import { NzAnchorModule } from 'ng-zorro-antd/anchor';
 
 registerLocaleData(en);
@@ -22,6 +23,7 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
