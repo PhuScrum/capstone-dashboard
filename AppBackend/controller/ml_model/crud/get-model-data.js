@@ -15,11 +15,11 @@ const getModelData = async (req, res)=>{
         //listing all files using forEach
         await files.forEach(function (file) {
             // Do whatever you want to do with the file
-            console.log(file); 
+            // console.log(file); 
             let filePath = path.join(__dirname, '../../../data/') + file
             var data = JSON.parse(fs.readFileSync(filePath));
             model_data.push(data)
-            console.log(data)
+            // console.log(data)
         });
         res.json(model_data)
     });
