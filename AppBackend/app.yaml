@@ -1,3 +1,7 @@
 runtime: nodejs12
 
 instance_class: F2
+
+env_variables:
+  FAUNADB_SECRET_KEY: "fnAD7ADnJXACDd2V6pO3pXItGGVXn9FCIQVww8D0"
+
