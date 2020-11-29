@@ -7,6 +7,14 @@ import { EChartOption } from 'echarts';
   styleUrls: ['./profile-summary.component.css']
 })
 export class ProfileSummaryComponent implements OnInit {
+  modelCount: number;
+  datasetCount: number;
+  someMetric: number;
+
+  initOpts = {
+    renderer: 'svg',
+    height: 300
+  };
 
   chartOption: EChartOption = {
     xAxis: {
@@ -27,6 +35,9 @@ export class ProfileSummaryComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.datasetCount = 120;
+    this.modelCount = 20;
+    this.someMetric = 100;
   }
 
 }

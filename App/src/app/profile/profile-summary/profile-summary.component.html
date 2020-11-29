@@ -17,11 +17,15 @@
                 <h4>Activities</h4>
                 <div class="chart-section row no-gutters">
                     <div class="col-8">
-                        <div echarts [options]="chartOption" class="demo-chart"></div>
+                        <div echarts [options]="chartOption" [initOpts]="initOpts" class="demo-chart" style="height: unset"></div>
                     </div>
                     <div class="col-4">
                         <div class="activities-count ml-1" >
-                            <h4>activities count</h4>
+                            <dl>
+                                <dd><strong>Models trained: </strong>{{modelCount}}</dd>
+                                <dd><strong>Dataset created: </strong>{{datasetCount}}</dd>
+                                <dd><strong>Some Metric: </strong>{{someMetric}}</dd>
+                            </dl>
                         </div>
                     </div>
                 </div>
