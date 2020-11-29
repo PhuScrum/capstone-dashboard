@@ -1,7 +1,7 @@
-<div class="container my-5">
-    <div class="row">
+<div class="container profile-summary">
+    <div class="row no-gutters">
         <div class="col-12 col-md-5">
-            <div class="info-section shadow row d-flex align-items-center">
+            <div class="info-section shadow row d-flex align-items-center mx-3">
                 <div class="avatar-section col-5">
                     <div class="avatar avatar-128"><span>G</span></div>
                 </div>
@@ -13,7 +13,19 @@
         </div>
 
         <div class="col-12 col-md-7">
-            <h4>activities</h4>
+            <div class="activities-section shadow mx-3">
+                <h4>Activities</h4>
+                <div class="chart-section row no-gutters">
+                    <div class="col-8">
+                        <div echarts [options]="chartOption" class="demo-chart"></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="activities-count ml-1" >
+                            <h4>activities count</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

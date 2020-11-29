@@ -1,3 +1,7 @@
+.profile-summary {
+  margin-top: 2.75rem ;
+}
+
 .avatar {
   display: inline-block;
   font-size: 1em;
@@ -26,5 +30,8 @@
 
 .info-section {
     padding: 30px 30px;
-    margin: 26px;
+}
+
+.activities-section {
+  padding: 8px 18px;
 }
