@@ -18,10 +18,6 @@ app.use(morgan('dev'))
 //   .then(() => console.log('MongoDB connected'))
 //   .catch(err => console.log(err));
 
-const useCase_API = require('./controller/use_case')
-const ml_model_API = require('./controller/ml_model')
-const upload = require('./controller/ml_model/crud/multer')
-
 //Test Server
 app.get('/api', (req, res) => {
     res.status(200).send('Hello, world!').end();
@@ -30,16 +26,18 @@ app.get('/api', (req, res) => {
 const ml_model = require('./routes/ml_model')
 const auth = require('./routes/auth')
 const user = require('./routes/user')
+const dataset = require('./routes/datasets')
 app.use('/api/model-data', ml_model)
 app.use('/api/auth', auth)
 app.use('/api/user', user)
+app.use('/api/dataset', dataset)
 
 
 // app.route('/api/model-data')
 //     .get(ml_model_API.crud.getModelData)
 //     .post(upload.single('modelData'), ml_model_API.crud.uploadModel)
 
-var port = process.env.PORT || 8080
+var port = process.env.PORT || 5000
   app.listen(port, () => {
     console.log('server running at port: ' + port)
   })
