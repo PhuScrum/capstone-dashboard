@@ -1,1 +1,25 @@
-<p>datasets works!</p>
+<div class="datasets-profile">
+  <h1 class="title">Datasets</h1>
+  <div nz-row nzGutter="[hGutter, vGutter]" class="datasets-wrapper">
+    <div nz-col nzSpan="12" class="datasets" *ngFor="let item of dataList | slice:0:4;">
+      <div class="datasets-content">
+        <div nz-row class="datasets-content-header">
+          <div nz-col nzSpan="8">
+            <B>ICON HERE</B>
+          </div>
+          <div nz-col nzSpan="8">
+            <B>{{item.title}}</B>
+          </div>
+          <div nz-col nzSpan="8" style="justify-content: flex-end;">
+            <a (click)='onSelectModel(item)' class="model-link">View</a>
+          </div>
+        </div>
+        <div nz-row>
+          <p>Description: {{item.description}}</p>
+          <p>Featuress: {{item.features}}</p>
+          <p>Length: {{item.length}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,3 +19,11 @@ export interface Data {
     median_absolute_error: number,
     data_by_crops: Array<Crop>
 }
+
+export interface DATASETS {
+  key: number,
+  title: string,
+  description: string,
+  features: number,
+  length: number,
+}

@@ -1,1 +1,38 @@
-<p>models works!</p>
+<div class="model-profile">
+  <h1 class="title">Models</h1>
+  <div nz-row nzGutter="[hGutter, vGutter]" class="model-wrapper">
+    <div nz-col nzSpan="12" class="model" *ngFor="let item of dataList | slice:0:4;">
+      <div class="model-content">
+        <div nz-row>
+          <div nz-col nzSpan="12">
+            <B>{{item.name}}</B>
+          </div>
+          <div nz-col nzSpan="12" style="justify-content: flex-end;">
+            <a (click)='onSelectModel(item)' class="model-link">View</a>
+          </div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="12">Type</div>
+          <div nz-col nzSpan="12">LinearRegression</div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="12">Model Grade</div>
+          <div nz-col nzSpan="12">Great</div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="12">Month</div>
+          <div nz-col nzSpan="12">7</div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="12">Target</div>
+          <div nz-col nzSpan="12">Wheat yield</div>
+        </div>
+        <div nz-row class="button-row">
+          <div nz-col nzSpan="24">
+            <button type="button" class="btn submit-model" style="width: 100%;"> </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
