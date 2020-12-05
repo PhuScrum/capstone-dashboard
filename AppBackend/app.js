@@ -37,7 +37,7 @@ app.use('/api/dataset', dataset)
 //     .get(ml_model_API.crud.getModelData)
 //     .post(upload.single('modelData'), ml_model_API.crud.uploadModel)
 
-var port = process.env.PORT || 5000
+var port = process.env.PORT || 8080
   app.listen(port, () => {
     console.log('server running at port: ' + port)
   })

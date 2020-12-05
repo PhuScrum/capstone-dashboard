@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Data as DataType } from '../../../data/dataType'
 
-const BACKEND_URL = 'http://localhost:5000/'
+const BACKEND_URL = 'http://localhost:8080/'
 
 @Injectable({
   providedIn: 'root'
@@ -30,12 +30,9 @@ export class ModelService {
   }
 
   onSaveModelFile(model: File): Observable<any> {
-    // console.log(model);
-    console.log(model)
     
     const body = new FormData();
     body.append('modelData', model);
-    console.log(body);
 
     return this.http.post(BACKEND_URL + 'api/model-data', body);
   }
