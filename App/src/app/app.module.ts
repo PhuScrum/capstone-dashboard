@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavbarModule } from './navbar/navbar.module'
 import { ModelModule } from './model/model.module';
 import { ProfileModule } from './profile/profile.module'
+import { VersioningModule } from './versioning/versioning.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,10 +28,11 @@ registerLocaleData(en);
 
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     AppRoutingModule,
     AuthModule,
     ProfileModule,
+    VersioningModule,
     NavbarModule,
     ModelModule,
     FormsModule,
