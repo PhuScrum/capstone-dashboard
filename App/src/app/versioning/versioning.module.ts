@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxEchartsModule } from 'ngx-echarts';
-
+import { NzTimelineModule } from 'ng-zorro-antd/timeline';
+import { NzTableModule } from 'ng-zorro-antd/table';
 import { VersioningPageComponent } from './versioning-page.component';
 import { DatasetsComponent } from './datasets/datasets.component';
 
@@ -9,6 +10,8 @@ import { DatasetsComponent } from './datasets/datasets.component';
   declarations: [VersioningPageComponent, DatasetsComponent],
   imports: [
     CommonModule,
+    NzTimelineModule,
+    NzTableModule,
     NgxEchartsModule.forRoot({
       /**
        * This will import all modules from echarts.

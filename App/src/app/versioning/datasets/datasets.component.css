@@ -17,7 +17,7 @@
 .versioning-col {
   display: flex;
   padding: 1rem;
-  height: 800px;
+  height: 900px;
 }
 
 .versioning-col.left-col {
@@ -37,7 +37,7 @@
 }
 
 .wrapper-up {
-  height: 350px;
+  height: 450px;
 }
 
 .wrapper-down {
@@ -114,4 +114,10 @@ h5.table-title {
 
 .timeline-content.center {
   color: #58b9ef;
+}
+.timeline-nz, .table-nz {
+  margin-top: 50px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }

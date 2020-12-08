@@ -3,8 +3,8 @@
   <div class="versioning-row">
     <div class="versioning-col left-col">
       <div class="content">
-        <div class="mock-timeline" >
-          <div class="timeline-content left">
+        <!-- <div class="mock-timeline" > -->
+          <!-- <div class="timeline-content left">
             <p>2015-09-01</p>
             <p>2015-09-01 09:12:11</p>
             <p></p>
@@ -21,7 +21,15 @@
               <p>Solve initial network problems</p>
               <p>Technical testing</p>
               <p>Network problems being solved</p>
-          </div>
+          </div> -->
+        <!-- </div> -->
+        <div class="timeline-nz">
+          <nz-timeline nzMode="alternate">
+            <nz-timeline-item>Create a services 2015-09-01</nz-timeline-item>
+            <nz-timeline-item>Solve initial network problems</nz-timeline-item>
+            <nz-timeline-item>Technical testing 2015-09-01 09:12:11</nz-timeline-item>
+            <nz-timeline-item>Network problems being solved 2015-09-01 09:12:11</nz-timeline-item>
+          </nz-timeline>
         </div>
       </div>
     </div>
@@ -31,9 +39,26 @@
           <h5 class="table-title">
             Overriding Export Function Preview
           </h5>
-          <h1>
-              TABLE HERE
-          </h1>
+          <div class="table-nz">
+            <nz-table #basicTable [nzData]="dataSet">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Surname</th>
+                  <th>Birth Year</th>
+                  <th>Birth Place</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of basicTable.data">
+                  <td>{{data.name}}</td>
+                  <td>{{data.surname}}</td>
+                  <td>{{data.birthYear}}</td>
+                  <td>{{data.birthPlace}}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
         </div>
       </div>
       <div class="wrapper-down">
