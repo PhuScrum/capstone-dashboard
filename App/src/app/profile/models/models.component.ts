@@ -51,5 +51,8 @@ export class ModelsComponent implements OnInit {
     this.dataListSub.unsubscribe()
   }
 
+  onSelectModel(item) {
+    console.log(item)
+  }
 
 }
