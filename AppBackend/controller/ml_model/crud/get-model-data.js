@@ -2,7 +2,7 @@
 const path = require('path');
 const fs = require('fs');
 //joining path of directory 
-const directoryPath = path.join(__dirname, '../../../data');
+const directoryPath = path.join(__dirname, '../../../files/models');
 //passsing directoryPath and callback function
 
 const getModelData = async (req, res)=>{
