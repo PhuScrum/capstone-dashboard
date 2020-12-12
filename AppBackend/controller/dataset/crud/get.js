@@ -7,28 +7,31 @@ const directoryPath = path.join(__dirname, '../../../files/dataset/weather/');
 
 const api = async (req, res) => {
     let dataset_data = [];
+    let i = 0;
 
     fs.readdir(directoryPath, (err, files) =>{
+        const numberOfFiles = files.length;
+        console.log(numberOfFiles)
         //handling error
         if (err) {
-            return console.log('Unable to scan directory: ' + err);
+            console.log('Unable to scan directory: ' + err);
+            return
         }
         //listing all files using forEach
         files.forEach(function (file) {
-            var datasetSize
+            i+=1
+            let datasetSize = 0;
             let filePath = directoryPath + file
             var filename = path.basename(filePath, '.csv')
 
-            const test = fs.readFile(filePath, async (err, data) => {
-                if(err) {
-                    console.log(err)
-                    return
-                }
-                const neatData = await neatCsv(data)
-                return datasetSize = neatData.length
+            fs.createReadStream(filePath)
+            .pipe(csv())
+            .on('data', (row) => {
+                datasetSize += 1;
             })
-            console.log(test)
-
+            .on('end', () => {
+                console.log('CSV file successfully processed');
+            });
         });
         res.json('get')
         
