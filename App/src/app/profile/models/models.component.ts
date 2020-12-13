@@ -30,7 +30,6 @@ export class ModelsComponent implements OnInit {
       .subscribe((data: DataType[]) => {
         this.dataList = data;
         this.singleData = data[0];
-        console.log('data: ', data);
       });
   }
 

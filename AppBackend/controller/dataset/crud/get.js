@@ -17,7 +17,7 @@ const getDesc = (filePath = new String, extension = new String) => {
         .on('data', row => size += 1)
         .on('error', reject)
         .on('end', () => resolve({
-            name: filename, size, features: headerSize
+            title: filename, length: size, features: headerSize
         }))
     })
 }
@@ -37,7 +37,8 @@ const api = async (req, res) => {
             let file = files[i]
             let filePath = directoryPath + file
             const data = await getDesc(filePath, '.csv')
-            dataset_data.push(data)
+            const final_data = {...data, key: i, description: 'Irem losum'}
+            dataset_data.push(final_data)
         }
         res.json(dataset_data)
     });

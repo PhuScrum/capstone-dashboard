@@ -48,3 +48,9 @@ h1.title {
   display: flex;
   justify-content: space-between;
 }
+
+.dataset-title {
+  overflow-x: hidden;
+  max-width: 212px;
+  text-overflow: ellipsis;
+}

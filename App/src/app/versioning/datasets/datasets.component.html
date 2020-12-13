@@ -43,18 +43,18 @@
             <nz-table #basicTable [nzData]="dataSet">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Surname</th>
-                  <th>Birth Year</th>
-                  <th>Birth Place</th>
+                  <th>title</th>
+                  <th>Desc</th>
+                  <th>Features Year</th>
+                  <th>Length</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let data of basicTable.data">
-                  <td>{{data.name}}</td>
-                  <td>{{data.surname}}</td>
-                  <td>{{data.birthYear}}</td>
-                  <td>{{data.birthPlace}}</td>
+                  <td>{{data.title}}</td>
+                  <td>{{data.description}}</td>
+                  <td>{{data.features}}</td>
+                  <td>{{data.length}}</td>
                 </tr>
               </tbody>
             </nz-table>

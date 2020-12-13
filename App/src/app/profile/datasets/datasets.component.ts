@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DATASETS as DataType } from '../../../data/dataType'
+
+import { DatasetsService } from './datasets.service'
 
 @Component({
   selector: 'app-datasets',
@@ -9,17 +12,31 @@ import { DATASETS as DataType } from '../../../data/dataType'
 export class DatasetsComponent implements OnInit {
   hGutter = 16;
   vGutter = 16;
+
   dataList: DataType[] = [];
-  constructor() { }
+  singleData: DataType;
+
+  private dataListSub: Subscription;
+
+  constructor(
+    private datasetService: DatasetsService
+  ) { }
 
   ngOnInit(): void {
-    this.dataList = [
-      { key: 1, title: 'AUS month data set', description: 'Irem losum', features: 250, length: 101 },
-      { key: 2, title: 'AUS month data set', description: 'Irem losum', features: 120, length: 198 },
-      { key: 3, title: 'AUS month data set', description: 'Irem losum', features: 172, length: 192 },
-      { key: 4, title: 'AUS month data set', description: 'Irem losum', features: 130, length: 200 },
-    ]
+    this.fetchData();
   }
 
+  onSelectModel(item) {
+    console.log(item)
+  }
 
+  fetchData(): void {
+    this.datasetService.getData();
+    this.dataListSub = this.datasetService.getDataListUpdateListener()
+      .subscribe((data: DataType[]) => {
+        this.dataList = data;
+        this.singleData = data[0];
+        console.log('data: ', data);
+      });
+  }
 }
