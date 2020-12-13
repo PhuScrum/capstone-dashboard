@@ -5,36 +5,41 @@ const path = require('path');
 
 const directoryPath = path.join(__dirname, '../../../files/dataset/weather/');
 
+const getDesc = (filePath = new String, extension = new String) => {
+    let size = 0;
+    let headerSize = 0;
+    var filename = path.basename(filePath, extension)
+    let stream = fs.createReadStream(filePath)
+
+    return new Promise((resolve, reject) => {
+        stream.pipe(csv())
+        .on('headers', (headers) => headerSize = headers.length)
+        .on('data', row => size += 1)
+        .on('error', reject)
+        .on('end', () => resolve({
+            name: filename, size, features: headerSize
+        }))
+    })
+}
+
 const api = async (req, res) => {
     let dataset_data = [];
-    let i = 0;
-
-    fs.readdir(directoryPath, (err, files) =>{
+    fs.readdir(directoryPath, async (err, files) =>{
         const numberOfFiles = files.length;
         console.log(numberOfFiles)
         //handling error
         if (err) {
             console.log('Unable to scan directory: ' + err);
-            return
+            return res.status(500).json(err)
         }
-        //listing all files using forEach
-        files.forEach(function (file) {
-            i+=1
-            let datasetSize = 0;
-            let filePath = directoryPath + file
-            var filename = path.basename(filePath, '.csv')
 
-            fs.createReadStream(filePath)
-            .pipe(csv())
-            .on('data', (row) => {
-                datasetSize += 1;
-            })
-            .on('end', () => {
-                console.log('CSV file successfully processed');
-            });
-        });
-        res.json('get')
-        
+        for (let i = 0; i < numberOfFiles; i++) {
+            let file = files[i]
+            let filePath = directoryPath + file
+            const data = await getDesc(filePath, '.csv')
+            dataset_data.push(data)
+        }
+        res.json(dataset_data)
     });
     
 }
