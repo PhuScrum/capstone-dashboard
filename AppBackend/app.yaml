@@ -2,5 +2,3 @@ runtime: nodejs12
 
 instance_class: F2
 
-env_variables:
-  
