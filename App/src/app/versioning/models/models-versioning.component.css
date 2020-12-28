@@ -1,0 +1,130 @@
+.models-versioning {
+  width: 100vw;
+  height: 100%;
+  padding: 1rem;
+}
+
+.models-versioning h3 {
+  padding-left: 1rem;
+  margin-bottom: 0 !important;
+}
+
+.versioning-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.versioning-col {
+  display: flex;
+  padding: 1rem;
+  height: 900px;
+}
+
+.versioning-col.left-col {
+  flex: 1;
+}
+
+.versioning-col.right-col {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+}
+
+.versioning-col.left-col .content {
+  border-radius: 5px;
+}
+
+.wrapper-up {
+  height: 450px;
+}
+
+.wrapper-down {
+  display: flex;
+  margin-top: 50px;
+  height: 350px;
+}
+
+.wrapper-down .content {
+  width: 300px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.wrapper-down .content.left {
+  height: 200px;
+}
+
+.wrapper-down .content.right {
+  justify-content: flex-start;
+}
+
+.wrapper-down .content.right h5 {
+  width: 90%;
+  padding-top: 20px;
+  text-align: left;
+}
+
+.wrapper-down .content.right p {
+  margin-bottom: 0!important;
+}
+
+.wrapper-down .content p {
+  width: 90%;
+  font-size: 1.1rem;
+  color: black;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  -moz-box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
+  -webkit-box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
+  box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
+}
+
+h5.table-title {
+  color: red;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.mock-timeline {
+  width: 90%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.timeline-content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.timeline-content.left {
+  align-items: flex-end;
+}
+
+.timeline-content.center {
+  color: #58b9ef;
+}
+.timeline-nz, .table-nz {
+  margin-top: 50px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.demo-chart {
+  height: 400px;
+}
+nz-select {
+  margin: 0 8px 10px 0;
+  width: 120px;
+}

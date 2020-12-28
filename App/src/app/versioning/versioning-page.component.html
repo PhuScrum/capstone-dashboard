@@ -1,2 +1,3 @@
 <!-- <app-versioning-summary></app-versioning-summary> -->
-<app-datasets></app-datasets>
+<app-datasets [hidden]="isModel"></app-datasets>
+<app-version-models [hidden]="!isModel"></app-version-models>

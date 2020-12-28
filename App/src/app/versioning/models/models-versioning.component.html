@@ -1,0 +1,55 @@
+<div class="models-versioning">
+  <h3>Models Versioning</h3>
+  <div class="versioning-row">
+    <div class="versioning-col left-col">
+      <div class="content">
+        <div class="timeline-nz">
+          <nz-timeline nzMode="alternate">
+            <nz-timeline-item>Create a services 2015-09-01</nz-timeline-item>
+            <nz-timeline-item>Solve initial network problems</nz-timeline-item>
+            <nz-timeline-item>Technical testing 2015-09-01 09:12:11</nz-timeline-item>
+            <nz-timeline-item>Network problems being solved 2015-09-01 09:12:11</nz-timeline-item>
+          </nz-timeline>
+        </div>
+      </div>
+    </div>
+    <div class="versioning-col right-col">
+      <div class="wrapper-up">
+        <!-- <div class="content"> -->
+                  
+        <!-- <error-outlook></error-outlook> -->
+
+        <filter-present
+        [cropType]='cropType'
+        [selectedCropType]='filterOptions.crop'
+        (selectCropType)="selectCropType($event)"
+
+        [targetType]='targetType'
+        [selectedTarget]='filterOptions.target'
+        (selectTargetType)="selectTargetType($event)"
+        ></filter-present>
+
+        <div echarts [options]="chartOption" class="demo-chart"></div>
+
+        <!-- </div> -->
+      </div>
+      <div class="wrapper-down">
+        <div class="content left">
+          <p>AUS Dataset version 1.0.1</p>
+          <p>Features: 128</p>
+          <p>Length: 348</p>
+          <p>Irem losum</p>
+        </div>
+        <div class="content right">
+            <h5>Recommend model</h5>
+            <p>Best model: </p>
+            <p>XGBoost model</p>
+            <p>R2score: 0.82</p>
+            <h5>Other models</h5>
+            <p>Linear Regression</p>
+            <p>Irem Losum</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

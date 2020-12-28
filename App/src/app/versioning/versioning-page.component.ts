@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VersioningPageComponent implements OnInit {
 
+  isModel = false;
   constructor() { }
 
   ngOnInit(): void {
+    this.isModel = window.location.pathname === '/versioning/model';
   }
 
 }
