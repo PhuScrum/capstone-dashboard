@@ -1,0 +1,21 @@
+<h3>overall metrics comparision</h3>
+<nz-table>
+    <thead>
+      <tr>
+        <th>Model Name</th>
+        <th>r2 score</th>
+        <th>rmse</th>
+        <th>mse</th>
+        <th>mae</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of dataList">
+        <td>{{data.name}}</td>
+        <td>{{data.r2_score}}</td>
+        <td>{{data.rmse}}</td>
+        <td>{{data.mse}}</td>
+        <td>{{data.mae}}</td>
+      </tr>
+    </tbody>
+  </nz-table>

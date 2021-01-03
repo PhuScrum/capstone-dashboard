@@ -26,11 +26,13 @@ export class ModelPageComponent implements OnInit, OnDestroy {
     .subscribe((data: DataType[]) => {
       this.dataList = data;
       this.singleData = data[0];
+      console.log(this.dataList)
     });
   }
 
   ngOnInit(): void {
     this.fetchData();
+    console.log(this.dataList)
   }
 
   parentFunction(data: DataType): void {

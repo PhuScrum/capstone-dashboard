@@ -11,6 +11,7 @@ import { generateEchartOption } from './echart-helpers';
   styleUrls: ['./model-present.component.css']
 })
 export class ModelPresentComponent implements OnInit, OnChanges {
+  @Input() dataList: DataType[] = [];
   @Input() model!: DataType;
 
   chartOption: EChartOption = {};
@@ -82,7 +83,9 @@ export class ModelPresentComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    console.log(this.dataList)
+   }
 
   selectCropType(crop: string): void {
     this.filterOptions = {
