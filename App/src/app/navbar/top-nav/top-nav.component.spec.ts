@@ -6,8 +6,6 @@ describe('TopNavComponent', () => {
   let component: TopNavComponent;
   let fixture: ComponentFixture<TopNavComponent>;
 
-  // console.log('component: ', component);
-  // console.log('fixture: ', fixture);
   const increaseHeight = (componentRef) => {
     const { nativeElement = {} } = componentRef || {};
     const newEleRef = { ...componentRef };

@@ -116,8 +116,11 @@ h5.table-title {
   color: #58b9ef;
 }
 .timeline-nz, .table-nz {
-  margin-top: 50px;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.timeline-nz {
+  margin-top: 50px;
 }

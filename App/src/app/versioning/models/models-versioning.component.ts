@@ -52,21 +52,13 @@ export class ModelsVersioningComponent implements OnInit {
     private modelService: VersioningService
   ) { }
 
-  fetchData(): void {
-    this.modelService.getData();
-    this.dataListSub = this.modelService.getDataListUpdateListener()
-    .subscribe((data: DataType[]) => {
-      this.dataList = data;
-      this.singleData = data[0];
-    });
-  }
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.model) {
+  convertData(resData: DataType) {
+    if (resData) {
       const {
         r2_score = 0, rmse = 0, mse = 0, mae = 0,
         data_by_crops = [], median_absolute_error = 0,
-      } = this.model || {};
-      this.chartTitle = 'Agtuary model ' + this.model.name;
+      } = resData || {};
+      this.chartTitle = 'Agtuary model ' + resData && resData.name;
 
       //Model metrics
       this.r2Score = Number(parseFloat(r2_score.toString()) * 100);
@@ -94,21 +86,35 @@ export class ModelsVersioningComponent implements OnInit {
 
       // generate echart options
       this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
-
     }
   }
 
-  ngOnInit(): void {
-    this.fetchData();
+  fetchData(): void {
+    this.modelService.getData();
+    this.dataListSub = this.modelService.getDataListUpdateListener()
+      .subscribe((data: DataType[]) => {
+        this.dataList = data;
+        this.singleData = data[0];
+        this.convertData(this.singleData);
 
-   }
+      });
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    this.convertData(this.singleData);
+  }
+
+  ngOnInit(): void {
+    if (window.location.pathname === '/versioning/model') {
+      this.fetchData();
+    }
+  }
 
   selectCropType(crop: string): void {
     this.filterOptions = {
       crop,
       ...this.filterOptions,
     };
-    this.cropData = this.model.data_by_crops.find(item => item.name === crop);
+    this.cropData = this.singleData.data_by_crops.find(item => item.name === crop);
     // generate echart options
     this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
 
@@ -119,7 +125,7 @@ export class ModelsVersioningComponent implements OnInit {
       ...this.filterOptions,
       target,
     };
-    // this.cropData = this.model.data_by_crops.find(item => item.name === this.filterOptions.crop);
+    // this.cropData = this.singleData.data_by_crops.find(item => item.name === this.filterOptions.crop);
     // generate echart options
     this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
   }

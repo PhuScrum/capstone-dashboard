@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DATASETS as DataType } from '../../../data/dataType'
+import { Subscription } from 'rxjs';
+import { DATASETS as DataType } from 'src/data/dataType';
+import { VersioningService } from '../versioning.service';
 
 @Component({
   selector: 'app-datasets',
@@ -10,16 +12,30 @@ export class DatasetsComponent implements OnInit {
   hGutter = 16;
   vGutter = 16;
   dataSet: DataType[] = [];
-  constructor() { }
+
+  private dataListSub: Subscription
+  constructor(
+    private modelService: VersioningService,
+
+  ) { }
+
+  fetchData(): void {
+    this.modelService.getDataSet();
+    this.dataListSub = this.modelService.getDataSetUpdateListener()
+    .subscribe((data: DataType[]) => {
+      this.dataSet = data;
+    });
+
+  }
 
   ngOnInit(): void {
-    this.dataSet = [
-      { key: 1, title: 'AUS month data set', description: 'Irem losum', features: 250, length: 101 },
-      { key: 2, title: 'AUS month data set', description: 'Irem losum', features: 120, length: 198 },
-      { key: 3, title: 'AUS month data set', description: 'Irem losum', features: 172, length: 192 },
-      { key: 4, title: 'AUS month data set', description: 'Irem losum', features: 130, length: 200 },
-    ]
+    if (window.location.pathname === '/versioning/dataset') {
+      this.fetchData();
+    }
   }
 
 
+  ngOnDestroy(): void {
+    this.dataListSub.unsubscribe()
+  }
 }

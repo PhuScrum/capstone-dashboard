@@ -16,18 +16,12 @@
     <div class="versioning-col right-col">
       <div class="wrapper-up">
         <!-- <div class="content"> -->
-                  
+
         <!-- <error-outlook></error-outlook> -->
 
-        <filter-present
-        [cropType]='cropType'
-        [selectedCropType]='filterOptions.crop'
-        (selectCropType)="selectCropType($event)"
-
-        [targetType]='targetType'
-        [selectedTarget]='filterOptions.target'
-        (selectTargetType)="selectTargetType($event)"
-        ></filter-present>
+        <filter-present [cropType]='cropType' [selectedCropType]='filterOptions.crop' (selectCropType)="selectCropType($event)" [targetType]='targetType'
+          [selectedTarget]='filterOptions.target' (selectTargetType)="selectTargetType($event)">
+        </filter-present>
 
         <div echarts [options]="chartOption" class="demo-chart"></div>
 
@@ -41,13 +35,13 @@
           <p>Irem losum</p>
         </div>
         <div class="content right">
-            <h5>Recommend model</h5>
-            <p>Best model: </p>
-            <p>XGBoost model</p>
-            <p>R2score: 0.82</p>
-            <h5>Other models</h5>
-            <p>Linear Regression</p>
-            <p>Irem Losum</p>
+          <h5>Recommend model</h5>
+          <p>Best model: </p>
+          <p>XGBoost model</p>
+          <p>R2score: 0.82</p>
+          <h5>Other models</h5>
+          <p>Linear Regression</p>
+          <p>Irem Losum</p>
         </div>
       </div>
     </div>
