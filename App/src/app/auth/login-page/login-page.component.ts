@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -10,18 +10,22 @@ import { AuthService } from '../auth.service';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
-export class LoginPageComponent implements OnInit {
-
+export class LoginPageComponent implements OnInit, OnDestroy {
+  private authStatusSub: Subscription
   form: FormGroup
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
 
   ) { }
 
   ngOnInit(): void {
-    
+    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
+      authStatus => {
+        console.log(authStatus)
+      }
+    )
 
     this.form = new FormGroup({
       email: new FormControl(null, { validators: [Validators.required, Validators.minLength(3)] }),
@@ -33,12 +37,10 @@ export class LoginPageComponent implements OnInit {
     if (this.form.invalid) return;
     const {email, password} = this.form.value
     this.authService.onLogin(email, password)
-    .subscribe(result => {
-      localStorage.setItem("secret", result.secret)
-      localStorage.setItem("userId", result.instance['@ref'].id)
-      localStorage.setItem("isLogin", true)
-      this.router.navigate(["/"])
-    })
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe()
   }
 
 }
