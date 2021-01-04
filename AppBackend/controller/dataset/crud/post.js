@@ -1,5 +1,6 @@
 const api = (req, res) => {
-    res.json('post')
+    console.log(req.file)
+    res.json(req.file)
 }
 
 module.exports = api

@@ -15,7 +15,7 @@ const getProfile = async (req,res) => {
             )
         )
         //ok
-        res.status(200).json(dbs.data)
+        res.status(200).json({... dbs.data, id})
     } catch(e) {
         // something went wrong
         res.status(500).json({ error: e.message })

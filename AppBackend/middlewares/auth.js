@@ -6,7 +6,6 @@ exports.authMiddleware = async (req, res, next) => {
         const authCheck = await client.query(
             q.KeyFromSecret(req.headers.secret)
         )
-        console.log(authCheck)
         const { instance } = authCheck
         const collection = JSON.parse(JSON.stringify(instance.collection))
         const collectionName = collection['@ref'].id

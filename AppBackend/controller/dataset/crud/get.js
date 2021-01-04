@@ -3,7 +3,7 @@ const neatCsv = require('neat-csv');
 const fs = require('fs');
 const path = require('path');
 
-const directoryPath = path.join(__dirname, '../../../files/dataset/weather/');
+const directoryPath = path.join(__dirname, '../../../files/dataset/');
 
 const getDesc = (filePath = new String, extension = new String) => {
     let size = 0;
@@ -38,17 +38,22 @@ const api = async (req, res) => {
         for (let i = 0; i < numberOfFiles; i++) {
             let file = files[i]
             let filePath = directoryPath + file
+            //access filename and dateTime key
+            let name = path.parse(file).name
+            let name_parts = name.split('-')
+            const filename = name_parts[0]
+            const versionKey = name_parts[name_parts.length-1]
+
             const data = await getDesc(filePath, '.csv')
             
             const final_data = {
-                ...data, key: i, 
+                ...data, key: i, filename, versionKey,
                 description: 'Irem losum'
             }
             dataset_data.push(final_data)
         }
         res.json(dataset_data)
     });
-    
 }
 
 module.exports = api;

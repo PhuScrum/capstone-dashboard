@@ -30,12 +30,8 @@ export class ModelService {
   }
 
   onSaveModelFile(model: File): Observable<any> {
-    // console.log(model);
-    console.log(model)
-    
     const body = new FormData();
     body.append('modelData', model);
-    console.log(body);
 
     return this.http.post(BACKEND_URL + 'api/model-data', body);
   }
