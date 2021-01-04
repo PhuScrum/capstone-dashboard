@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router'
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -10,7 +13,10 @@ export class LoginPageComponent implements OnInit {
 
   form: FormGroup
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -21,7 +27,12 @@ export class LoginPageComponent implements OnInit {
 
   onLogin() {
     if (this.form.invalid) return;
-    console.log(this.form.value)
+    const {email, password} = this.form.value
+    this.authService.onLogin(email, password)
+    .subscribe(result => {
+      console.log(result.secret) // save to local storage
+      this.router.navigate(["/"])
+    })
   }
 
 }
