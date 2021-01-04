@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router'
 import { AuthService } from '../auth.service';
@@ -15,10 +16,13 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+
   ) { }
 
   ngOnInit(): void {
+    
+
     this.form = new FormGroup({
       email: new FormControl(null, { validators: [Validators.required, Validators.minLength(3)] }),
       password: new FormControl(null, { validators: [Validators.required, Validators.minLength(3)] })
@@ -30,7 +34,9 @@ export class LoginPageComponent implements OnInit {
     const {email, password} = this.form.value
     this.authService.onLogin(email, password)
     .subscribe(result => {
-      console.log(result.secret) // save to local storage
+      localStorage.setItem("secret", result.secret)
+      localStorage.setItem("userId", result.instance['@ref'].id)
+      localStorage.setItem("isLogin", true)
       this.router.navigate(["/"])
     })
   }

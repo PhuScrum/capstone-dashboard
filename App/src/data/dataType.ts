@@ -28,4 +28,10 @@ export interface DATASETS {
   length: number,
 }
 
+export interface PROFILE {
+    email: string,
+    username: string,
+    name: string,
+    id: string
+}
 
