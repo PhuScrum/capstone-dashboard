@@ -26,7 +26,35 @@ const getDesc = (filePath = new String, extension = new String) => {
 
 const api = async (req, res) => {
     const bucket = req.bucket
-    console.log(bucket)
+
+//    const [gcpFiles] = await bucket.getFiles()
+//    gcpFiles.forEach(async file => {
+//     // fs.readFile(file, 'utf8', function (err,data) {
+//     //     if (err) {
+//     //       return console.log(err);
+//     //     }
+//     //     console.log(data);
+//     //   });
+// //     const content = await file.download(async function(err, contents) {
+// //         console.log("file err: "+err);  
+// //         console.log("file data: "+contents);
+// //    });
+//     console.log(file)
+
+//    });
+    const gcpFile = bucket.file('dataset/Temp_Min_Daily_CroplandFiltered_States_GOOD_all-1609840499916.csv')
+    let buffer = '';
+    // gcpFile.createReadStream()
+    // .on('error', function(err) {console.log(err)})
+    // .on('data', function(response) {
+    //     buffer += response
+    //     console.log(buffer)
+    // })
+    // .on('end', function() {
+        
+    //     // res.send(buffer);
+    // })
+
     let dataset_data = [];
     fs.readdir(directoryPath, async (err, files) =>{
         const numberOfFiles = files.length;
