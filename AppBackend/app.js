@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
 const path = require('path')
+const gcpConfig = require('./gcpConfig')
 
 app.use(bodyParser.json({ limit: '10mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
@@ -31,7 +32,6 @@ app.use('/api/model-data', ml_model)
 app.use('/api/auth', auth)
 app.use('/api/user', user)
 app.use('/api/dataset', dataset)
-
 
 // app.route('/api/model-data')
 //     .get(ml_model_API.crud.getModelData)

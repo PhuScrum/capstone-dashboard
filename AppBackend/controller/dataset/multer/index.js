@@ -14,7 +14,8 @@ const storage = multer.diskStorage({
     const name = path.parse(file.originalname).name
     const filename = name + '-' + dateTime + ext
     // for windows add .replace(/:/g, '-') add the end of the toISOString https://stackoverflow.com/questions/48418680/enoent-no-such-file-or-directory/48653921#48653921
-    cb(null, filename) 
+    cb(null, filename)
+
   }
 
 })
