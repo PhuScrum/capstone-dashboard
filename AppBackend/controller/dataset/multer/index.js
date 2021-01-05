@@ -3,11 +3,11 @@ const multer = require('multer')
 const path = require('path');
 
 const storage = multer.diskStorage({
-  destination: function(req, file, cb){
-    var path = 'files/dataset'
-    cb(null, path);
-    // cb(null, './Express/uploads/');
-  },
+  // destination: function(req, file, cb){
+  //   var path = 'files/dataset'
+  //   cb(null, path);
+  //   // cb(null, './Express/uploads/');
+  // },
   filename: function(req, file, cb){
     const dateTime = Date.now()
     const ext = path.parse(file.originalname).ext

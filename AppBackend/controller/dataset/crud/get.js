@@ -25,6 +25,8 @@ const getDesc = (filePath = new String, extension = new String) => {
 }
 
 const api = async (req, res) => {
+    const bucket = req.bucket
+    console.log(bucket)
     let dataset_data = [];
     fs.readdir(directoryPath, async (err, files) =>{
         const numberOfFiles = files.length;
