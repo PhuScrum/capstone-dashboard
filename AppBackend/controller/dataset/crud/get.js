@@ -1,6 +1,7 @@
 const csv = require('csv-parser');
-const neatCsv = require('neat-csv');
+const stream = require('stream')
 const fs = require('fs');
+const byline =require('byline');
 const path = require('path');
 
 const directoryPath = path.join(__dirname, '../../../files/dataset/');
@@ -24,36 +25,13 @@ const getDesc = (filePath = new String, extension = new String) => {
     })
 }
 
+const getGCP_CSV_DESCRIPTION = (bucketFile) => {
+    const remoteFile = bucket.file(bucketFile.name)
+}
+
 const api = async (req, res) => {
-    const bucket = req.bucket
-
-//    const [gcpFiles] = await bucket.getFiles()
-//    gcpFiles.forEach(async file => {
-//     // fs.readFile(file, 'utf8', function (err,data) {
-//     //     if (err) {
-//     //       return console.log(err);
-//     //     }
-//     //     console.log(data);
-//     //   });
-// //     const content = await file.download(async function(err, contents) {
-// //         console.log("file err: "+err);  
-// //         console.log("file data: "+contents);
-// //    });
-//     console.log(file)
-
-//    });
-    const gcpFile = bucket.file('dataset/Temp_Min_Daily_CroplandFiltered_States_GOOD_all-1609840499916.csv')
-    let buffer = '';
-    // gcpFile.createReadStream()
-    // .on('error', function(err) {console.log(err)})
-    // .on('data', function(response) {
-    //     buffer += response
-    //     console.log(buffer)
-    // })
-    // .on('end', function() {
-        
-    //     // res.send(buffer);
-    // })
+    
+    res.json(dataStream)
 
     let dataset_data = [];
     fs.readdir(directoryPath, async (err, files) =>{

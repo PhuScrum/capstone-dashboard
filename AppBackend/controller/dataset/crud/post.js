@@ -2,12 +2,17 @@ const { format } = require("util");
 
 const api =  (req, res) => {
   const bucket = req.bucket;
-  const file = req.file
-
+  const file = req.file;
 
   // Create a new blob in the bucket and upload the file data.
   const blob = bucket.file(`dataset/${file.filename}`);
-  const blobStream = blob.createWriteStream({public: true});
+  const blobStream = blob.createWriteStream({
+    public: true,
+    metadata: {
+      contentType: req.file.mimetype
+    },
+    resumable: false
+  });
 
   blobStream.on("error", (err) => {
     res.status(401).json(err);

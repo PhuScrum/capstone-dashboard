@@ -23,6 +23,7 @@ app.use(gcpConfig)
 
 //Test Server
 app.get('/api', (req, res) => {
+    
     res.status(200).send('Hello, world!').end();
   });
 
