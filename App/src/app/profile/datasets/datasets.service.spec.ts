@@ -1,16 +1,18 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { DatasetsService } from './datasets.service';
 
 describe('DatasetsService', () => {
-  let service: DatasetsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(DatasetsService);
+    TestBed.configureTestingModule({
+      providers: [DatasetsService, HttpClientTestingModule],
+      imports: [HttpClientTestingModule],
+    });
   });
 
-  it('should be created', () => {
+  it('HTTP Client should works', inject([DatasetsService], (service: DatasetsService) => {
     expect(service).toBeTruthy();
-  });
+  }));
 });

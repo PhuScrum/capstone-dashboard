@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { MetricsComparisionComponent } from './metrics-comparision.component';
 
@@ -8,9 +9,10 @@ describe('MetricsComparisionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MetricsComparisionComponent ]
+      declarations: [MetricsComparisionComponent],
+      imports: [HttpClientTestingModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('MetricsComparisionComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Metrics comparision should be truthy', () => {
     expect(component).toBeTruthy();
   });
 });

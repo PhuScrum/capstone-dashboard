@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DatasetsComponent } from './datasets.component';
 
 describe('DatasetsComponent', () => {
@@ -8,9 +8,10 @@ describe('DatasetsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DatasetsComponent ]
+      declarations: [DatasetsComponent],
+      imports: [HttpClientTestingModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +20,7 @@ describe('DatasetsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Datasets components should be created', () => {
     expect(component).toBeTruthy();
   });
 });

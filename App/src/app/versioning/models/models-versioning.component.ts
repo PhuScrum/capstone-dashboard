@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { EChartOption } from 'echarts';
 import { generateEchartOption } from './echart-helpers';
 import { Subscription } from 'rxjs';
@@ -133,6 +133,8 @@ export class ModelsVersioningComponent implements OnInit {
 
 
   ngOnDestroy(): void {
-    this.dataListSub.unsubscribe()
+    if (this.dataListSub) {
+      this.dataListSub.unsubscribe()
+    }
   }
 }

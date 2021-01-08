@@ -1,14 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { DatasetsComponent } from './datasets.component';
 
-describe('DatasetsComponent', () => {
+describe('ProfileDatasetsComponent', () => {
   let component: DatasetsComponent;
   let fixture: ComponentFixture<DatasetsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DatasetsComponent ]
+      declarations: [ DatasetsComponent ],
+      imports: [HttpClientTestingModule],
     })
     .compileComponents();
   }));
@@ -19,7 +21,7 @@ describe('DatasetsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create Profile Dataset component', () => {
     expect(component).toBeTruthy();
   });
 });

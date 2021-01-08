@@ -19,7 +19,7 @@ describe('ProfileSummaryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Profile summary component should be created', () => {
     expect(component).toBeTruthy();
   });
 });

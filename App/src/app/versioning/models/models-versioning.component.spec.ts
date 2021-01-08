@@ -1,25 +1,27 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { ModelsComponent } from './models.component';
+import { ModelsVersioningComponent } from './models-versioning.component';
 
-describe('DatasetsComponent', () => {
-  let component: ModelsComponent;
-  let fixture: ComponentFixture<ModelsComponent>;
+describe('ModelsVersioningComponents', () => {
+  let component: ModelsVersioningComponent;
+  let fixture: ComponentFixture<ModelsVersioningComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModelsComponent ]
+      declarations: [ ModelsVersioningComponent ],
+      imports: [HttpClientTestingModule],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModelsComponent);
+    fixture = TestBed.createComponent(ModelsVersioningComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Models Versioning Components should be created', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -9,6 +9,7 @@ const BACKEND_URL = 'http://localhost:8080/'
 @Injectable({
   providedIn: 'root'
 })
+
 export class ModelService {
   private dataList: DataType[] = [];
   private dataListUpdated = new Subject<DataType[]>();

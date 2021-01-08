@@ -19,7 +19,7 @@ describe('ProfilePageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Profile page should be created', () => {
     expect(component).toBeTruthy();
   });
 });
