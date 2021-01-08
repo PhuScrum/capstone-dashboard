@@ -21,7 +21,6 @@ export class LoginPageComponent implements OnInit {
 
   onLogin() {
     if (this.form.invalid) return;
-    console.log(this.form.value)
   }
 
 }

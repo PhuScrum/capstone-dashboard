@@ -84,7 +84,6 @@ export class ModelPresentComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.dataList)
    }
 
   selectCropType(crop: string): void {

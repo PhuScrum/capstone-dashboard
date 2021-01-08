@@ -63,10 +63,10 @@
       </div>
       <div class="wrapper-down">
         <div class="content left">
-          <p>AUS Dataset version 1.0.1</p>
-          <p>Features: 128</p>
-          <p>Length: 348</p>
-          <p>Irem losum</p>
+          <p>{{singleData && singleData.title}}</p>
+          <p>Features: {{singleData && singleData.features}}</p>
+          <p>Length: {{singleData && singleData.length}}</p>
+          <p>{{singleData && singleData.description}}</p>
         </div>
         <div class="content right">
             <h5>Recommend model</h5>

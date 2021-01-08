@@ -58,7 +58,7 @@ export class ModelsVersioningComponent implements OnInit {
         r2_score = 0, rmse = 0, mse = 0, mae = 0,
         data_by_crops = [], median_absolute_error = 0,
       } = resData || {};
-      this.chartTitle = 'Agtuary model ' + resData && resData.name;
+      this.chartTitle = `Agtuary model ${resData && resData.name}`;
 
       //Model metrics
       this.r2Score = Number(parseFloat(r2_score.toString()) * 100);
@@ -83,18 +83,17 @@ export class ModelsVersioningComponent implements OnInit {
         target: this.targetType[0],
         crop: this.cropType[0],
       };
-
       // generate echart options
       this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
     }
   }
 
-  fetchData(): void {
+  fetchData(modelName): void {
     this.modelService.getData();
     this.dataListSub = this.modelService.getDataListUpdateListener()
       .subscribe((data: DataType[]) => {
         this.dataList = data;
-        this.singleData = data[0];
+        this.singleData = Array.isArray(data) && data.find((item) => item.name === modelName);
         this.convertData(this.singleData);
 
       });
@@ -104,8 +103,10 @@ export class ModelsVersioningComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const search = window.location.search;
+    const modelName = typeof search === 'string' && search.includes('?name=') && search.split('?name=')[1];
     if (window.location.pathname === '/versioning/model') {
-      this.fetchData();
+      this.fetchData(modelName);
     }
   }
 

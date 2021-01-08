@@ -25,23 +25,51 @@
 
         <div echarts [options]="chartOption" class="demo-chart"></div>
 
+        <div nz-row class="mt-3">
+          <div nz-col nzSpan="8">
+            <p>MSE</p>
+            <p class="font-weight-bolder">{{mse}}</p>
+          </div>
+          <div nz-col nzSpan="8">
+            <p>MAE</p>
+            <p class="font-weight-bolder">{{mae}}</p>
+          </div>
+          <div nz-col nzSpan="8">
+            <p>Meadian Absolute Error</p>
+            <p class="font-weight-bolder">{{median_absolute_error}}</p>
+          </div>
+        </div>
+
+        <div nz-row class="mt-4">
+          <div nz-col nzSpan="8">
+            <p>R2</p>
+            <p class="font-weight-bolder">{{r2Score}}</p>
+            <div *ngIf="r2Score > 0">
+              <nz-progress nz-tooltip nzTitle="mockup" [nzPercent]="100" [nzSuccessPercent]="r2Score"></nz-progress>
+            </div>
+          </div>
+          <div nz-col nzSpan="8"></div>
+          <div nz-col nzSpan="8">
+            <p>RMSE:</p>
+            <p class="font-weight-bolder">{{rmse}}</p>
+          </div>
+        </div>
         <!-- </div> -->
       </div>
       <div class="wrapper-down">
         <div class="content left">
+          <h5>Parameters: </h5>
+          <p>Type: Random Forest</p>
+          <p>Estimator: 189</p>
+          <p>Min leaf split: 2</p>
+          <p>Min leaf sample: 3</p>
+          <p>Irem losum: ...</p>
+        </div>
+        <div class="content right">
           <p>AUS Dataset version 1.0.1</p>
           <p>Features: 128</p>
           <p>Length: 348</p>
           <p>Irem losum</p>
-        </div>
-        <div class="content right">
-          <h5>Recommend model</h5>
-          <p>Best model: </p>
-          <p>XGBoost model</p>
-          <p>R2score: 0.82</p>
-          <h5>Other models</h5>
-          <p>Linear Regression</p>
-          <p>Irem Losum</p>
         </div>
       </div>
     </div>

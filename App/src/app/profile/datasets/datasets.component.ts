@@ -27,7 +27,9 @@ export class DatasetsComponent implements OnInit {
   }
 
   onSelectModel(item) {
-    console.log(item)
+    const { protocol = 'http:', host = 'localhost:4200' } = window.location || {};
+    const url = `${protocol}//${host}/versioning/dataset?name=${item && item.title}`;
+    window.location.href = url;
   }
 
   fetchData(): void {
@@ -36,7 +38,6 @@ export class DatasetsComponent implements OnInit {
       .subscribe((data: DataType[]) => {
         this.dataList = data;
         this.singleData = data[0];
-        console.log('data: ', data);
       });
   }
 }

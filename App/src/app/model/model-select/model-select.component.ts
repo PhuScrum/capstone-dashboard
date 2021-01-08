@@ -23,7 +23,6 @@ export class ModelSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.dataList)
   }
 
   onSelectModel(model: DataType): void {

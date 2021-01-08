@@ -37,7 +37,7 @@
 }
 
 .wrapper-up {
-  height: 450px;
+  /* height: 450px; */
 }
 
 .wrapper-down {
@@ -57,14 +57,19 @@
 }
 
 .wrapper-down .content.left {
-  height: 200px;
+  height: 300px;
+  margin-bottom: 20px;
 }
 
 .wrapper-down .content.right {
+  height: 200px;
+}
+
+.wrapper-down .content.left {
   justify-content: flex-start;
 }
 
-.wrapper-down .content.right h5 {
+.wrapper-down h5 {
   width: 90%;
   padding-top: 20px;
   text-align: left;

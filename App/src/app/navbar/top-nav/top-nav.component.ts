@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopNavComponent implements OnInit {
 
+  isVersioning = false;
   constructor() { }
 
   ngOnInit(): void {
+    this.isVersioning = window.location.pathname.includes('versioning');
   }
 
 }

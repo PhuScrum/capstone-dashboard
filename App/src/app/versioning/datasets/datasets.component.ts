@@ -12,6 +12,7 @@ export class DatasetsComponent implements OnInit {
   hGutter = 16;
   vGutter = 16;
   dataSet: DataType[] = [];
+  singleData: DataType;
 
   private dataListSub: Subscription
   constructor(
@@ -19,18 +20,23 @@ export class DatasetsComponent implements OnInit {
 
   ) { }
 
-  fetchData(): void {
+  fetchData(dataSetName): void {
     this.modelService.getDataSet();
     this.dataListSub = this.modelService.getDataSetUpdateListener()
     .subscribe((data: DataType[]) => {
       this.dataSet = data;
+      const selectedItem = Array.isArray(data) && data.find((item) => item && item.title === dataSetName);
+      const { title = '' } = selectedItem || {};
+      this.singleData = { ...selectedItem, title: typeof title === 'string' && title.split('_').join(' ') };
     });
 
   }
 
   ngOnInit(): void {
+    const search = window.location.search;
+    const dataSetName = typeof search === 'string' && search.includes('?name=') && search.split('?name=')[1];
     if (window.location.pathname === '/versioning/dataset') {
-      this.fetchData();
+      this.fetchData(dataSetName);
     }
   }
 

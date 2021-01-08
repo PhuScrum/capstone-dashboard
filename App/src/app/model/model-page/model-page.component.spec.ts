@@ -32,7 +32,6 @@ describe('ModelPageComponent', () => {
 
   it('should have model-present', () => {
     const compiled = fixture.nativeElement;
-    console.log('compiled 2: ', compiled);
     expect(compiled.querySelector('model-present')).toBeDefined();
   });
 });

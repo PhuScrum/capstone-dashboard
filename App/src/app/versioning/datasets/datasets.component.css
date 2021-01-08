@@ -37,7 +37,7 @@
 }
 
 .wrapper-up {
-  height: 450px;
+  /* height: 450px; */
 }
 
 .wrapper-down {
@@ -57,7 +57,7 @@
 }
 
 .wrapper-down .content.left {
-  height: 200px;
+  height: 220px;
 }
 
 .wrapper-down .content.right {
@@ -87,6 +87,7 @@
   -moz-box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
   -webkit-box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
   box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
+  white-space: pre-line;
 }
 
 h5.table-title {

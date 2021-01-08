@@ -20,12 +20,10 @@ export class MetricsComparisionComponent implements OnInit {
     this.dataListSub = this.modelService.getDataListUpdateListener()
     .subscribe((data: DataType[]) => {
       this.dataList = data;
-      console.log(this.dataList)
     });
   }
   ngOnInit(): void {
     this.fetchData();
-    console.log(this.dataList)
   }
 
 }
