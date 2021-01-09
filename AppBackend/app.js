@@ -5,7 +5,7 @@ var bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
 const path = require('path')
-const gcpConfig = require('./gcpConfig')
+const gcpConfig = require('./middlewares/gcpConfig')
 
 app.use(bodyParser.json({ limit: '10mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))

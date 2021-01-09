@@ -30,9 +30,6 @@ const getGCP_CSV_DESCRIPTION = (bucketFile) => {
 }
 
 const api = async (req, res) => {
-    
-    res.json(dataStream)
-
     let dataset_data = [];
     fs.readdir(directoryPath, async (err, files) =>{
         const numberOfFiles = files.length;
