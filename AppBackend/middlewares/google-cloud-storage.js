@@ -15,12 +15,18 @@ const gcsHelpers = require('../helpers/gcpConfig');
     if (!req.file) {
       return next();
     }
-  
+    
+    //bucket detail
     const bucketName = req.body.bucketName || DEFAULT_BUCKET_NAME;
     const bucket = storage.bucket(bucketName);
-    const gcsFileName = req.body.directory? `${req.body.directory}/${Date.now()}-${req.file.originalname}` : `${Date.now()}-${req.file.originalname}`;
+
+    //file name
+    const version = Date.now()
+    const fileName = `${version}-${req.file.originalname}`
+    const gcsFileName = req.body.directory ? `${req.body.directory}/${fileName}` : fileName;
+
+    //send file stream to GCS
     const file = bucket.file(gcsFileName);
-  
     const stream = file.createWriteStream({
       metadata: {
         contentType: req.file.mimetype,
@@ -33,10 +39,11 @@ const gcsHelpers = require('../helpers/gcpConfig');
     });
   
     stream.on('finish', () => {
-      req.file.cloudStorageObject = gcsFileName;
   
       return file.makePublic()
         .then(() => {
+          req.file.version = version;
+          req.file.fileName = fileName;
           req.file.gcsUrl = gcsHelpers.getPublicUrl(bucketName, gcsFileName);
           next();
         });

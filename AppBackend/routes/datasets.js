@@ -9,7 +9,7 @@ const { authMiddleware } = require('../middlewares/auth')
 const { sendUploadToGCS } = require('../middlewares/google-cloud-storage')
 
 router.get('/', get)
-router.post('/', upload.single('datasetData'), sendUploadToGCS, post)
+router.post('/', authMiddleware, upload.single('datasetData'), sendUploadToGCS, post)
 router.get('/detail/:id', getById)
 router.put('/update/:id', edit)
 router.delete('/delete/:id', remove)
