@@ -4,6 +4,7 @@ const post = require('./post');
 const edit = require('./edit');
 const remove = require('./delete');
 const getByName = require('./get-by-name');
+const getByUserId = require('./get-by-userId');
 
 module.exports = {
     get,
@@ -11,5 +12,6 @@ module.exports = {
     post,
     edit,
     remove,
-    getByName
+    getByName,
+    getByUserId
 }

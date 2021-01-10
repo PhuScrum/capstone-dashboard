@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BACKEND_URL } from '../../globalVar'
 
 import { DATASETS as DataType } from '../../../data/dataType'
@@ -17,7 +17,10 @@ export class DatasetsService {
   ) {}
 
   getData() {
-    this.http.get<DataType[]>( BACKEND_URL + 'api/dataset')
+    const localSecret = localStorage.getItem('secret')
+    let headers = new HttpHeaders().set('secret', localSecret);
+
+    this.http.get<DataType[]>( BACKEND_URL + 'api/dataset/myDatasets', {headers: headers})
     .subscribe(data => {
       this.dataList = data;
       this.dataListUpdated.next([...this.dataList]);

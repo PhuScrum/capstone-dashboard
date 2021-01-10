@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DATASETS as DataType } from '../../../data/dataType'
 
@@ -9,13 +9,11 @@ import { DatasetsService } from './datasets.service'
   templateUrl: './datasets.component.html',
   styleUrls: ['./datasets.component.css']
 })
-export class DatasetsComponent implements OnInit {
+export class DatasetsComponent implements OnInit, OnDestroy {
   hGutter = 16;
   vGutter = 16;
 
   dataList: DataType[] = [];
-  singleData: DataType;
-
   private dataListSub: Subscription;
 
   constructor(
@@ -35,8 +33,11 @@ export class DatasetsComponent implements OnInit {
     this.dataListSub = this.datasetService.getDataListUpdateListener()
       .subscribe((data: DataType[]) => {
         this.dataList = data;
-        this.singleData = data[0];
         console.log('data: ', data);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.dataListSub.unsubscribe()
   }
 }

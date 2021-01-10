@@ -8,7 +8,8 @@ import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: ModelPageComponent, pathMatch: 'full' },
-  { path: 'profile/:userId', component: ProfilePageComponent, pathMatch: 'full' },
+  { path: 'profile', component: ProfilePageComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+  { path: 'profile/:userId', component: ProfilePageComponent, pathMatch: 'full', canActivate: [AuthGuard]},
   { path: 'versioning/dataset', component: VersioningPageComponent, pathMatch: 'full' },
   { path: 'versioning/model', component: VersioningPageComponent, pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent, pathMatch: 'full' }

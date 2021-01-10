@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 
 import { AuthData } from './authData.model';
 
@@ -46,13 +45,13 @@ export class AuthService {
       password: password
     }
 
-    this.http.post(BACKEND_URL + "api/auth/login", body)
+    this.http.post<any>(BACKEND_URL + "api/auth/login", body)
     .subscribe(result => {
       this.saveAuthData(result.secret, result.instance['@ref'].id, true)
       this.isLogin = true;
       this.secret = result.secret;
       this.userId = result.instance['@ref'].id
-      this.router.navigate(["/"])
+      this.router.navigate([`profile/${this.userId}`])
       this.authStatusListener.next(this.isLogin)
     },error => {
       console.log(error)
@@ -72,7 +71,7 @@ export class AuthService {
   private saveAuthData(secret: string, userId: string, isLogin: boolean) {
     localStorage.setItem("secret", secret);
     localStorage.setItem("userId", userId);
-    localStorage.setItem("isLogin", isLogin);
+    localStorage.setItem("isLogin", isLogin.toString());
   }
 
   private clearAuthData() {

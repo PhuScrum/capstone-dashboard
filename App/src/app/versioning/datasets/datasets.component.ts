@@ -14,10 +14,10 @@ export class DatasetsComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSet = [
-      { key: 1, title: 'AUS month data set', description: 'Irem losum', features: 250, length: 101 },
-      { key: 2, title: 'AUS month data set', description: 'Irem losum', features: 120, length: 198 },
-      { key: 3, title: 'AUS month data set', description: 'Irem losum', features: 172, length: 192 },
-      { key: 4, title: 'AUS month data set', description: 'Irem losum', features: 130, length: 200 },
+      { version: 1, originalName: 'AUS month data set', note: 'Irem losum', features: 250, length: 101, url: '', fileName: "", user: "" },
+      { version: 2, originalName: 'AUS month data set', note: 'Irem losum', features: 120, length: 198, url: '', fileName: "", user: ""  },
+      { version: 3, originalName: 'AUS month data set', note: 'Irem losum', features: 172, length: 192, url: '', fileName: "", user: ""  },
+      { version: 4, originalName: 'AUS month data set', note: 'Irem losum', features: 130, length: 200, url: '', fileName: "", user: "" },
     ]
   }
 

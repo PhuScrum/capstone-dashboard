@@ -21,11 +21,14 @@ export interface Data {
 }
 
 export interface DATASETS {
-  key: number,
-  title: string,
-  description: string,
+  url: string,
+  version: number,
+  fileName: string,
+  originalName: string,
+  note: string,
   features: number,
   length: number,
+  user: string
 }
 
 export interface PROFILE {

@@ -2,6 +2,7 @@ const db = require('../../../dbConfig')
 
 const api = async (req, res) => {
     const { q, client } = db;
+    const authId = req.authUserId;
     
     try {
         const dbs = await client.query(
@@ -11,7 +12,7 @@ const api = async (req, res) => {
                     // make paginatable
                     q.Match(
                         // query index
-                        q.Index('all_datasets')
+                        q.Index('datasets_by_userId'), authId
                     )
                 ),
                 // ref => q.Get(ref) // lookup each result by its reference

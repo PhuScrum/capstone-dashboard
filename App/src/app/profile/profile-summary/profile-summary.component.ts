@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EChartOption } from 'echarts';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { ProfileService } from '../profile.service'
 
@@ -51,7 +51,8 @@ export class ProfileSummaryComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -60,15 +61,17 @@ export class ProfileSummaryComponent implements OnInit {
       if(paramMap.has('userId')){
         this.userId = paramMap.get('userId')
         this.fetchProfile(this.userId)
+      } else {
+        this.router.navigate(['/'])
       }
     })
-    
+
 
     this.datasetCount = 120;
     this.modelCount = 20;
     this.someMetric = 100;
 
-    
+
   }
 
   fetchProfile(id: string): void {
