@@ -30,8 +30,6 @@ const getDesc = (buffer) => {
     }))
   })
 
-  
-
 }
 
 const api = async (req, res) => {

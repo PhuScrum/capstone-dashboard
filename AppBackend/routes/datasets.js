@@ -10,6 +10,7 @@ const { sendUploadToGCS } = require('../middlewares/google-cloud-storage')
 
 router.get('/all', get)
 router.get('/myDatasets', authMiddleware, getByUserId)
+router.get('/versioning', authMiddleware, getByName)
 router.post('/upload', authMiddleware, upload.single('datasetData'), sendUploadToGCS, post)
 router.get('/detail/:id', getById)
 router.put('/update/:id', edit)
