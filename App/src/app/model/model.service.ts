@@ -31,7 +31,6 @@ export class ModelService {
   }
 
   onSaveModelFile(model: File): Observable<any> {
-    
     const body = new FormData();
     body.append('modelData', model);
 

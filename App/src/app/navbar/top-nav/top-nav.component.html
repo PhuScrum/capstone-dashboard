@@ -9,7 +9,12 @@
     <span>online service</span>
   </div>
   <div class="account">
-    <h3>Hello Jack</h3>
+    <a *ngIf="isLogin" href="/profile/{{userId}}">
+      <h3>Hello User</h3>
+    </a>
+    <a *ngIf="!isLogin" href="/login">
+      <h3>Login</h3>
+    </a>
   </div>
   <div class="bottom-line"></div>
 </nav>

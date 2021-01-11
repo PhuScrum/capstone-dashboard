@@ -20,6 +20,7 @@ app.use(morgan('dev'))
 
 //Test Server
 app.get('/api', (req, res) => {
+    
     res.status(200).send('Hello, world!').end();
   });
 
@@ -31,7 +32,6 @@ app.use('/api/model-data', ml_model)
 app.use('/api/auth', auth)
 app.use('/api/user', user)
 app.use('/api/dataset', dataset)
-
 
 // app.route('/api/model-data')
 //     .get(ml_model_API.crud.getModelData)

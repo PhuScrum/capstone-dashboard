@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ModelPageComponent } from './model/model-page/model-page.component';
 import { ProfilePageComponent } from './profile/profile-page.component';
 import { VersioningPageComponent } from './versioning/versioning-page.component';
-import { LoginPageComponent } from './auth/login-page/login-page.component'
+import { LoginPageComponent } from './auth/login-page/login-page.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: ModelPageComponent, pathMatch: 'full' },
-  { path: 'profile', component: ProfilePageComponent, pathMatch: 'full' },
+  { path: 'profile', component: ProfilePageComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+  { path: 'profile/:userId', component: ProfilePageComponent, pathMatch: 'full', canActivate: [AuthGuard]},
   { path: 'versioning/dataset', component: VersioningPageComponent, pathMatch: 'full' },
   { path: 'versioning/model', component: VersioningPageComponent, pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent, pathMatch: 'full' }
@@ -15,6 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
