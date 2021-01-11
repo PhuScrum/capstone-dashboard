@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { AuthService } from '../../auth/auth.service'
 
 import { Data as DataType } from '../../../data/dataType'
 
@@ -14,11 +16,15 @@ export class ModelService {
   private dataListUpdated = new Subject<DataType[]>();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) { }
 
   getData() {
-    this.http.get<DataType[]>( BACKEND_URL + 'api/model-data')
+    const secret = this.authService.getSecret();
+    let headers = new HttpHeaders().set('secret', secret);
+
+    this.http.get<DataType[]>( BACKEND_URL + 'api/model-data/myModels', {headers: headers})
     .subscribe(data => {
       this.dataList = data;
       this.dataListUpdated.next([...this.dataList]);

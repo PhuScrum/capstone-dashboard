@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const upload = require('../controller/dataset/multer')
+const upload = require('../middlewares/multer')
 const { crud } = require('../controller/dataset')
 const { get, getById, post, edit, remove, getByName, getByUserId } = crud
 

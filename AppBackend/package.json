@@ -25,7 +25,8 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "neat-csv": "^6.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "slugify": "^1.4.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

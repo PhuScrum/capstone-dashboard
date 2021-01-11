@@ -1,8 +1,11 @@
 const getModelData = require('./get-model-data')
-let uploadModel = require('./upload-model')
+const uploadModel = require('./upload-model')
+const getMyModels = require('./get-by-userId')
+
 const crud = {
     getModelData,
-    uploadModel
+    uploadModel,
+    getMyModels
 }
 
 module.exports = crud

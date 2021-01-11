@@ -25,9 +25,9 @@ export class DatasetsComponent implements OnInit {
     this.dataListSub = this.modelService.getDataSetUpdateListener()
     .subscribe((data: DataType[]) => {
       this.dataSet = data;
-      const selectedItem = Array.isArray(data) && data.find((item) => item && item.title === dataSetName);
-      const { title = '' } = selectedItem || {};
-      this.singleData = { ...selectedItem, title: typeof title === 'string' && title.split('_').join(' ') };
+      const selectedItem = Array.isArray(data) && data.find((item) => item && item.originalName === dataSetName);
+      const { originalName = '' } = selectedItem || {};
+      this.singleData = { ...selectedItem, originalName: typeof originalName === 'string' && originalName.split('_').join(' ') };
     });
 
   }

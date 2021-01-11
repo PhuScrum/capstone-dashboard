@@ -17,7 +17,15 @@ export interface Data {
     mse: number,
     mae: number,
     median_absolute_error: number,
-    data_by_crops: Array<Crop>
+    data_by_crops: Array<Crop>,
+    url: string,
+    fileName: string,
+    originalName: string,
+    slug: string,
+    version: string,
+    note: string,
+    user: string,
+    type: string
 }
 
 export interface DATASETS {
