@@ -18,7 +18,9 @@ const api = async (req, res) => {
                 q.Lambda("X", q.Get(q.Var("X")))// lookup each result by its reference
             )
         )
-        const datasets = dbs.data.map(item => item.data)
+        const datasets = dbs.data.map(item => {
+            return {...item.data, id: item.ref.id}
+        })
         // ok
         res.status(200).json(datasets)
     } catch (e) {
