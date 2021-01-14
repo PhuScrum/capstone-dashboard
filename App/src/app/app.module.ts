@@ -15,10 +15,11 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en'
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+// import { NzButtonModule } from 'ng-zorro-antd/button';
+// import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+// import { NgZorroAntdModule } from 'ng-zorro-antd';
 // import { NzAnchorModule } from 'ng-zorro-antd/anchor';
+import { NgZorroAntdModule } from './ng-zorro-antd.module'
 
 registerLocaleData(en);
 
@@ -38,9 +39,10 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NzButtonModule,
-    NzDropDownModule,
-    NgZorroAntdModule,
+    NgZorroAntdModule
+    // NzButtonModule,
+    // NzDropDownModule,
+    // NgZorroAntdModule,
     // NzAnchorModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

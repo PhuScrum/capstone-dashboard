@@ -8,10 +8,20 @@
     <h3>internal dashboard</h3>
     <span>online service</span>
   </div>
+
   <div class="account">
-    <a *ngIf="isLogin" href="/profile/{{userId}}">
-      <h3>Hello User</h3>
-    </a>
+    <div *ngIf="isLogin" class="user-dropdown">
+      <a nz-dropdown [nzDropdownMenu]="menu">
+        <h3>Hello User</h3>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item><a href="/profile/{{userId}}">Profile</a></li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item>Sign out</li>
+        </ul>
+      </nz-dropdown-menu>
+    </div>
     <a *ngIf="!isLogin" href="/login">
       <h3>Login</h3>
     </a>
