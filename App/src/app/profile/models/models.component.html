@@ -1,7 +1,16 @@
 <div class="model-profile">
-  <h1 class="title">Models</h1>
+  <div class="title">
+    <h1 style="margin-bottom: 0px;">Models</h1>
+    <a class="add-button" (click)="showModal()">Add</a>
+    <nz-modal [(nzVisible)]="isVisible" nzClosable="false" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+      <p>Content one</p>
+      <p>Content two</p>
+      <p>Content three</p>
+      <p>Content three</p>
+    </nz-modal>
+  </div>
   <div nz-row nzGutter="[hGutter, vGutter]" class="model-wrapper">
-    <div nz-col nzSpan="12" class="model" *ngFor="let item of dataList | slice:0:4;">
+    <div nz-col nzSpan="6" class="model" *ngFor="let item of dataList | slice:0:4;">
       <div class="model-content">
         <div nz-row>
           <div nz-col nzSpan="12">

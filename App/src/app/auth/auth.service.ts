@@ -59,7 +59,7 @@ export class AuthService {
       this.saveAuthData(secret, userId, true, userName)
       this.isLogin = true;
       this.secret = secret;
-      this.userId = userId
+      this.userId = userId;
       this.userName = userName
       this.router.navigate([`profile/${this.userId}`])
 
@@ -137,7 +137,6 @@ export class AuthService {
       this.onLogout()
     }, duration * 1000)
   }
-
 
   autoAuthUser() {
     const authInformation = this.getAuthData()

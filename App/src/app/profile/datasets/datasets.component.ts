@@ -39,6 +39,13 @@ export class DatasetsComponent implements OnInit, OnDestroy {
       });
   }
 
+  onDatasetPicked(event: Event): void {
+    const file = (event.target as HTMLInputElement).files[0];
+    console.log(file)
+
+    this.datasetService.onSaveDataset(file).subscribe(result => this.fetchData())
+  }
+
   ngOnDestroy(): void {
     this.dataListSub.unsubscribe()
   }

@@ -49,8 +49,6 @@ export class ModelService {
     //   type: 'LinearRegression'
     // }
 
-    console.log(body)
-
     return this.http.post(BACKEND_URL + 'api/model-data/upload', body, {headers: headers});
   }
 }

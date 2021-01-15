@@ -3,6 +3,8 @@ import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BACKEND_URL } from '../../globalVar'
 
+import { AuthService } from '../../auth/auth.service'
+
 import { DATASETS as DataType } from '../../../data/dataType'
 
 @Injectable({
@@ -13,7 +15,8 @@ export class DatasetsService {
   private dataListUpdated = new Subject<DataType[]>();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {}
 
   getData() {
@@ -31,7 +34,15 @@ export class DatasetsService {
     return this.dataListUpdated.asObservable();
   }
 
-  getDatasetCount() {
-    return this.dataList.length;
+  onSaveDataset(dataset: File): Observable<any> {
+    const localSecret = this.authService.getSecret()
+    let headers = new HttpHeaders().set('secret', localSecret);
+
+    const body = new FormData();
+    body.append("datasetData", dataset);
+    body.append('directory', 'dataset')
+    body.append('note', 'my dataset')
+
+    return this.http.post(BACKEND_URL + 'api/dataset/upload', body, {headers: headers});
   }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { NgZorroAntdModule } from '../ng-zorro-antd.module'
 
 import { ProfilePageComponent } from './profile-page.component';
 import { ModelsComponent } from './models/models.component';
@@ -11,6 +12,7 @@ import { ProfileSummaryComponent } from './profile-summary/profile-summary.compo
   declarations: [ProfilePageComponent, ModelsComponent, DatasetsComponent, ProfileSummaryComponent],
   imports: [
     CommonModule,
+    NgZorroAntdModule,
     NgxEchartsModule.forRoot({
       /**
        * This will import all modules from echarts.

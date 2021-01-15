@@ -2,13 +2,47 @@
   padding-bottom: 100px;
 }
 
-h1.title {
+.title {
   width: 98%;
   margin: 0 auto;
   padding-bottom: 10px;
   margin-bottom: 20px;
   border-bottom: 1px solid #cccccc;
+  display: flex;
 }
+
+.title h1{
+  margin-right: auto;
+}
+
+
+.add-button {
+  background-color: #1e7e4e;
+  border: 1px solid #1e7e4e;
+  color: white;
+  border-radius: 2px;
+  font-size: 17px;
+  padding: .35rem .85rem;
+  vertical-align: middle;
+  display: inline-flex;
+  /* letter-spacing: normal; */
+  /* text-indent: 0px; */
+  align-items: center;
+}
+
+.add-button:active,
+.add-button:hover,
+.add-button:focus,
+.add-button:visited {
+  background-color: #196941;
+  border: 1px solid #196941;
+  box-shadow: none;
+}
+
+.add-button::selection {
+  background: #196941!important;
+}
+
 
 .datasets-wrapper {
   width: 98%;
@@ -53,4 +87,8 @@ h1.title {
   overflow-x: hidden;
   max-width: 212px;
   text-overflow: ellipsis;
+}
+
+input[type="file"] {
+  visibility: hidden;
 }

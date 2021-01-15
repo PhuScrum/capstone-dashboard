@@ -39,6 +39,7 @@ export class TopNavComponent implements OnInit, OnDestroy {
         this.isLogin = data.isLogin;
         this.userName = data.userName;
         this.firstName = this.userName.replace(/ .*/,'');
+        this.userId = this.authService.getUserId();
       }
     )
   }

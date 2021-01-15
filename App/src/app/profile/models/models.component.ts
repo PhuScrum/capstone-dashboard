@@ -11,6 +11,7 @@ import { Data as DataType } from '../../../data/dataType'
   styleUrls: ['./models.component.css']
 })
 export class ModelsComponent implements OnInit {
+  isVisible = false;
   hGutter = 16;
   vGutter = 16;
 
@@ -35,6 +36,20 @@ export class ModelsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchData();
+  }
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
   }
 
   parentFunction(data: DataType): void {
