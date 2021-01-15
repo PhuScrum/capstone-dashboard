@@ -18,7 +18,7 @@ export class DatasetsComponent implements OnInit {
   constructor(
     private modelService: VersioningService,
 
-  ) { }
+  ) { } 
 
   fetchData(dataSetName): void {
     this.modelService.getDataSet();

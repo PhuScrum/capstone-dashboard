@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ModelsVersioningComponent } from './models-versioning.component';
 
@@ -10,7 +11,7 @@ describe('ModelsVersioningComponents', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ModelsVersioningComponent ],
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule],
     })
     .compileComponents();
   }));

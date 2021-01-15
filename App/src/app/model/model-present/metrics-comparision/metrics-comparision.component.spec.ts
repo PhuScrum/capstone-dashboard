@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MetricsComparisionComponent } from './metrics-comparision.component';
 
@@ -10,7 +11,7 @@ describe('MetricsComparisionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [MetricsComparisionComponent],
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule],
     })
       .compileComponents();
   }));

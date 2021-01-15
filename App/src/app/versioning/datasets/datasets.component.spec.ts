@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { DatasetsComponent } from './datasets.component';
 
 describe('DatasetsComponent', () => {
@@ -9,7 +10,7 @@ describe('DatasetsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DatasetsComponent],
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule],
     })
       .compileComponents();
   }));
