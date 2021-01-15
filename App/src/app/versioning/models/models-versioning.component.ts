@@ -19,6 +19,10 @@ export class ModelsVersioningComponent implements OnInit {
   chartOption: EChartOption = {};
   chartTitle: string = '';
 
+  fileName: string = '';
+  paramType: string = '';
+  paramNote: string = '';
+
   cropType: string[] = [];
   cropData: Crop;
 
@@ -57,19 +61,19 @@ export class ModelsVersioningComponent implements OnInit {
       const {
         r2_score = 0, rmse = 0, mse = 0, mae = 0,
         data_by_crops = [], median_absolute_error = 0,
+        fileName = '', type = '', note = '',
       } = resData || {};
       this.chartTitle = `Agtuary model ${resData && resData.name}`;
 
       //Model metrics
       this.r2Score = Number(parseFloat(r2_score.toString()) * 100);
-      this.mae = this.generateOutputNumber(mae)
-      this.mse = this.generateOutputNumber(mse)
-      this.median_absolute_error = this.generateOutputNumber(median_absolute_error)
-      this.rmse = this.generateOutputNumber(rmse)
+      this.mae = this.generateOutputNumber(mae);
+      this.mse = this.generateOutputNumber(mse);
+      this.median_absolute_error = this.generateOutputNumber(median_absolute_error);
+      this.rmse = this.generateOutputNumber(rmse);
 
       // create list of crop types
       this.cropType = data_by_crops.map(item => item.name);
-
 
       // filter crop by crop name
       this.cropData = data_by_crops.find(item => item.name === this.cropType[0]);
@@ -83,6 +87,12 @@ export class ModelsVersioningComponent implements OnInit {
         target: this.targetType[0],
         crop: this.cropType[0],
       };
+      
+      // Parameter
+      this.fileName = fileName;
+      this.paramType = type;
+      this.paramNote = note;
+
       // generate echart options
       this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
     }

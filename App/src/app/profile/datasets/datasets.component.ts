@@ -26,7 +26,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
 
   onSelectModel(item) {
     const { protocol = 'http:', host = 'localhost:4200' } = window.location || {};
-    const url = `${protocol}//${host}/versioning/dataset?name=${item && item.title}`;
+    const url = `${protocol}//${host}/versioning/dataset?name=${item && item.originalName}`;
     window.location.href = url;
   }
 

@@ -51,8 +51,8 @@
               </thead>
               <tbody>
                 <tr *ngFor="let data of basicTable.data">
-                  <td>{{data.title}}</td>
-                  <td>{{data.description}}</td>
+                  <td>{{data.originalName}}</td>
+                  <td>{{data.note}}</td>
                   <td>{{data.features}}</td>
                   <td>{{data.length}}</td>
                 </tr>
@@ -63,7 +63,7 @@
       </div>
       <div class="wrapper-down">
         <div class="content left">
-          <p>{{singleData && singleData.originalName}}</p>
+          <p>{{singleData && singleData.fileName}}</p>
           <p>Features: {{singleData && singleData.features}}</p>
           <p>Length: {{singleData && singleData.length}}</p>
           <p>{{singleData && singleData.note}}</p>
