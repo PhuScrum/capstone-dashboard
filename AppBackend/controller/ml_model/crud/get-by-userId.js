@@ -12,7 +12,7 @@ const api = async (req, res) => {
                     // make paginatable
                     q.Match(
                         // query index
-                        q.Index('datasets_by_userId'), authId
+                        q.Index('models_by_user'), authId
                     )
                 ),
                 // ref => q.Get(ref) // lookup each result by its reference

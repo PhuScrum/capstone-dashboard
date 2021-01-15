@@ -31,4 +31,7 @@ export class DatasetsService {
     return this.dataListUpdated.asObservable();
   }
 
+  getDatasetCount() {
+    return this.dataList.length;
+  }
 }

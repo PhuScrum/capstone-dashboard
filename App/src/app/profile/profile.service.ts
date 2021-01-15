@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { PROFILE } from '../../data/dataType'
+import { PROFILE, Data as MODEL, DATASETS } from '../../data/dataType'
 
 const BACKEND_URL = 'http://localhost:8080/'
 
@@ -11,6 +11,12 @@ const BACKEND_URL = 'http://localhost:8080/'
 export class ProfileService {
   private profileData: PROFILE;
   private profileUpdated = new Subject<PROFILE>();
+
+  private modelList: MODEL[] = [];
+  private modelListUpdated = new Subject<MODEL[]>();
+
+  private dataList: DATASETS[] = [];
+  private dataListUpdated = new Subject<DATASETS[]>();
 
   constructor(
     private http: HttpClient
@@ -31,4 +37,5 @@ export class ProfileService {
   getProfileUpdateListener() {
     return this.profileUpdated.asObservable();
   }
+
 }

@@ -16,7 +16,7 @@ export class AuthService {
   private secret: string;
   private userId: string;
   private tokenTimer: any;
-  private userName: string;
+  private userName: string = "";
 
   private authStatusListener = new Subject<{ isLogin: boolean; userName: string }>();
 
@@ -71,7 +71,7 @@ export class AuthService {
       console.log(error)
       this.authStatusListener.next({
         isLogin: false,
-        userName: null
+        userName: ""
       })
     })
   }
@@ -88,14 +88,14 @@ export class AuthService {
       this.userId = null
       this.authStatusListener.next({
         isLogin: false,
-        userName: null
+        userName: ""
       })
       this.router.navigate(['/'])
     }, error => {
       console.log(error)
       this.authStatusListener.next({
         isLogin: false,
-        userName: null
+        userName: ""
       })
     })
   }

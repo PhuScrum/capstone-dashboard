@@ -9,7 +9,7 @@ const { authMiddleware } = require('../middlewares/auth')
 const { sendUploadToGCS } = require('../middlewares/google-cloud-storage')
 
 router.get('/all', getModelData)
-router.get('/myModels', authMiddleware, getModelData)
+router.get('/myModels', authMiddleware, getMyModels)
 router.post('/upload', authMiddleware, upload.single('modelData'), sendUploadToGCS, uploadModel)
 
 module.exports = router;
