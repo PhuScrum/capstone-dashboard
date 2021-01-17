@@ -20,8 +20,9 @@ from faunadb.client import FaunaClient
 client = FaunaClient(secret="fnAD7ADnJXACDd2V6pO3pXItGGVXn9FCIQVww8D0")
 
 indexes = client.query(q.paginate(q.indexes()))
-
+print(client.query(q.get(q.ref(q.collection("datasets"), "287406437783568909"))))
 print(indexes)
+
 
 def read_csv(address):
     return pd.read_csv(address)
@@ -71,6 +72,7 @@ def model_Recommend():
     if len(target) > 1:
         multi = True
     size = req_data['size']
+    did = req_data['did']
     data=  read_csv(dataUrl)
     X = data.drop(columns=target,axis=1)
     y = data[target]
@@ -114,7 +116,15 @@ def model_Recommend():
                    {"model": "Light Gradient Boosting", "result": predictResult(y_test, y_pred_modelLGB)},
                    {"model": "Extreme Gradient Boosting", "result": predictResult(y_test, y_pred_modelXGB)}]
     }
+
     json_object = json.dumps(result, indent=4)
+
+    client.query(
+        q.update(
+            q.ref(q.collection("datasets"),did ),
+            {"data": {"model-recommend":[result]}}
+        ))
+
     return json_object
 
 
