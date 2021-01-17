@@ -3,6 +3,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ModelService } from '../model.service';
 import { Data as DataType } from '../../../data/dataType'
 
+import { mlOpts } from '../../globalVar'
+
 
 @Component({
   selector: 'model-select',
@@ -10,6 +12,9 @@ import { Data as DataType } from '../../../data/dataType'
   styleUrls: ['./model-select.component.css'],
 })
 export class ModelSelectComponent implements OnInit {
+  mlOpts: any[] = [];
+  selectedType = "LinearRegression";
+
   hGutter = 16;
   vGutter = 16;
 
@@ -23,6 +28,7 @@ export class ModelSelectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.mlOpts = mlOpts;
   }
 
   onSelectModel(model: DataType): void {
@@ -32,6 +38,11 @@ export class ModelSelectComponent implements OnInit {
   onModelPicked(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
     this.onUploadModel.emit(file)
+  }
+
+  typeChange(value: any): void {
+    console.log(value);
+    this.selectedType = value;
   }
 
 }
