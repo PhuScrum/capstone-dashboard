@@ -1,0 +1,11 @@
+.form-group label {
+  font-size: 16px;
+}
+
+input:focus,
+input:active,
+input:hover,
+input:enabled {
+  box-shadow: none;
+  border-color: #ced4da;
+}

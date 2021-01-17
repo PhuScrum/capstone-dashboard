@@ -48,30 +48,9 @@
   display: block !important;
 }
 
-
-.add-button {
-  background-color: #1e7e4e;
-  border: 1px solid #1e7e4e;
-  color: white;
-  border-radius: 2px;
-  font-size: 17px;
-  padding: .35rem .85rem;
-  vertical-align: middle;
-  display: flex;
+.genric-btn {
+  display: inline-flex;
   /* letter-spacing: normal; */
   /* text-indent: 0px; */
   align-items: center;
-}
-
-.add-button:active,
-.add-button:hover,
-.add-button:focus,
-.add-button:visited {
-  background-color: #196941;
-  border: 1px solid #196941;
-  box-shadow: none;
-}
-
-.add-button::selection {
-  background: #196941!important;
 }
