@@ -25,10 +25,10 @@
         <!-- </div> -->
         <div class="timeline-nz">
           <nz-timeline nzMode="alternate">
-            <nz-timeline-item>Create a services 2015-09-01</nz-timeline-item>
-            <nz-timeline-item>Solve initial network problems</nz-timeline-item>
-            <nz-timeline-item>Technical testing 2015-09-01 09:12:11</nz-timeline-item>
-            <nz-timeline-item>Network problems being solved 2015-09-01 09:12:11</nz-timeline-item>
+            <nz-timeline-item *ngFor="let item of dataSet">
+              <p><strong>Version: </strong><span (click)="onSelectVersion(item.version)" class="timeline-version">{{item.version}}</span></p>
+              <p class="date">{{item.date}}</p>
+            </nz-timeline-item>
           </nz-timeline>
         </div>
       </div>
@@ -62,20 +62,26 @@
         </div>
       </div>
       <div class="wrapper-down">
-        <div class="content left">
+        <div class="content left dataset-overview">
           <p>{{singleData && singleData.fileName}}</p>
           <p>Features: {{singleData && singleData.features}}</p>
           <p>Length: {{singleData && singleData.length}}</p>
-          <p>{{singleData && singleData.note}}</p>
+          <p>Description: {{singleData && singleData.note}}</p>
         </div>
-        <div class="content right">
-            <h5>Recommend model</h5>
-            <p>Best model: </p>
-            <p>XGBoost model</p>
-            <p>R2score: 0.82</p>
-            <h5>Other models</h5>
-            <p>Linear Regression</p>
-            <p>Irem Losum</p>
+        <div class="content right model-recommendation" *ngIf="singleData.model_recommend">
+            <div class="best-model">
+              <h5>Recommend model</h5>
+              <p>Best model: {{singleData.model_recommend[0].best_model}}</p>
+              <p>r2_score: {{singleData.model_recommend[0].bestResult.r2_score.toFixed(4)}}</p>
+            </div>
+            <div class="other-models">
+              <h5 style="margin-bottom: 5px;">Other models</h5>
+              <ul class="list-group">
+                <li class="list-unstyled" *ngFor="let item of singleData.model_recommend[0].result">
+                  {{item.model}}
+                </li>
+              </ul>
+            </div>
         </div>
       </div>
     </div>

@@ -29,14 +29,16 @@ export interface Data {
 }
 
 export interface DATASETS {
+  date: string,
   url: string,
-  version: number,
+  version: string,
   fileName: string,
   originalName: string,
   note: string,
   features: number,
   length: number,
-  user: string
+  user: string,
+  model_recommend: any[]
 }
 
 export interface PROFILE {

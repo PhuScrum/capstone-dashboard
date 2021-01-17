@@ -37,7 +37,7 @@ const api = async (req, res) => {
   const { q, client } = db;
 
   //file info
-  const {gcsUrl, fileName, originalname, version} = req.file
+  const {gcsUrl, fileName, originalname, version, date} = req.file
 
   try {
     const desc = await getDesc(req.file.buffer)
@@ -46,6 +46,7 @@ const api = async (req, res) => {
       fileName: fileName,
       originalName: originalname,
       version: version,
+      date: date,
       length: desc.length,
       features: desc.features,
       note: req.body.note,

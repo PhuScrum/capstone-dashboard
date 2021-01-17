@@ -122,7 +122,7 @@ def model_Recommend():
     client.query(
         q.update(
             q.ref(q.collection("datasets"),did ),
-            {"data": {"model-recommend":[result]}}
+            {"data": {"model_recommend":[result]}}
         ))
 
     return json_object

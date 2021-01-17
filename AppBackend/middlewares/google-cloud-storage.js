@@ -1,3 +1,4 @@
+const moment = require('moment')
 const gcsHelpers = require('../helpers/gcpConfig');
 
 const { storage } = gcsHelpers;
@@ -24,6 +25,7 @@ exports.sendUploadToGCS = (req, res, next) => {
 
     //file name
     const version = Date.now()
+    const date = moment().format('MMMM Do YYYY, h:mm:ss a');
     const fileName = `${version}-${req.file.originalname}`
     const gcsFileName = req.body.directory ? `${req.body.directory}/${fileName}` : fileName;
 
@@ -44,6 +46,7 @@ exports.sendUploadToGCS = (req, res, next) => {
 
         return file.makePublic()
         .then(() => {
+            req.file.date = date
             req.file.version = version;
             req.file.fileName = fileName;
             req.file.gcsUrl = gcsHelpers.getPublicUrl(bucketName, gcsFileName);

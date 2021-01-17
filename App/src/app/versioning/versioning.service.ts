@@ -3,16 +3,17 @@ import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { AuthService } from '../auth/auth.service';
-import { Data as DataType, DATASETS } from '../../data/dataType'
+import { Data as MODELS, DATASETS } from '../../data/dataType'
 
 const BACKEND_URL = 'http://localhost:8080/'
 @Injectable({
   providedIn: 'root'
 })
 export class VersioningService {
-  private dataList: DataType[] = [];
+  private models: MODELS[] = [];
   private dataSet: DATASETS[] = [];
-  private dataListUpdated = new Subject<DataType[]>();
+
+  private modelsUpdated = new Subject<MODELS[]>();
   private dataSetUpdated = new Subject<DATASETS[]>();
 
   constructor(
@@ -20,19 +21,17 @@ export class VersioningService {
     private authService: AuthService,
   ) { }
 
-  getData(name: string) {
-
+  getModels(name: string) {
     const secret = this.authService.getSecret();
     let headers = new HttpHeaders().set('secret', secret);
-    this.http.get<DataType[]>(BACKEND_URL + 'api/model-data/myModels', { headers: headers })
+    this.http.get<MODELS[]>(BACKEND_URL + 'api/model-data/myModels', { headers: headers })
       .subscribe(data => {
-        this.dataList = data;
-        this.dataListUpdated.next([...this.dataList]);
+        this.models = data;
+        this.modelsUpdated.next([...this.models]);
       });
   }
 
   getDataSet(name: string) {
-
     const secret = this.authService.getSecret();
     let headers = new HttpHeaders().set('secret', secret);
 
@@ -46,14 +45,13 @@ export class VersioningService {
   }
 
   getDataListUpdateListener() {
-    return this.dataListUpdated.asObservable();
+    return this.modelsUpdated.asObservable();
   }
   getDataSetUpdateListener() {
     return this.dataSetUpdated.asObservable();
   }
 
   onSaveModelFile(model: File): Observable<any> {
-
     const body = new FormData();
     body.append('modelData', model);
 

@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7dd28dd9-2fcb-4195-8b7b-cd3f36384724" name="Default Changelist" comment="" />
+    <list default="true" id="7dd28dd9-2fcb-4195-8b7b-cd3f36384724" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/profile/datasets/datasets.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/profile/datasets/datasets.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/profile/datasets/datasets.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/profile/datasets/datasets.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/versioning/datasets/datasets.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/versioning/datasets/datasets.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/versioning/datasets/datasets.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/versioning/datasets/datasets.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/versioning/datasets/datasets.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/versioning/datasets/datasets.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/versioning/models/models-versioning.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/versioning/models/models-versioning.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/versioning/versioning.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/versioning/versioning.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/data/dataType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/data/dataType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AppBackend/controller/dataset/crud/get.js" beforeDir="false" afterPath="$PROJECT_DIR$/../AppBackend/controller/dataset/crud/get.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AppBackend/controller/dataset/crud/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/../AppBackend/controller/dataset/crud/post.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AppBackend/middlewares/google-cloud-storage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../AppBackend/middlewares/google-cloud-storage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AppBackend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../AppBackend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AppBackend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../AppBackend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ML_backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ML_backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +34,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1jisjQzjiCheWrXLVmAzFpQf4jW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,6 +46,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -31,6 +56,18 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Personal\personal\ML_backend" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="ML_backend" type="Python.FlaskServer">
@@ -68,11 +105,23 @@
       <workItem from="1608686876503" duration="14136000" />
       <workItem from="1609668156289" duration="2955000" />
       <workItem from="1609838250949" duration="5932000" />
+      <workItem from="1610910261075" duration="2877000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="549" y="172" key="FileChooserDialogImpl" timestamp="1605862076246">
@@ -113,6 +162,6 @@
     <state x="2385" y="393" key="com.intellij.ide.util.TipDialog/1920.150.1536.840/0.0.1920.1050@1920.150.1536.840" timestamp="1609668156028" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ML_backend$ML_backend.coverage" NAME="ML_backend Coverage Results" MODIFIED="1609729757002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/ML_backend$ML_backend.coverage" NAME="ML_backend Coverage Results" MODIFIED="1610911894221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

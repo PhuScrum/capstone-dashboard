@@ -99,7 +99,7 @@ export class ModelsVersioningComponent implements OnInit {
   }
 
   fetchData(modelName): void {
-    this.modelService.getData(modelName);
+    this.modelService.getModels(modelName);
     this.dataListSub = this.modelService.getDataListUpdateListener()
       .subscribe((data: DataType[]) => {
         this.dataList = data;

@@ -2,7 +2,7 @@ const db = require('../../../dbConfig')
 
 const api = async (req, res) => {
     const { q, client } = db;
-    
+
     try {
         const dbs = await client.query(
             q.Map(

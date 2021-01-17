@@ -4,8 +4,8 @@
     <input type="file" #filePicker (change)="onDatasetPicked($event)" >
     <a class="genric-btn primary-border" (click)="filePicker.click()">Add</a>
   </div>
-  <div nz-row nzGutter="[hGutter, vGutter]" class="datasets-wrapper">
-    <div nz-col nzSpan="6" class="datasets" *ngFor="let item of dataList | slice:0:4;">
+  <div class="datasets-wrapper row no-gutters">
+    <div class="datasets col-12 col-sm-6 col-md-3" *ngFor="let item of dataList | slice:0:4;">
       <div class="datasets-content">
         <div nz-row class="datasets-content-header">
           <div nz-col nzSpan="8">
@@ -19,10 +19,10 @@
           </div>
         </div>
         <div class="datasets-content-inner">
-          <p>Description: {{item.note}}</p>
+          <p>Version: {{item.version}}</p>
           <p>Featuress: {{item.features}}</p>
           <p>Length: {{item.length}}</p>
-          <p>version: {{item.version}}</p>
+          <p>Description: {{item.note}}</p>
         </div>
       </div>
     </div>

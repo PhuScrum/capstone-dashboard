@@ -47,12 +47,12 @@
 }
 
 .wrapper-down .content {
-  width: 300px;
+  /* width: 300px; */
   margin-right: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   border-radius: 10px;
 }
 
@@ -65,7 +65,6 @@
 }
 
 .wrapper-down .content.right h5 {
-  width: 90%;
   padding-top: 20px;
   text-align: left;
 }
@@ -75,8 +74,7 @@
 }
 
 .wrapper-down .content p {
-  width: 90%;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: black;
 }
 
@@ -84,9 +82,7 @@
   width: 100%;
   height: 100%;
   background-color: white;
-  -moz-box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
-  -webkit-box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
-  box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
+  box-shadow: 1px 2px 7px -2.5px rgba(68, 68, 68, 0.6);
   white-space: pre-line;
 }
 
@@ -117,11 +113,33 @@ h5.table-title {
   color: #58b9ef;
 }
 .timeline-nz, .table-nz {
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0px 1em;
 }
 
 .timeline-nz {
-  margin-top: 50px;
+  margin-top: 33px;
+}
+
+.timeline-nz p {
+  margin-bottom: .35rem;
+}
+
+.timeline-nz p.date {
+  font-size: 12px;
+  color: #999999;
+  font-weight: 600;
+}
+
+.timeline-version:hover{
+  text-decoration: underline;
+  color: #F66D51;
+  cursor: pointer;
+}
+
+.model-recommendation, .dataset-overview{
+  padding: 0px 12px;
+}
+
+.dataset-overview{
+  max-width: 300px;
 }

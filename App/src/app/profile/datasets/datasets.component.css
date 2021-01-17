@@ -31,14 +31,10 @@
 .datasets-wrapper {
   width: 98%;
   margin: 0 auto;
-  /* display: grid;
-  grid-template-columns: auto auto auto auto; */
-  display: flex;
-  justify-content: space-between;
 }
 
 .datasets {
-  width: 22%;
+  
 }
 
 .datasets-content {
