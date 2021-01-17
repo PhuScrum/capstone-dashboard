@@ -14,30 +14,30 @@
       <div class="model-content">
         <div nz-row>
           <div nz-col nzSpan="12">
-            <B>{{item.name}}</B>
+            <B class="model-title">{{item.name}}</B>
           </div>
-          <div nz-col nzSpan="12" style="justify-content: flex-end;">
-            <a (click)='onSelectModel(item)' class="model-link">View</a>
+          <div nz-col nzSpan="12">
+            <a (click)='onSelectModel(item)' class="model-link right">View</a>
           </div>
         </div>
         <div nz-row>
-          <div nz-col nzSpan="12">Type</div>
-          <div nz-col nzSpan="12">{{item.type}}</div>
+          <div nz-col nzSpan="12" class="model-label">Type</div>
+          <div nz-col nzSpan="12" class="model-type">{{item.type}}</div>
         </div>
         <div nz-row>
-          <div nz-col nzSpan="12" class="float-left" >Version</div>
+          <div nz-col nzSpan="12" class="model-label" >Version</div>
           <div nz-col nzSpan="12" class="float-right" style="font-size: 14px" >{{item.version}}</div>
         </div>
         <div nz-row>
-          <div nz-col nzSpan="12">Model Grade</div>
+          <div nz-col nzSpan="12" class="model-label">Model Grade</div>
           <div nz-col nzSpan="12">Great</div>
         </div>
         <div nz-row>
-          <div nz-col nzSpan="12">Month</div>
+          <div nz-col nzSpan="12" class="model-label">Month</div>
           <div nz-col nzSpan="12">7</div>
         </div>
         <div nz-row>
-          <div nz-col nzSpan="12">Target</div>
+          <div nz-col nzSpan="12" class="model-label">Target</div>
           <div nz-col nzSpan="12">Wheat yield</div>
         </div>
         <div nz-row class="button-row">

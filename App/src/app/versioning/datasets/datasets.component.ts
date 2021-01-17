@@ -16,18 +16,16 @@ export class DatasetsComponent implements OnInit {
 
   private dataListSub: Subscription
   constructor(
-    private modelService: VersioningService,
+    private versioningService: VersioningService,
 
   ) { } 
 
-  fetchData(dataSetName): void {
-    this.modelService.getDataSet();
-    this.dataListSub = this.modelService.getDataSetUpdateListener()
+  fetchData(dataSetName: string): void {
+    this.versioningService.getDataSet(dataSetName);
+    this.dataListSub = this.versioningService.getDataSetUpdateListener()
     .subscribe((data: DataType[]) => {
       this.dataSet = data;
-      const selectedItem = Array.isArray(data) && data.find((item) => item && item.originalName === dataSetName);
-      const { originalName = '' } = selectedItem || {};
-      this.singleData = { ...selectedItem, originalName: typeof originalName === 'string' && originalName.split('_').join(' ') };
+      this.singleData = data[0];
     });
 
   }

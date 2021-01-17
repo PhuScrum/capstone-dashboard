@@ -62,3 +62,11 @@ input:enabled {
 background: #1c6e45;
 border-color: #1c6e45;
 }
+
+.right {
+  float: right!important;
+}
+
+.left {
+  float: left!important;
+}

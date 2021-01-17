@@ -13,7 +13,7 @@ import { mlOpts } from '../../globalVar'
 })
 export class ModelSelectComponent implements OnInit {
   mlOpts: any[] = [];
-  selectedType = "LinearRegression";
+  selectedType = "Linear Regression";
 
   hGutter = 16;
   vGutter = 16;

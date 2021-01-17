@@ -20,7 +20,7 @@ export class VersioningService {
     private authService: AuthService,
   ) { }
 
-  getData() {
+  getData(name: string) {
 
     const secret = this.authService.getSecret();
     let headers = new HttpHeaders().set('secret', secret);
@@ -32,12 +32,14 @@ export class VersioningService {
       });
   }
 
-  getDataSet() {
+  getDataSet(name: string) {
 
     const secret = this.authService.getSecret();
     let headers = new HttpHeaders().set('secret', secret);
 
-    this.http.get<DATASETS[]>( BACKEND_URL + 'api/dataset/myDatasets', {headers: headers})
+    const query = `/?name=${name}`
+
+    this.http.get<DATASETS[]>( BACKEND_URL + 'api/dataset/versioning' + query, {headers: headers})
       .subscribe(data => {
         this.dataSet = data;
         this.dataSetUpdated.next([...this.dataSet]);
