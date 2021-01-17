@@ -87,7 +87,7 @@ export class ModelsVersioningComponent implements OnInit {
         target: this.targetType[0],
         crop: this.cropType[0],
       };
-      
+
       // Parameter
       this.fileName = fileName;
       this.paramType = type;
@@ -99,7 +99,7 @@ export class ModelsVersioningComponent implements OnInit {
   }
 
   fetchData(modelName): void {
-    this.modelService.getData();
+    this.modelService.getData(modelName);
     this.dataListSub = this.modelService.getDataListUpdateListener()
       .subscribe((data: DataType[]) => {
         this.dataList = data;

@@ -24,7 +24,7 @@ export class VersioningService {
 
     const secret = this.authService.getSecret();
     let headers = new HttpHeaders().set('secret', secret);
-
+z
     this.http.get<DataType[]>(BACKEND_URL + 'api/model-data/myModels', { headers: headers })
       .subscribe(data => {
         this.dataList = data;
