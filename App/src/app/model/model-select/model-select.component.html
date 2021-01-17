@@ -8,7 +8,7 @@
       </nz-select>
     </div>
     <div class="model-input form-group">
-      <button type="button" class="btn" style="width: 120px;" (click)="filePicker.click()">Add Model</button>
+      <a type="button" class="genric-btn primary-border" (click)="filePicker.click()">Add Model</a>
       <input type="file" #filePicker (change)="onModelPicked($event)" >
     </div>
   </form>

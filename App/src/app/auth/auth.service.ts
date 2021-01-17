@@ -83,6 +83,7 @@ export class AuthService {
     this.http.post<boolean>(BACKEND_URL + "api/auth/logout", {}, {headers: headers})
     .subscribe(result => {
       this.clearAuthData()
+      this.router.navigate(['/'])
       this.secret = null
       this.isLogin = false
       this.userId = null
@@ -90,7 +91,6 @@ export class AuthService {
         isLogin: false,
         userName: ""
       })
-      this.router.navigate(['/'])
     }, error => {
       console.log(error)
       this.authStatusListener.next({
