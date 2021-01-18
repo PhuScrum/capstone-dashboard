@@ -38,7 +38,8 @@ export interface DATASETS {
   features: number,
   length: number,
   user: string,
-  model_recommend: any[]
+  model_recommend: any[],
+  id: string
 }
 
 export interface PROFILE {

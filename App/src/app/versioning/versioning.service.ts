@@ -44,6 +44,10 @@ export class VersioningService {
       });
   }
 
+  trainDataset(id: string) {
+    console.log(id)
+  }
+
   getDataListUpdateListener() {
     return this.modelsUpdated.asObservable();
   }

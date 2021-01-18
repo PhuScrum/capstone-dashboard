@@ -44,6 +44,10 @@ export class DatasetsComponent implements OnInit {
     this.singleData = this.dataSet.find(item => item.version === version);
   }
 
+  getVersionRecommend(id: string): void {
+    this.versioningService.trainDataset(id)
+  }
+
   ngOnDestroy(): void {
     this.dataListSub.unsubscribe()
   }

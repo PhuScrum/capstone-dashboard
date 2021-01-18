@@ -68,7 +68,7 @@
           <p>Length: {{singleData && singleData.length}}</p>
           <p>Description: {{singleData && singleData.note}}</p>
         </div>
-        <div class="content right model-recommendation" *ngIf="singleData.model_recommend">
+        <div class="content right model-recommendation" *ngIf="singleData && singleData.model_recommend">
             <div class="best-model">
               <h5>Recommend model</h5>
               <p>Best model: {{singleData.model_recommend[0].best_model}}</p>
@@ -82,6 +82,13 @@
                 </li>
               </ul>
             </div>
+        </div>
+        <div class="content right no-recommendation" *ngIf="singleData && !singleData.model_recommend">
+          <h5>No model is recommended yet</h5>
+          <div class="d-inline-flex align-center">
+            <p class="mr-3">Click to train</p>
+            <a class="genric-btn primary-border" (click)="getVersionRecommend(singleData.id)">Train</a>
+          </div>
         </div>
       </div>
     </div>

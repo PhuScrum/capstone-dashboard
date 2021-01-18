@@ -136,10 +136,15 @@ h5.table-title {
   cursor: pointer;
 }
 
-.model-recommendation, .dataset-overview{
+.model-recommendation, .dataset-overview, .no-recommendation{
   padding: 0px 12px;
 }
 
 .dataset-overview{
   max-width: 300px;
+}
+
+.genric-btn {
+  line-height: 30px;
+  padding: 0px 25px;
 }
