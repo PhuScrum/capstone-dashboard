@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, send_file
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
@@ -10,12 +10,19 @@ from sklearn.model_selection import train_test_split
 import json
 from xgboost import XGBRegressor
 from lightgbm import LGBMRegressor
+import IPython
+import matplotlib
 import re
 from sklearn.multioutput import MultiOutputRegressor
+import shap
+import pickle
+import urllib.request
+shap.initjs()
 app = Flask(__name__)
 from faunadb import query as q
 from faunadb.objects import Ref
 from faunadb.client import FaunaClient
+import codecs
 
 client = FaunaClient(secret="fnAD7ADnJXACDd2V6pO3pXItGGVXn9FCIQVww8D0")
 
@@ -122,7 +129,7 @@ def model_Recommend():
     client.query(
         q.update(
             q.ref(q.collection("datasets"),did ),
-            {"data": {"model_recommend":[result]}}
+            {"data": {"model-recommend":[result]}}
         ))
 
     return json_object
@@ -132,14 +139,19 @@ def model_Recommend():
 @cross_origin()
 def trainLinear():
     req_data = request.get_json()
-
+    multi = False
     # try:
-    trainUrl = req_data['train']
-    testUrl = req_data['test']
+    dataUrl = req_data['dataUrl']
+    target = req_data['target']
+    if len(target) > 1:
+        multi = True
     size = req_data['size']
-    X = read_csv(trainUrl)
-    y = read_csv(testUrl)
+    data = read_csv(dataUrl)
+    X = data.drop(columns=target, axis=1)
+    y = data[target]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=size, shuffle=False)
+    X_train = X_train.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
+    X_test = X_test.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
     model = trainLinearModel(X_train, y_train)
     y_pred = model.predict(X_test)
     result = predictResult(y_test, y_pred)
@@ -154,17 +166,20 @@ def trainLinear():
 @cross_origin()
 def trainLGBR():
     req_data = request.get_json()
-
+    multi = False
     # try:
-    trainUrl = req_data['train']
-    testUrl = req_data['test']
+    dataUrl = req_data['dataUrl']
+    target = req_data['target']
+    if len(target) > 1:
+        multi = True
     size = req_data['size']
-    X = read_csv(trainUrl)
-    y = read_csv(testUrl)
+    data = read_csv(dataUrl)
+    X = data.drop(columns=target, axis=1)
+    y = data[target]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=size, shuffle=False)
     X_train = X_train.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
     X_test = X_test.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
-    model = trainLGB(X_train, y_train)
+    model = trainLGB(X_train, y_train,multi)
     y_pred = model.predict(X_test)
     result = predictResult(y_test, y_pred)
 
@@ -174,19 +189,46 @@ def trainLGBR():
     return json_object
 # fnAD7ADnJXACDd2V6pO3pXItGGVXn9FCIQVww8D0
 
-@app.route('/train-xgb', methods=["POST"])
+
+@app.route('/shap-value', methods=["POST"])
 @cross_origin()
-def trainXGBR():
+def trainShapValue():
     req_data = request.get_json()
 
     # try:
     trainUrl = req_data['train']
     testUrl = req_data['test']
     size = req_data['size']
+    sav_url= req_data['sav_url']
     X = read_csv(trainUrl)
     y = read_csv(testUrl)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=size, shuffle=False)
-    model = trainXGB(X_train, y_train)
+    model = pickle.load(urllib.request.urlopen(sav_url))
+
+
+    # except:
+    #     print("error")
+    json_object = json.dumps(result, indent=4)
+    return json_object
+
+@app.route('/train-xgb', methods=["POST"])
+@cross_origin()
+def trainXGBR():
+    req_data = request.get_json()
+    multi = False
+    # try:
+    dataUrl = req_data['dataUrl']
+    target = req_data['target']
+    if len(target) > 1:
+        multi = True
+    size = req_data['size']
+    data = read_csv(dataUrl)
+    X = data.drop(columns=target, axis=1)
+    y = data[target]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=size, shuffle=False)
+    X_train = X_train.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
+    X_test = X_test.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
+    model = trainXGB(X_train, y_train,multi)
     y_pred = model.predict(X_test)
     result = predictResult(y_test, y_pred)
 
@@ -194,7 +236,39 @@ def trainXGBR():
     #     print("error")
     json_object = json.dumps(result, indent=4)
     return json_object
+@app.route('/train-xgb-shap', methods=["GET","POST"])
+@cross_origin()
+def trainXGBRShap():
+    req_data = request.get_json()
+    multi = False
+    # try:
+    dataUrl = req_data['dataUrl']
+    target = req_data['target']
+    if len(target) > 1:
+        multi = True
+    size = req_data['size']
+    data = read_csv(dataUrl)
+    X = data.drop(columns=target, axis=1)
+    y = data[target]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=size, shuffle=False)
+    X_train = X_train.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
+    model = trainXGB(X_train, y_train,multi)
+    explainer = shap.TreeExplainer(model)
+    shap_values = explainer.shap_values(X_train)
+    plot = shap.force_plot(explainer.expected_value, shap_values, X_train)
+    shap.save_html('out.html',plot)
+    with open('out.html', encoding="utf8") as file:
+        page = file.read()
+        # os.remove("out.html")
+    return page
 
+@app.route('/shap-get', methods=["GET"])
+@cross_origin()
+def getShap():
+    with open('out.html', encoding="utf8") as file:
+        page = file.read()
+        # os.remove("out.html")
+    return page
 
 @app.route('/train-random-forest', methods=["POST"])
 @cross_origin()
