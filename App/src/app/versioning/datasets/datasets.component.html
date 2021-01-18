@@ -82,14 +82,29 @@
                 </li>
               </ul>
             </div>
+            <div class="re-train mt-3">
+              <a class="genric-btn primary-border" (click)="showModal()">Train Again</a>
+            </div>
         </div>
         <div class="content right no-recommendation" *ngIf="singleData && !singleData.model_recommend">
           <h5>No model is recommended yet</h5>
           <div class="d-inline-flex align-center">
             <p class="mr-3">Click to train</p>
-            <a class="genric-btn primary-border" (click)="getVersionRecommend(singleData.id)">Train</a>
+            <a class="genric-btn primary-border" (click)="showModal()">Train</a>
           </div>
         </div>
+        <nz-modal class="model-recommendation-modal" [(nzVisible)]="isVisible" nzTitle="Get Model Recommendation" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzClosable="false" >
+          <div class="row align-items-center d-flex">
+            <label style="font-size: 16px; font-weight: 700; max-width: 13%; margin-right: 15px;">Test size</label>
+            <nz-input-number [(ngModel)]="testSize" [nzMin]="0.1" [nzMax]="0.4" [nzStep]="0.1"></nz-input-number>
+          </div>
+          <div class="row mt-3">
+            <label style="font-size: 16px; font-weight: 700; max-width: 13%; margin-right: 15px;">Targets:</label>
+            <nz-select nzMode="multiple" nzPlaceHolder="Please select" [(ngModel)]="selectedFeatures" style="width: 75%;">
+              <nz-option *ngFor="let item of listOfFeatures" [nzLabel]="item" [nzValue]="item"></nz-option>
+            </nz-select>
+          </div>
+        </nz-modal>
       </div>
     </div>
   </div>

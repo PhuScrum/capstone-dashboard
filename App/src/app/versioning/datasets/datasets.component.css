@@ -148,3 +148,9 @@ h5.table-title {
   line-height: 30px;
   padding: 0px 25px;
 }
+
+.ant-input-number-focused, .ant-input-number:hover,.ant-input-number:focus, .ant-input-number:active {
+  box-shadow: none;
+  border-color: #F66D51;
+  border-right-width: 1px!important;
+}

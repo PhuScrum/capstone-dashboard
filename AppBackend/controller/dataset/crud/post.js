@@ -14,19 +14,24 @@ const getDesc = (buffer) => {
   //load csv info
   let size = 0
   let headerSize = 0
+  let headerList = [];
 
   const stream = Readable.from(buffer.toString())
 
   return new Promise((resolve, reject) => {
     stream
     .pipe(csv())
-    .on('headers', (headers) => headerSize = headers.length)
+    .on('headers', (headers) => {
+      headerSize = headers.length
+      headerList = headers
+    })
     .on('data', row => size += 1)
     .on('error', reject)
     .on('end', () => resolve({
         // title: filename, 
         length: size, 
-        features: headerSize
+        features: headerSize,
+        headers: headerList
     }))
   })
 
@@ -49,6 +54,7 @@ const api = async (req, res) => {
       date: date,
       length: desc.length,
       features: desc.features,
+      featureList: desc.headers,
       note: req.body.note,
       user: req.authUserId
     }

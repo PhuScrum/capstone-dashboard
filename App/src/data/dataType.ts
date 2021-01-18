@@ -36,6 +36,7 @@ export interface DATASETS {
   originalName: string,
   note: string,
   features: number,
+  featureList: string[],
   length: number,
   user: string,
   model_recommend: any[],
