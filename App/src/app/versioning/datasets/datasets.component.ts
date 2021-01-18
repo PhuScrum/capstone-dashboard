@@ -20,11 +20,13 @@ export class DatasetsComponent implements OnInit {
   dataSet: DATASETS[] = [];
   singleData: DATASETS;
 
-  // listOfFeatures: Array<{ label: string; value: string }> = [];
+  currentVersion: string = '';
+
   listOfFeatures: string[] = [];
   selectedFeatures: string[] = [];
 
-  isRecommended = false;
+  isRecommendationLoading: boolean = false;
+  isPageLoading: boolean = false;
 
   private dataListSub: Subscription
   constructor(
@@ -32,40 +34,71 @@ export class DatasetsComponent implements OnInit {
 
   ) { }
 
+  ngOnInit(): void {
+    this.isPageLoading = true;
+    const search = window.location.search;
+    const name = typeof search === 'string' && search.includes('?name=') && search.split('?name=')[1];
+    this.datasetName = name;
+    if (window.location.pathname === '/versioning/dataset') {
+      this.fetchData(this.datasetName);
+    } else {
+      this.stopLoading();
+    }
+  }
+
   fetchData(dataSetName: string): void {
     this.versioningService.getDataSet(dataSetName);
     this.dataListSub = this.versioningService.getDataSetUpdateListener()
     .subscribe((data: DATASETS[]) => {
       this.dataSet = data;
       this.singleData = data[0];
+      // this.currentVersion = data[0].version;
       this.listOfFeatures = data[0].featureList;
+      this.stopLoading();
     });
 
   }
 
-  ngOnInit(): void {
-    console.log('on init')
-    const search = window.location.search;
-    const name = typeof search === 'string' && search.includes('?name=') && search.split('?name=')[1];
-    this.datasetName = name;
-    if (window.location.pathname === '/versioning/dataset') {
-      this.fetchData(this.datasetName);
-    }
+  stopLoading() {
+    this.isRecommendationLoading = false;
+    this.isPageLoading = false;
   }
 
-  onSelectVersion(version: string): void {
-    const found = this.dataSet.find(item => item.version === version);
+  getSelectedData(version: string, dataSet: DATASETS[]) {
+    const found = dataSet.find(item => item.version === version);
     this.singleData = found;
+    this.currentVersion = found.version;
     this.listOfFeatures = found.featureList;
   }
 
+  onSelectVersion(version: string): void {
+    this.getSelectedData(version, this.dataSet);
+  }
+
   getVersionRecommend(version: string): void {
+    this.isRecommendationLoading = true;
     this.versioningService.trainDataset(this.singleData.id, this.singleData.url, this.testSize, this.selectedFeatures, this.datasetName)
-    // this.dataListSub = this.versioningService.getDataSetUpdateListener()
-    // .subscribe((data: DATASETS[]) => {
-    //   this.dataSet = data;
-    //   this.singleData = data.find(item => item.version === version);
-    // });
+    .subscribe(result => {
+      console.log(result);
+      this.versioningService.getDataSet(this.datasetName);
+      this.dataListSub = this.versioningService.getDataSetUpdateListener()
+      .subscribe((data: DATASETS[]) => {
+        console.log(this.currentVersion);
+        this.dataSet = data;
+        this.getSelectedData(this.currentVersion, data);
+        this.stopLoading();
+        this.resetTrainingOpts();
+      });
+    })
+  }
+
+  resetTrainingOpts(): void {
+    this.testSize = 0.2;
+    this.selectedFeatures = [];
+  }
+
+  isSelected(version: string): boolean {
+    return this.currentVersion === version;
   }
 
   showModal(): void {

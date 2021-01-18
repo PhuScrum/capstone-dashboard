@@ -128,8 +128,8 @@ def model_Recommend():
 
     client.query(
         q.update(
-            q.ref(q.collection("datasets"),did ),
-            {"data": {"model-recommend":[result]}}
+            q.ref(q.collection("datasets"), did),
+            {"data": {"model_recommend": [result]}}
         ))
 
     return json_object
@@ -208,7 +208,7 @@ def trainShapValue():
 
     # except:
     #     print("error")
-    json_object = json.dumps(result, indent=4)
+    json_object = json.dumps("done", indent=4)
     return json_object
 
 @app.route('/train-xgb', methods=["POST"])

@@ -45,11 +45,6 @@ export class VersioningService {
   }
 
   trainDataset(id: string, url: string, testSize: number, target: string[], datasetName: string) {
-    // const body = new FormData();
-    // body.append('did', id)
-    // body.append('dataUrl', url)
-    // body.append('size', testSize)
-    // body.append('target', target)
     const body = {
       did: id,
       dataUrl: url,
@@ -57,12 +52,7 @@ export class VersioningService {
       target: target
     }
 
-    console.log(body)
-
-    this.http.post('http://localhost:5000/model-recommend', body)
-    .subscribe(result => {
-      this.getDataSet(datasetName)
-    })
+    return this.http.post('http://localhost:5000/model-recommend', body)
   }
 
   getDataListUpdateListener() {
