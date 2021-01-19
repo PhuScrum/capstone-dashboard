@@ -5,7 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 import { Data as MODELS, DATASETS } from '../../data/dataType'
 
-const BACKEND_URL = 'http://localhost:8080/'
+import { BACKEND_URL, ML_URL } from '../globalVar'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -54,11 +55,11 @@ export class VersioningService {
       target: target
     }
 
-    return this.http.post('http://localhost:5000/model-recommend', body)
+    return this.http.post(ML_URL + 'model-recommend', body)
   }
 
   getCSV(url: string) {
-    return this.http.get(url, { responseType: 'text' })
+    return this.http.post(ML_URL + 'csv-to-json', {url})
   }
 
   getDataListUpdateListener() {

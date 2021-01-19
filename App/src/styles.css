@@ -94,4 +94,9 @@ border-color: #1c6e45;
   border-width: 3px;
 }
 
-/* #F66D51 */
+input:hover,
+input:active,
+input:focus {
+  border-color: #F66D51;
+  box-shadow: none;
+}

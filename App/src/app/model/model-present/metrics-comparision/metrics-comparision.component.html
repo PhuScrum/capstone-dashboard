@@ -1,5 +1,6 @@
-<h3>overall metrics comparision</h3>
-<nz-table>
+<div class="metric-comparision">
+  <h3 class="text-capitalize">overall metrics comparision</h3>
+  <nz-table #basicTable [nzData]="dataList" [nzShowPagination]="false">
     <thead>
       <tr>
         <th>Model Name</th>
@@ -10,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of dataList">
+      <tr *ngFor="let data of basicTable.data">
         <td>{{data.name}}</td>
         <td>{{data.r2_score}}</td>
         <td>{{data.rmse}}</td>
@@ -19,3 +20,4 @@
       </tr>
     </tbody>
   </nz-table>
+</div>

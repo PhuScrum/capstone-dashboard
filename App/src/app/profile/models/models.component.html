@@ -1,14 +1,9 @@
 <div class="model-profile">
   <div class="title">
     <h1 style="margin-bottom: 0px;">Models</h1>
-    <nz-select [(ngModel)]="selectedType" (ngModelChange)="typeChange($event)" style="width: 160px;display: block;float: right;" nzPlaceHolder="Choose Model Type" [nzOptions]="mlOpts" [ngModelOptions]="{standalone: true}"></nz-select>
-    <a class="genric-btn primary-border" (click)="showModal()">Add</a>
-    <nz-modal [(nzVisible)]="isVisible" nzClosable="false" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-      <p>Content one</p>
-      <p>Content two</p>
-      <p>Content three</p>
-      <p>Content three</p>
-    </nz-modal>
+    <nz-select [(ngModel)]="selectedType" (ngModelChange)="typeChange($event)" style="width: 190px;display: block; margin-right: 8px; align-self: center;" nzPlaceHolder="Choose Model Type" [nzOptions]="mlOpts" [ngModelOptions]="{standalone: true}"></nz-select>
+    <input type="file" #filePicker (change)="onModelPicked($event)" >
+    <a class="genric-btn primary-border" (click)="filePicker.click()">Add</a>
   </div>
   <div class="model-wrapper row no-gutters">
     <div class="model col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let item of dataList | slice:0:4;">

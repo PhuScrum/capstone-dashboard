@@ -36,9 +36,10 @@ export class ModelPageComponent implements OnInit, OnDestroy {
   parentFunction(data: DataType): void {
     this.singleData = data;
   }
-  
-  onUploadModel(model: File): void {
-    this.modelService.onSaveModelFile(model).subscribe(result=> {
+
+  onUploadModel(data: any): void {
+    const { file, selectedType } = data
+    this.modelService.onSaveModelFile(file, selectedType).subscribe(result=> {
       this.fetchData();
     });
   }

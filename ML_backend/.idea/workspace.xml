@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7dd28dd9-2fcb-4195-8b7b-cd3f36384724" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../App/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../App/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/globalVar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/globalVar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/model/model-present/metrics-comparision/metrics-comparision.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/model/model-present/metrics-comparision/metrics-comparision.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/model/model-present/metrics-comparision/metrics-comparision.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/model/model-present/metrics-comparision/metrics-comparision.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/model/model-present/model-present.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/model/model-present/model-present.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/model/model-select/model-select.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/model/model-select/model-select.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/model/model.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/model/model.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/profile/datasets/datasets.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/profile/datasets/datasets.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/profile/models/model.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/profile/models/model.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/profile/models/models.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/profile/models/models.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/profile/models/models.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/profile/models/models.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/profile/models/models.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/profile/models/models.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/profile/profile.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/profile/profile.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/versioning/datasets/datasets.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/versioning/datasets/datasets.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/app/versioning/versioning.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/app/versioning/versioning.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../App/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../App/src/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,6 +110,7 @@
       <workItem from="1610979153442" duration="471000" />
       <workItem from="1610982302524" duration="965000" />
       <workItem from="1611041408574" duration="1088000" />
+      <workItem from="1611084879447" duration="2852000" />
     </task>
     <servers />
   </component>
@@ -151,6 +169,6 @@
     <state x="2385" y="393" key="com.intellij.ide.util.TipDialog/1920.150.1536.840/0.0.1920.1050@1920.150.1536.840" timestamp="1609668156028" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ML_backend$ML_backend.coverage" NAME="ML_backend Coverage Results" MODIFIED="1611041825800" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/ML_backend$ML_backend.coverage" NAME="ML_backend Coverage Results" MODIFIED="1611089131227" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

@@ -20,7 +20,7 @@ export class ModelSelectComponent implements OnInit {
 
   @Input() dataList: DataType[] = [];
   @Output() onSubmit: EventEmitter<any> = new EventEmitter<DataType>();
-  @Output() onUploadModel: EventEmitter<any> = new EventEmitter<File>();
+  @Output() onUploadModel: EventEmitter<any> = new EventEmitter<{file: File, selectedType: string}>();
 
   constructor(
     private modelService: ModelService
@@ -37,11 +37,11 @@ export class ModelSelectComponent implements OnInit {
 
   onModelPicked(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
-    this.onUploadModel.emit(file)
+    const body = {file, selectedType: this.selectedType}
+    this.onUploadModel.emit(body)
   }
 
   typeChange(value: any): void {
-    console.log(value);
     this.selectedType = value;
   }
 

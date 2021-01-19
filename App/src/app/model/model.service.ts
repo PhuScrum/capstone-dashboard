@@ -32,7 +32,7 @@ export class ModelService {
     return this.dataListUpdated.asObservable();
   }
 
-  onSaveModelFile(model: File): Observable<any> {
+  onSaveModelFile(model: File, type: string): Observable<any> {
     const localSecret = this.authService.getSecret()
     let headers = new HttpHeaders().set('secret', localSecret);
 
@@ -40,14 +40,7 @@ export class ModelService {
     body.append('modelData', model);
     body.append('directory', 'models')
     body.append('note', 'hello world')
-    body.append('type', 'LinearRegression')
-
-    // const body = {
-    //   modelData: model,
-    //   directory: 'models',
-    //   note: 'hello world',
-    //   type: 'LinearRegression'
-    // }
+    body.append('type', type)
 
     return this.http.post(BACKEND_URL + 'api/model-data/upload', body, {headers: headers});
   }

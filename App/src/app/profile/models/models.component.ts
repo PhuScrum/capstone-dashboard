@@ -22,7 +22,7 @@ export class ModelsComponent implements OnInit {
   dataList: DataType[] = [];
   singleData: DataType;
 
-  selectedType: string = '';
+  selectedType: string;
 
   private dataListSub: Subscription;
 
@@ -62,18 +62,19 @@ export class ModelsComponent implements OnInit {
     this.singleData = data;
   }
 
-  onUploadModel(model: File): void {
-    this.modelService.onSaveModelFile(model).subscribe(result => {
-      this.fetchData();
-    });
+  onModelPicked(event: Event): void {
+    const file = (event.target as HTMLInputElement).files[0];
+
+    this.modelService.onSaveModelFile(file, this.selectedType).subscribe(result => this.fetchData())
   }
+
   ngOnDestroy(): void {
     this.dataListSub.unsubscribe()
   }
 
   onSelectModel(item) {
     const { protocol = 'http:', host = 'localhost:4200' } = window.location || {};
-    const url = `${protocol}//${host}/versioning/model?name=${item && item.slug}`;
+    const url = `${protocol}//${host}/versioning/model?name=${item && item.slug}&version=${item && item.version}`;
     window.location.href = url;
   }
 

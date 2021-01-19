@@ -26,7 +26,7 @@ export class DatasetsComponent implements OnInit, OnDestroy {
 
   onSelectModel(item) {
     const { protocol = 'http:', host = 'localhost:4200' } = window.location || {};
-    const url = `${protocol}//${host}/versioning/dataset?name=${item && item.originalName}`;
+    const url = `${protocol}//${host}/versioning/dataset?name=${item && item.originalName}&version=${item && item.version}`;
     window.location.href = url;
   }
 
@@ -40,7 +40,6 @@ export class DatasetsComponent implements OnInit, OnDestroy {
 
   onDatasetPicked(event: Event): void {
     const file = (event.target as HTMLInputElement).files[0];
-    console.log(file)
 
     this.datasetService.onSaveDataset(file).subscribe(result => this.fetchData())
   }

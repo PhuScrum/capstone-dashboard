@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 import { Subscription } from 'rxjs';
 import { DATASETS } from 'src/data/dataType';
 import { VersioningService } from '../versioning.service';
+
+import { formatToAntArray, generateTableOptions } from './helpers'
 
 @Component({
   selector: 'app-datasets',
@@ -24,51 +27,54 @@ export class DatasetsComponent implements OnInit {
 
   currentVersion: string = '';
 
-  listOfFeatures: string[] = [];
+  listOfFeatures: Array<{ value: string; label: string }> = [];
   selectedFeatures: string[] = [];
 
   isRecommendationLoading: boolean = false;
   isPageLoading: boolean = false;
+  isLoadingTable: boolean = false;
+
+  csvTable:{headers: Array<string>, data: Array<Array<string>>} = {headers:[], data:[[]]};
 
   private dataListSub: Subscription
+
   constructor(
     private versioningService: VersioningService,
-
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.isPageLoading = true;
-    const search = window.location.search;
-    const name = typeof search === 'string' && search.includes('?name=') && search.split('?name=')[1];
-    this.datasetName = name;
-    if (window.location.pathname === '/versioning/dataset') {
-      this.fetchData(this.datasetName);
-    } else {
-      this.stopLoading();
-    }
+
+    this.route.queryParams.subscribe(params => {
+      console.log(this.currentVersion)
+      const name = params.name;
+      const version = params.version;
+      this.datasetName = name;
+      if (window.location.pathname === '/versioning/dataset') {
+        this.fetchData(name, version);
+      } else {
+        this.stopLoading();
+      }
+    })
   }
 
-  fetchData(dataSetName: string): void {
+  fetchData(dataSetName: string, version: string): void {
     this.versioningService.getDataSet(dataSetName);
     this.dataListSub = this.versioningService.getDataSetUpdateListener()
     .subscribe((data: DATASETS[]) => {
-      this.getCSV(data[0].url)
       this.dataSet = data;
-      this.singleData = data[0];
-      // this.currentVersion = data[0].version;
-      this.listOfFeatures = data[0].featureList;
+      this.getSelectedData(version, data)
       this.stopLoading();
     });
 
   }
 
   getCSV(url: string) {
+    this.isLoadingTable = true;
     this.versioningService.getCSV(url).subscribe((data: any) => {
-      const list = data.split('\n');
-      list.forEach((line) => {
-        this.csvData.push(line);
-      })
-      console.log(this.csvData)
+      this.csvTable = generateTableOptions(data)
+      this.isLoadingTable = false;
     })
   }
 
@@ -78,13 +84,15 @@ export class DatasetsComponent implements OnInit {
   }
 
   getSelectedData(version: string, dataSet: DATASETS[]) {
-    const found = dataSet.find(item => item.version === version);
+    const found = dataSet.find(item => item.version.toString() === version.toString());
     this.singleData = found;
     this.currentVersion = found.version;
-    this.listOfFeatures = found.featureList;
+    this.listOfFeatures = formatToAntArray(found.featureList);
+    this.getCSV(found.url)
   }
 
   onSelectVersion(version: string): void {
+    this.currentVersion = version;
     this.getSelectedData(version, this.dataSet);
   }
 
@@ -92,14 +100,12 @@ export class DatasetsComponent implements OnInit {
     this.isRecommendationLoading = true;
     this.versioningService.trainDataset(this.singleData.id, this.singleData.url, this.testSize, this.selectedFeatures, this.datasetName)
     .subscribe(result => {
-      console.log(result);
       this.versioningService.getDataSet(this.datasetName);
       this.dataListSub = this.versioningService.getDataSetUpdateListener()
       .subscribe((data: DATASETS[]) => {
         this.dataSet = data;
-        this.getSelectedData(this.currentVersion, data);
+        this.getSelectedData(version, data);
         this.stopLoading();
-        this.resetTrainingOpts();
       });
     })
   }

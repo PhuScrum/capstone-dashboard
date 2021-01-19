@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PROFILE, Data as MODEL, DATASETS } from '../../data/dataType'
-
-const BACKEND_URL = 'http://localhost:8080/'
+import { BACKEND_URL } from '../globalVar'
 
 @Injectable({
   providedIn: 'root'

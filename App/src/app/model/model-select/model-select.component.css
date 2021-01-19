@@ -26,7 +26,7 @@
 .model .ant-col.float-left {
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 140.62%;
   /* or 25px */
 
@@ -40,7 +40,7 @@
 .model .ant-col.float-right {
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 140.62%;
   /* or 25px */
 
@@ -48,7 +48,7 @@
   align-items: center;
   text-align: left;
   color: #000000;
-  text-align: right;
+  /* text-align: right; */
 }
 
 .model .ant-col b {

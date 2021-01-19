@@ -38,6 +38,7 @@
 
 .wrapper-up {
   /* height: 450px; */
+  min-height: 380px;
 }
 
 .wrapper-down {
@@ -112,8 +113,13 @@ h5.table-title {
 .timeline-content.center {
   color: #58b9ef;
 }
-.timeline-nz, .table-nz {
+.timeline-nz {
   margin: 0px 1em;
+}
+
+.table-nz {
+  min-height: 300px;
+  margin: 0px 1em 1em;
 }
 
 .timeline-nz {

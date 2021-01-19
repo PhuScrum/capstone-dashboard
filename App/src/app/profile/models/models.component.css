@@ -80,3 +80,15 @@
   /* text-indent: 0px; */
   align-items: center;
 }
+
+.ant-select-single .ant-select-selector:hover,
+.ant-select-single .ant-select-selector:active,
+.ant-select-single .ant-select-selector:focus {
+  border-color: #F66D51;
+  box-shadow: none;
+}
+
+input[type="file"] {
+  visibility: hidden;
+  position: absolute;
+}

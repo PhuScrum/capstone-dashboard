@@ -1,4 +1,5 @@
 export const BACKEND_URL = 'http://localhost:8080/'
+export const ML_URL = 'http://localhost:5000/'
 
 export const mlOpts = [
     { label: 'Linear Regression', value: 'Linear Regression', groupLabel: 'Regression'},

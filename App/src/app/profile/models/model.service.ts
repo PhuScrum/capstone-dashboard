@@ -35,11 +35,17 @@ export class ModelService {
     return this.dataListUpdated.asObservable();
   }
 
-  onSaveModelFile(model: File): Observable<any> {
+  onSaveModelFile(model: File, type = 'Linear Regression'): Observable<any> {
+    const localSecret = this.authService.getSecret()
+    let headers = new HttpHeaders().set('secret', localSecret);
+
     const body = new FormData();
     body.append('modelData', model);
+    body.append('directory', 'models')
+    body.append('note', 'hello world')
+    body.append('type', type)
 
-    return this.http.post(BACKEND_URL + 'api/model-data', body);
+    return this.http.post(BACKEND_URL + 'api/model-data/upload', body, {headers: headers});
   }
 
   getModelCount() {

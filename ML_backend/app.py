@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory, send_file
+from flask import Flask, request, send_from_directory, send_file, jsonify
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
@@ -18,7 +18,7 @@ import shap
 import pickle
 import urllib.request
 shap.initjs()
-app = Flask(__name__)
+
 from faunadb import query as q
 from faunadb.objects import Ref
 from faunadb.client import FaunaClient
@@ -132,8 +132,8 @@ def model_Recommend():
 
     client.query(
         q.update(
-            q.ref(q.collection("datasets"),did ),
-            {"data": {"model-recommend":[result]}}
+            q.ref(q.collection("datasets"), did),
+            {"data": {"model_recommend": [result]}}
         ))
 
     return json_object
@@ -420,6 +420,7 @@ def trainRandomForest():
     #     print("error")
     json_object = json.dumps(result, indent=4)
     return json_object
+
 @app.route('/train-random-forest-shap', methods=["POST"])
 @cross_origin()
 def trainRandomForestShap():
@@ -454,14 +455,18 @@ def trainRandomForestShap():
         # os.remove("out.html")
     return blob.public_url
 
-@app.route('/csv-to-json', methods=["GET","POST"])
+@app.route('/csv-to-json', methods=["GET", "POST"])
 @cross_origin()
 def csvToJson():
     req_data = request.get_json()
     url = req_data['url']
-    csvfile= pd.read_csv(url)
-    print(csvfile)
-    return csvfile.to_json(orient='records')
+    csvfile = pd.read_csv(url)
+    print(csvfile.columns)
+
+    json_csv = csvfile.to_json(orient='records')
+
+    return json_csv
+
 @app.route('/favicon.ico')
 @cross_origin()
 def favicon():
