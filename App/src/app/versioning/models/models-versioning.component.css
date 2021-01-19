@@ -89,9 +89,7 @@
   width: 100%;
   height: 100%;
   background-color: white;
-  -moz-box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
-  -webkit-box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
-  box-shadow: 4px 4px 4px rgba(68, 68, 68, 0.6);
+  box-shadow: 1px 2px 7px -2.5px rgba(68, 68, 68, 0.6);
 }
 
 h5.table-title {
@@ -120,12 +118,19 @@ h5.table-title {
 .timeline-content.center {
   color: #58b9ef;
 }
-.timeline-nz, .table-nz {
+
+.table-nz {
   margin-top: 50px;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
 }
+
+.timeline-nz {
+  margin-top: 33px;
+  padding: 0px 12px;
+}
+
 .demo-chart {
   height: 400px;
 }
@@ -144,3 +149,7 @@ nz-select {
   color: #F66D51;
   font-weight: 600;
 }
+
+.timeline-nz p {
+  margin-bottom: .25rem;
+} 

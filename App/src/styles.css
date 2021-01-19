@@ -78,3 +78,20 @@ border-color: #1c6e45;
   text-shadow: 0 -1px 0 rgba(0,0,0,.12);
   box-shadow: 0 2px 0 rgba(0,0,0,.045);
 }
+
+.ant-timeline-item-head-green {
+  color: #135132;
+  border-color: #135132;
+}
+
+.ant-timeline-item-head-red {
+  color: #F66D51;
+  border-color: #F66D51;
+}
+
+.ant-timeline.ant-timeline-alternate .ant-timeline-item-head, .ant-timeline.ant-timeline-alternate .ant-timeline-item-head-custom, .ant-timeline.ant-timeline-alternate .ant-timeline-item-tail, .ant-timeline.ant-timeline-label .ant-timeline-item-head, .ant-timeline.ant-timeline-label .ant-timeline-item-head-custom, .ant-timeline.ant-timeline-label .ant-timeline-item-tail, .ant-timeline.ant-timeline-right .ant-timeline-item-head, .ant-timeline.ant-timeline-right .ant-timeline-item-head-custom, .ant-timeline.ant-timeline-right .ant-timeline-item-tail {
+  left: 50%;
+  border-width: 3px;
+}
+
+/* #F66D51 */
