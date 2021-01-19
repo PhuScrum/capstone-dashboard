@@ -13,10 +13,10 @@
     <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td>{{data.name}}</td>
-        <td>{{data.r2_score}}</td>
-        <td>{{data.rmse}}</td>
-        <td>{{data.mse}}</td>
-        <td>{{data.mae}}</td>
+        <td>{{data.r2_score.toFixed(4)}}</td>
+        <td>{{data.rmse.toFixed(4)}}</td>
+        <td>{{data.mse.toFixed(4)}}</td>
+        <td>{{data.mae.toFixed(4)}}</td>
       </tr>
     </tbody>
   </nz-table>
