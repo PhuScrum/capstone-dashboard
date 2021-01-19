@@ -128,8 +128,8 @@ def model_Recommend():
 
     client.query(
         q.update(
-            q.ref(q.collection("datasets"), did),
-            {"data": {"model_recommend": [result]}}
+            q.ref(q.collection("datasets"),did ),
+            {"data": {"model-recommend":[result]}}
         ))
 
     return json_object
@@ -208,7 +208,7 @@ def trainShapValue():
 
     # except:
     #     print("error")
-    json_object = json.dumps("done", indent=4)
+    json_object = json.dumps(result, indent=4)
     return json_object
 
 @app.route('/train-xgb', methods=["POST"])
@@ -236,6 +236,8 @@ def trainXGBR():
     #     print("error")
     json_object = json.dumps(result, indent=4)
     return json_object
+
+
 @app.route('/train-xgb-shap', methods=["GET","POST"])
 @cross_origin()
 def trainXGBRShap():
@@ -291,7 +293,14 @@ def trainRandomForest():
     json_object = json.dumps(result, indent=4)
     return json_object
 
-
+@app.route('/csv-to-json', methods=["GET","POST"])
+@cross_origin()
+def csvToJson():
+    req_data = request.get_json()
+    url = req_data['url']
+    csvfile= pd.read_csv(url)
+    print(csvfile)
+    return csvfile.to_json(orient='records')
 @app.route('/favicon.ico')
 @cross_origin()
 def favicon():
