@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "faunadb-1204",
+  "private_key_id": "4fc80f10037e39518720819e5a68d13e0dd2b103",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDYS5KCfXOwgR32\n1z8Pa5ws0FKwJkYWta/8VeXH5s0T2reobT4UBxCQYQedQnqbwh9xO4600yELXsgJ\ntzSYWL/7dLEk0TrsMM8oT8Tlh0DSmcLGhnsXexdEjdFQ90pUKUwJ1vd63C3SUPlC\nzlKVkYuC31FyBAjHYosOVafNgbDhra6bus8QKS6TnlkiwDWa5t9BH+QKTXMtzGuE\nx92G+TIsmCfddgS0lRxbsZaBxnv881llVqJMWTH0K1k+/15xNmzEpDSys5C5aBFu\nMYMB6XZGDijy6ji3lSVv7XiOQUE6/gtEsMeKx6nQSVyiyQQ4R7LTfvwx1C6gFxCQ\nZP6oqJ1nAgMBAAECggEAAq1AwBVxtFv+fDdGR629v/6sO74soG9u2dg0vUhO4fih\nd1fAiRcG2Q/nrfDTgp69HosC+rg9goGRnL6AhKEIjBdHONXPmbNARQ/x4iNOF3Q9\nzMm4fpcQVEOVtRFrSFiUC9NZniggMGD3KS8amG1gaJC4K5ep93t/4yqxpm+18tl2\n2+Plc4dD9D+ePgUyoeGQXVCeN5xIjJLpgeZoh1CrlTDceB33VTqkv7+Vp3KpmxJN\nfbWgF+dDZLuCYwOHixZoNeXMOO/v6RFn9cAJeINW/tSQEDc+tZTJtteeVjMoo4Ox\n5OoRxDxI4jcj8RYA0M9n+l9kQc1UkS1FDNXbIGCXcQKBgQDxtsl1ZFRrvnyTGJNl\ntAC3cRqvVtu65ri2wCq7pCiyFtVwQVjAy5CWCR92H8iabyje3E/LYhkHQHDv1lfQ\nm5hv4+wl8x8Lgqzm0XwDdfGZq1gEemykyZqnVYW9thKtwlzbTDfjWBg9F8EyW6Au\n3hDRaFyk/XBWNTJ7taqKcqnKsQKBgQDlFDC9BAlADHxvTQEH0KwbFcOqbpUS0rlW\nfJHYM6AMC09EE1u1DrVyXcIiXx8GDxdVlZAZXYV1+6v1wVcVWLXUYUTLVouJpg0r\nwVdrxLzVsbwV4YSrFCLw+Mo4+06PHtAfoM51u9BWEKPSUaDFmCZS49qvWMiXvpsk\nOeNFXsi/lwKBgD95WqoDMNAic6BFId/hRxblErbcvlL0Z6lGCXLBBxbNPDuATYhD\nbLKZrrNcYVd8vWTYwfOMzTnESGQTC3hyg7NOTSMiFxL0u+bZOBHIlStffXufkowr\njPtIUBijiYArvCqydzKyXZsdc9R/jy7/jbcQCtQg4bEhwyINcL1uovvhAoGATjae\njWqbXerlcXrxJyHwIS9FJyOqckrQTN8rTI4Tzwjtf2i8nwzulqW8as/fX8o3RVlT\nYdW0g5vyEm54tSkcq+6p9mMOMWkohg/1MS5y6uNMPIxLJ74wT+Yh5WKoZ+U1Whcl\nZr1BXKFBzcVhBxXzv8lcGRJPKsBBaBT7q+u4zvECgYBQtYI3fIDIsNhk1mFeFBZA\nBDMvqF/ZhwR9UEun6WAz44kaIxdY0EtKFT2GYmSwj2cS/uOzz5hwjfKDQjaL0feW\nXatqzgdWmBw6PHi/zOxumYb2hc7w8art+dxK5gRDkHI2FOUKIQidtEWXxxeoDUww\nFJ3RVRgH+d6i2KumELIZZQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "capstone-storage@faunadb-1204.iam.gserviceaccount.com",
+  "client_id": "109470526769507950686",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/capstone-storage%40faunadb-1204.iam.gserviceaccount.com"
+}
