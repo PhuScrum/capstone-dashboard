@@ -2,7 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ModelService } from './model.service';
-import { Data as DataType } from '../../../data/dataType'
+import { Data as DataType } from '../../../data/dataType';
+
+import { mlOpts } from '../../globalVar'
 
 
 @Component({
@@ -12,30 +14,34 @@ import { Data as DataType } from '../../../data/dataType'
 })
 export class ModelsComponent implements OnInit {
   isVisible = false;
+  mlOpts: any[] = [];
+
   hGutter = 16;
   vGutter = 16;
 
   dataList: DataType[] = [];
   singleData: DataType;
 
+  selectedType: string = '';
+
   private dataListSub: Subscription;
 
   constructor(
     private modelService: ModelService
-  ) {
-  }
+  ) {}
 
   fetchData(): void {
     this.modelService.getData();
     this.dataListSub = this.modelService.getDataListUpdateListener()
-      .subscribe((data: DataType[]) => {
-        this.dataList = data;
-        this.singleData = data[0];
-      });
+    .subscribe((data: DataType[]) => {
+      this.dataList = data;
+      this.singleData = data[0];
+    });
   }
 
   ngOnInit(): void {
     this.fetchData();
+    this.mlOpts = mlOpts;
   }
 
   showModal(): void {
@@ -69,6 +75,11 @@ export class ModelsComponent implements OnInit {
     const { protocol = 'http:', host = 'localhost:4200' } = window.location || {};
     const url = `${protocol}//${host}/versioning/model?name=${item && item.slug}`;
     window.location.href = url;
+  }
+
+  typeChange(value: any): void {
+    console.log(value);
+    this.selectedType = value;
   }
 
 }
