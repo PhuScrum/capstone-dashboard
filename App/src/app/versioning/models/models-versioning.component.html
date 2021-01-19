@@ -7,12 +7,8 @@
           <nz-timeline nzMode="alternate">
             <nz-timeline-item nzColor="red" *ngFor="let item of modelList">
               <p>
-                <strong>Version: </strong
-                ><span
-                  (click)="onSelectVersion(item.version)"
-                  class="timeline-version active" [class.active] = "currentVersion === item.version"
-                  >{{ item.version }}</span
-                >
+                <strong>Version: </strong>
+                <span (click)="onSelectVersion(item.version)" class="timeline-version active" [class.active]="currentVersion === item.version">{{ item.version }}</span>
               </p>
               <p class="date">{{ item.date }}</p>
             </nz-timeline-item>
@@ -21,7 +17,16 @@
       </div>
     </div>
     <div class="versioning-col right-col">
-      <div class="wrapper-up">
+      <nz-button-group >
+        <button nz-button nzType="default" (click)="onSelectTab(false)">
+          Regression Metrics
+        </button>
+        <button nz-button nzType="default" (click)="onSelectTab(true)">
+          Shap value
+        </button>
+      </nz-button-group>
+      <iframe src="https://storage.googleapis.com/capstone_rmit_2020/b8c8b198-5a7d-11eb-9a8d-44032ceb1a4eout.html" [hidden]="!isShap" height="800"></iframe>
+      <div class="wrapper-up" [hidden]="isShap">
         <!-- <div class="content"> -->
 
         <!-- <error-outlook></error-outlook> -->
@@ -63,7 +68,7 @@
         </div>
         <!-- </div> -->
       </div>
-      <div class="wrapper-down">
+      <div class="wrapper-down" [hidden]="isShap">
         <div class="content left">
           <h5>Parameters: </h5>
           <p>Type: {{ paramType }}</p>

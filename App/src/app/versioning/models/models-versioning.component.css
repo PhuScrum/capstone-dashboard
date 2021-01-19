@@ -153,3 +153,7 @@ nz-select {
 .timeline-nz p {
   margin-bottom: .25rem;
 } 
+
+iframe {
+  border: none;
+}

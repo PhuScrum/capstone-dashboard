@@ -2,7 +2,7 @@ import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { EChartOption } from 'echarts';
 import { generateEchartOption } from './echart-helpers';
 import { Subscription } from 'rxjs';
-
+import { DomSanitizer} from '@angular/platform-browser';
 import { Data as MODEL, Crop } from 'src/data/dataType';
 import { VersioningService } from '../versioning.service';
 
@@ -15,6 +15,8 @@ export class ModelsVersioningComponent implements OnInit {
   hGutter = 16;
   vGutter = 16;
   @Input() model!: MODEL;
+  isShap: boolean = false;
+  htmlSrcFrame: string = '';
 
   chartOption: EChartOption = {};
   chartTitle: string = '';
@@ -55,7 +57,8 @@ export class ModelsVersioningComponent implements OnInit {
     return Number(parseFloat(value.toString()).toFixed(2));
   }
   constructor(
-    private modelService: VersioningService
+    private modelService: VersioningService,
+    private sanitizer: DomSanitizer
   ) { }
 
   convertData(resData: MODEL) {
@@ -120,6 +123,11 @@ export class ModelsVersioningComponent implements OnInit {
     if (window.location.pathname === '/versioning/model') {
       this.fetchData(modelName);
     }
+    this.htmlSrcFrame = 'https://storage.googleapis.com/capstone_rmit_2020/b8c8b198-5a7d-11eb-9a8d-44032ceb1a4eout.html';
+  }
+
+  getIframeSrc() {
+    return this.sanitizer.sanitize(4, this.htmlSrcFrame)
   }
 
   selectCropType(crop: string): void {
@@ -154,6 +162,9 @@ export class ModelsVersioningComponent implements OnInit {
     this.getSelectedModel(version, this.modelList);
   }
 
+  onSelectTab(shap: boolean): void {
+    this.isShap = shap;
+  }
 
   ngOnDestroy(): void {
     if (this.dataListSub) {
