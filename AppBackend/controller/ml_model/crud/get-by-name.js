@@ -1,10 +1,10 @@
-const moment = require('moment');
 const db = require('../../../dbConfig')
-// const bucket = require('../../../middlewares/google-cloud-storage').bucket
 
-const getModelData = async (req, res)=>{
+const api = async (req, res) => {
     const { q, client } = db;
-    
+    const authId = req.authUserId;
+    const name = req.query.name;
+
     try {
         const dbs = await client.query(
             q.Map(
@@ -13,7 +13,7 @@ const getModelData = async (req, res)=>{
                     // make paginatable
                     q.Match(
                         // query index
-                        q.Index('all_models')
+                        q.Index('models_by_name'), authId, name
                     )
                 ),
                 // ref => q.Get(ref) // lookup each result by its reference
@@ -27,8 +27,6 @@ const getModelData = async (req, res)=>{
         // something went wrong
         res.status(500).json({ error: e.message })
     }
-
-
 }
 
-module.exports = getModelData
+module.exports = api;

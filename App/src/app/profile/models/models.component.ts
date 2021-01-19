@@ -67,7 +67,7 @@ export class ModelsComponent implements OnInit {
 
   onSelectModel(item) {
     const { protocol = 'http:', host = 'localhost:4200' } = window.location || {};
-    const url = `${protocol}//${host}/versioning/model?name=${item && item.name}`;
+    const url = `${protocol}//${host}/versioning/model?name=${item && item.slug}`;
     window.location.href = url;
   }
 

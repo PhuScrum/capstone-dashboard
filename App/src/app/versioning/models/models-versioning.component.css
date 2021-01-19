@@ -133,3 +133,14 @@ nz-select {
   margin: 0 8px 10px 0;
   width: 120px;
 }
+
+.timeline-version:hover{
+  text-decoration: underline;
+  color: #F66D51;
+  cursor: pointer;
+}
+
+.timeline-version.active{
+  color: #F66D51;
+  font-weight: 600;
+}

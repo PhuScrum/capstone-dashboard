@@ -25,7 +25,8 @@ export interface Data {
     version: string,
     note: string,
     user: string,
-    type: string
+    type: string,
+    date: string
 }
 
 export interface DATASETS {

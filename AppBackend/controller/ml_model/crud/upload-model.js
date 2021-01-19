@@ -9,7 +9,7 @@ const api = async (req, res) => {
     const json = JSON.parse(req.file.buffer.toString());
 
     //file info
-    const { gcsUrl, fileName, originalname, version } = req.file
+    const { gcsUrl, fileName, originalname, version, date } = req.file
     // const {r2_score, rmse, mse, mae, median_absolute_error, data_by_crops } = json;
 
     try {
@@ -22,7 +22,8 @@ const api = async (req, res) => {
             version: version,
             note: req.body.note,
             type: req.body.type,
-            user: req.authUserId
+            user: req.authUserId,
+            date: date
         }
 
         const dbs = await client.query(

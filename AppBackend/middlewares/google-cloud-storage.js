@@ -28,7 +28,8 @@ const configureBucketCors = async () => {
         to allow ${method} requests from ${origin} sharing 
         ${responseHeader} responses across origins`);
 }
-configureBucketCors();
+
+exports.configureBucketCors = configureBucketCors;
 
 /**
  * Middleware for uploading file to GCS.

@@ -5,10 +5,17 @@
       <div class="content">
         <div class="timeline-nz">
           <nz-timeline nzMode="alternate">
-            <nz-timeline-item>Create a services 2015-09-01</nz-timeline-item>
-            <nz-timeline-item>Solve initial network problems</nz-timeline-item>
-            <nz-timeline-item>Technical testing 2015-09-01 09:12:11</nz-timeline-item>
-            <nz-timeline-item>Network problems being solved 2015-09-01 09:12:11</nz-timeline-item>
+            <nz-timeline-item *ngFor="let item of modelList">
+              <p>
+                <strong>Version: </strong
+                ><span
+                  (click)="onSelectVersion(item.version)"
+                  class="timeline-version active" [class.active] = "currentVersion === item.version"
+                  >{{ item.version }}</span
+                >
+              </p>
+              <p class="date">{{ item.date }}</p>
+            </nz-timeline-item>
           </nz-timeline>
         </div>
       </div>

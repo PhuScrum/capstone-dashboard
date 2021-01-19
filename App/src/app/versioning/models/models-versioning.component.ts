@@ -3,7 +3,7 @@ import { EChartOption } from 'echarts';
 import { generateEchartOption } from './echart-helpers';
 import { Subscription } from 'rxjs';
 
-import { Data as DataType, Crop } from 'src/data/dataType';
+import { Data as MODEL, Crop } from 'src/data/dataType';
 import { VersioningService } from '../versioning.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { VersioningService } from '../versioning.service';
 export class ModelsVersioningComponent implements OnInit {
   hGutter = 16;
   vGutter = 16;
-  @Input() model!: DataType;
+  @Input() model!: MODEL;
 
   chartOption: EChartOption = {};
   chartTitle: string = '';
@@ -45,8 +45,10 @@ export class ModelsVersioningComponent implements OnInit {
   median_absolute_error: number = 0;
   mae: number = 0;
 
-  dataList: DataType[] = [];
-  singleData: DataType;
+  modelList: MODEL[] = [];
+  singleModel: MODEL;
+
+  currentVersion: string = '';
 
   private dataListSub: Subscription;
   generateOutputNumber(value: number): number {
@@ -56,14 +58,14 @@ export class ModelsVersioningComponent implements OnInit {
     private modelService: VersioningService
   ) { }
 
-  convertData(resData: DataType) {
+  convertData(resData: MODEL) {
     if (resData) {
       const {
         r2_score = 0, rmse = 0, mse = 0, mae = 0,
         data_by_crops = [], median_absolute_error = 0,
         fileName = '', type = '', note = '',
       } = resData || {};
-      this.chartTitle = `Agtuary model ${resData && resData.name}`;
+      this.chartTitle = `${resData && resData.name} - ${resData && resData.version}`;
 
       //Model metrics
       this.r2Score = Number(parseFloat(r2_score.toString()) * 100);
@@ -101,15 +103,15 @@ export class ModelsVersioningComponent implements OnInit {
   fetchData(modelName): void {
     this.modelService.getModels(modelName);
     this.dataListSub = this.modelService.getDataListUpdateListener()
-      .subscribe((data: DataType[]) => {
-        this.dataList = data;
-        this.singleData = Array.isArray(data) && data.find((item) => item.name === modelName);
-        this.convertData(this.singleData);
-
+      .subscribe((data: MODEL[]) => {
+        this.modelList = data;
+        this.singleModel = data[0];
+        this.convertData(data[0]);
       });
   }
+
   ngOnChanges(changes: SimpleChanges) {
-    this.convertData(this.singleData);
+    this.convertData(this.singleModel);
   }
 
   ngOnInit(): void {
@@ -125,7 +127,7 @@ export class ModelsVersioningComponent implements OnInit {
       crop,
       ...this.filterOptions,
     };
-    this.cropData = this.singleData.data_by_crops.find(item => item.name === crop);
+    this.cropData = this.singleModel.data_by_crops.find(item => item.name === crop);
     // generate echart options
     this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
 
@@ -136,9 +138,20 @@ export class ModelsVersioningComponent implements OnInit {
       ...this.filterOptions,
       target,
     };
-    // this.cropData = this.singleData.data_by_crops.find(item => item.name === this.filterOptions.crop);
+    // this.cropData = this.singleModel.data_by_crops.find(item => item.name === this.filterOptions.crop);
     // generate echart options
     this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
+  }
+
+  getSelectedModel(version: string, models: MODEL[]) {
+    const found = models.find(item => item.version === version);
+    this.singleModel = found;
+    this.currentVersion = found.version;
+    this.convertData(found);
+  }
+
+  onSelectVersion(version: string): void {
+    this.getSelectedModel(version, this.modelList);
   }
 
 

@@ -4,6 +4,7 @@ const app = express()
 var bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
+const bucketCors = require('./middlewares/google-cloud-storage').configureBucketCors
 const path = require('path')
 
 app.use(bodyParser.json({ limit: '10mb', extended: true }))
@@ -36,6 +37,8 @@ app.use('/api/dataset', dataset)
 // app.route('/api/model-data')
 //     .get(ml_model_API.crud.getModelData)
 //     .post(upload.single('modelData'), ml_model_API.crud.uploadModel)
+
+bucketCors();
 
 var port = process.env.PORT || 8080
   app.listen(port, () => {

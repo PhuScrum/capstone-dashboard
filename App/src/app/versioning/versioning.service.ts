@@ -24,7 +24,9 @@ export class VersioningService {
   getModels(name: string) {
     const secret = this.authService.getSecret();
     let headers = new HttpHeaders().set('secret', secret);
-    this.http.get<MODELS[]>(BACKEND_URL + 'api/model-data/myModels', { headers: headers })
+    const query = `/?name=${name}`
+
+    this.http.get<MODELS[]>(BACKEND_URL + 'api/model-data/versioning' + query, { headers: headers })
       .subscribe(data => {
         this.models = data;
         this.modelsUpdated.next([...this.models]);
