@@ -35,7 +35,6 @@ export class DatasetsComponent implements OnInit, OnDestroy {
     this.dataListSub = this.datasetService.getDataListUpdateListener()
       .subscribe((data: DataType[]) => {
         this.dataList = data;
-        console.log('data: ', data);
       });
   }
 

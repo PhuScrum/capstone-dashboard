@@ -55,6 +55,10 @@ export class VersioningService {
     return this.http.post('http://localhost:5000/model-recommend', body)
   }
 
+  getCSV(url: string) {
+    return this.http.get(url, { responseType: 'text' })
+  }
+
   getDataListUpdateListener() {
     return this.modelsUpdated.asObservable();
   }

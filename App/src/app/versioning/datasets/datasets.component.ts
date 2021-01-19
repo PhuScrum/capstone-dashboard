@@ -20,6 +20,8 @@ export class DatasetsComponent implements OnInit {
   dataSet: DATASETS[] = [];
   singleData: DATASETS;
 
+  csvData: any[] = [];
+
   currentVersion: string = '';
 
   listOfFeatures: string[] = [];
@@ -50,6 +52,7 @@ export class DatasetsComponent implements OnInit {
     this.versioningService.getDataSet(dataSetName);
     this.dataListSub = this.versioningService.getDataSetUpdateListener()
     .subscribe((data: DATASETS[]) => {
+      this.getCSV(data[0].url)
       this.dataSet = data;
       this.singleData = data[0];
       // this.currentVersion = data[0].version;
@@ -57,6 +60,16 @@ export class DatasetsComponent implements OnInit {
       this.stopLoading();
     });
 
+  }
+
+  getCSV(url: string) {
+    this.versioningService.getCSV(url).subscribe((data: any) => {
+      const list = data.split('\n');
+      list.forEach((line) => {
+        this.csvData.push(line);
+      })
+      console.log(this.csvData)
+    })
   }
 
   stopLoading() {
@@ -83,7 +96,6 @@ export class DatasetsComponent implements OnInit {
       this.versioningService.getDataSet(this.datasetName);
       this.dataListSub = this.versioningService.getDataSetUpdateListener()
       .subscribe((data: DATASETS[]) => {
-        console.log(this.currentVersion);
         this.dataSet = data;
         this.getSelectedData(this.currentVersion, data);
         this.stopLoading();

@@ -68,7 +68,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "capstone-agtuary-dashboard:build"
+            "browserTarget": "capstone-agtuary-dashboard:build",
+            "proxyConfig": "./proxy.config.json"
           },
           "configurations": {
             "production": {

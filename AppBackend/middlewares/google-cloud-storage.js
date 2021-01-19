@@ -7,6 +7,29 @@ const DEFAULT_BUCKET_NAME = 'capstone_rmit_2020'; // Replace with the name of yo
 
 exports.bucket = storage.bucket(DEFAULT_BUCKET_NAME);
 
+const configureBucketCors = async () => {
+    const maxAgeSeconds = 3600;
+    const bucketName = DEFAULT_BUCKET_NAME
+
+    const method = 'GET';
+    const origin = "http://localhost:4200/";
+    const responseHeader = 'Access-Control-Allow-Origin, Content-Type, Accept, Accept-Language, Origin, User-Agent'
+
+    await storage.bucket(bucketName).setCorsConfiguration([
+      {
+        maxAgeSeconds,
+        method,
+        origin,
+        responseHeader,
+      },
+    ]);
+  
+    console.log(`Bucket ${bucketName} was updated with a CORS config
+        to allow ${method} requests from ${origin} sharing 
+        ${responseHeader} responses across origins`);
+}
+configureBucketCors();
+
 /**
  * Middleware for uploading file to GCS.
  * @param {Object} req

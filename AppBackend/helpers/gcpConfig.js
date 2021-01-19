@@ -6,8 +6,10 @@ const auth = {
     projectId: 'faunadb-1204'
 }
 
+const storage =  new Storage(auth);
+
 // Instantiate a storage client
-exports.storage = new Storage(auth);
+exports.storage = storage;
 
 /**
    * Get public URL of a file. The file must have public access
