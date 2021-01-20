@@ -153,6 +153,7 @@ h5.table-title {
 
 .dataset-overview{
   max-width: 300px;
+  position: relative;
 }
 
 .genric-btn {
@@ -177,4 +178,9 @@ h5.table-title {
 
 .loading .spinner-grow{
   margin: 0px 3px;
+}
+
+.dataset-name{
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }

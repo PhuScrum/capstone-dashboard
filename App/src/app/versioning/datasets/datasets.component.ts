@@ -1,10 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  PipeTransform, Pipe } from '@angular/core';
+import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from 'rxjs';
 import { DATASETS } from 'src/data/dataType';
 import { VersioningService } from '../versioning.service';
 
 import { formatToAntArray, generateTableOptions } from './helpers'
+
+@Pipe({ name: 'safe' })
+export class SafePipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) { }
+  transform(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+}
 
 @Component({
   selector: 'app-datasets',
@@ -36,6 +45,9 @@ export class DatasetsComponent implements OnInit {
 
   csvTable:{headers: Array<string>, data: Array<Array<string>>} = {headers:[], data:[[]]};
 
+  shapURL: string = '';
+  summaryURL: string ='';
+
   private dataListSub: Subscription
 
   constructor(
@@ -47,7 +59,6 @@ export class DatasetsComponent implements OnInit {
     this.isPageLoading = true;
 
     this.route.queryParams.subscribe(params => {
-      console.log(this.currentVersion)
       const name = params.name;
       const version = params.version;
       this.datasetName = name;
@@ -85,6 +96,13 @@ export class DatasetsComponent implements OnInit {
 
   getSelectedData(version: string, dataSet: DATASETS[]) {
     const found = dataSet.find(item => item.version.toString() === version.toString());
+    if(found.model_recommend[0].best_model_shap){
+      this.shapURL = found.model_recommend[0].best_model_shap.force_plot_html;
+      this.summaryURL = found.model_recommend[0].best_model_shap.summary_plot;
+    } else {
+      this.shapURL = '';
+      this.summaryURL = '';
+    }
     this.singleData = found;
     this.currentVersion = found.version;
     this.listOfFeatures = formatToAntArray(found.featureList);
@@ -130,6 +148,14 @@ export class DatasetsComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+
+  viewForcePlot(): void {
+    window.location.href = this.shapURL;
+  }
+
+  viewSummarPlot(): void {
+    window.location.href = this.summaryURL;
   }
 
   ngOnDestroy(): void {

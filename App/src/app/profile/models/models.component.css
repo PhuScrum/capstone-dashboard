@@ -3,8 +3,6 @@
   margin: 0 auto;
   /* display: grid;
   grid-template-columns: auto auto auto auto; */
-  display: flex;
-  justify-content: space-between;
 
 }
 .model-profile {

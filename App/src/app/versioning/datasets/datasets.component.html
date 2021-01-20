@@ -57,8 +57,8 @@
         </div>
       </div>
       <div class="wrapper-down">
-        <div class="content left dataset-overview">
-          <p>{{ singleData && singleData.fileName }}</p>
+        <div class="content d-block left dataset-overview">
+          <p class="dataset-name">{{ singleData && singleData.fileName }}</p>
           <p>Features: {{ singleData && singleData.features }}</p>
           <p>Length: {{ singleData && singleData.length }}</p>
           <p>Description: {{ singleData && singleData.note }}</p>
@@ -161,6 +161,14 @@
             <nz-select nzMode="multiple" style="width: 75%" nzPlaceHolder="Please select" [nzOptions]="listOfFeatures" [(ngModel)]="selectedFeatures"> </nz-select>
           </div>
         </nz-modal>
+      </div>
+      <div class="shap-display mt-3" *ngIf="singleData.model_recommend[0].best_model_shap">
+        <div class="shap-wrapper">
+          <h1 class="mb-3">Shap Image</h1>
+          <a class="genric-btn primary-border" (click)="viewForcePlot()">View Force Plot</a>
+          <a class="genric-btn primary-border ml-2" (click)="viewSummarPlot()">View Summary Plot</a>
+        </div>
+
       </div>
     </div>
   </div>
