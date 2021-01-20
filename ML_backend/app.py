@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory, send_file, jsonify
+from flask import Flask, request, send_from_directory, send_file
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
@@ -18,7 +18,7 @@ import shap
 import pickle
 import urllib.request
 shap.initjs()
-
+app = Flask(__name__)
 from faunadb import query as q
 from faunadb.objects import Ref
 from faunadb.client import FaunaClient
@@ -108,32 +108,111 @@ def model_Recommend():
     if maxR2 == 0:
         bestModel = "Linear"
         bestResult = predictResult(y_test, y_pred_modelLinear)
+
     elif maxR2 == 1:
         bestModel = "Random Forest"
         bestResult = predictResult(y_test, y_pred_modelRFR)
+        if multi==False:
+            explainer = shap.TreeExplainer(modelRFR)
+            shap_values = explainer.shap_values(X_train)
+            force_plot = shap.force_plot(explainer.expected_value, shap_values, X_train)
+            shap.save_html('out.html', force_plot)
+            shap.summary_plot(shap_values, X_train, show=False)
+            plt.savefig("summary.png", dpi=300, bbox_inches='tight')
+            plt.figure().clear()
     elif maxR2 == 2:
         bestModel = "Light Gradient Boosting"
         bestResult = predictResult(y_test, y_pred_modelLGB)
+        if multi == False:
+            explainer = shap.TreeExplainer(modelLGB)
+            shap_values = explainer.shap_values(X_train)
+            force_plot = shap.force_plot(explainer.expected_value, shap_values, X_train)
+            shap.save_html('out.html', force_plot)
+            shap.summary_plot(shap_values, X_train, show=False)
+            plt.savefig("summary.png", dpi=300, bbox_inches='tight')
+            plt.figure().clear()
     elif maxR2 == 3:
         bestModel = "Extreme Gradient Boosting"
         bestResult = predictResult(y_test, y_pred_modelXGB)
+        if multi == False:
+            explainer = shap.TreeExplainer(modelXGB)
+            shap_values = explainer.shap_values(X_train)
+            force_plot = shap.force_plot(explainer.expected_value, shap_values, X_train)
+            shap.save_html('out.html', force_plot)
+            shap.summary_plot(shap_values, X_train, show=False)
+            plt.savefig("summary.png", dpi=300, bbox_inches='tight')
+            plt.figure().clear()
     else:
         print("error")
-    result = {
-        "best_model": bestModel,
-        "bestResult": bestResult,
-        "result": [{"model": "Linear", "result": predictResult(y_test, y_pred_modelLinear)},
-                   {"model": "Random Forest", "result": predictResult(y_test, y_pred_modelRFR)},
-                   {"model": "Light Gradient Boosting", "result": predictResult(y_test, y_pred_modelLGB)},
-                   {"model": "Extreme Gradient Boosting", "result": predictResult(y_test, y_pred_modelXGB)}]
-    }
+    result = {}
+    if multi == False:
+        storage_client = storage.Client.from_service_account_json(config.Config.GOOGLE_APPLICATION_CREDENTIALS)
+        bucket = storage_client.get_bucket(config.Config.CLOUD_STORAGE_BUCKET)
+        uid = str(uuid.uuid1())
+        urlsumary = ""
+        # urlforce=""
+        urlHtml = ""
+        with open('summary.png', 'rb') as file:
+            page = file.read()
 
+            sumaryname = uid + "summary.png"
+            blob = bucket.blob(sumaryname)
+
+            blob.upload_from_string(
+                page,
+                content_type="png"
+            )
+            urlsumary = blob.public_url
+            print("done")
+        # with open('force.png', 'rb') as file:
+        #     page = file.read()
+        #
+        #     sumaryname =uid  + "force.png"
+        #     blob = bucket.blob(sumaryname)
+        #
+        #     blob.upload_from_string(
+        #         page,
+        #         content_type="png"
+        #     )
+        #     urlforce=blob.public_url
+        #     print("done")
+        with open('out.html', encoding="utf8") as file:
+            page = file.read()
+
+            htmlname = uid + "out.html"
+            blob = bucket.blob(htmlname)
+
+            blob.upload_from_string(
+                page,
+                content_type="html"
+            )
+            urlHtml = blob.public_url
+            print("done")
+        result = {
+            "best_model": bestModel,
+            "best_model_shap":{ "force_plot_html": urlHtml,
+                          "summary_plot":urlsumary},
+            "bestResult": bestResult,
+            "result": [{"model": "Linear", "result": predictResult(y_test, y_pred_modelLinear)},
+                       {"model": "Random Forest", "result": predictResult(y_test, y_pred_modelRFR)},
+                       {"model": "Light Gradient Boosting", "result": predictResult(y_test, y_pred_modelLGB)},
+                       {"model": "Extreme Gradient Boosting", "result": predictResult(y_test, y_pred_modelXGB)}]
+        }
+    else:
+        result = {
+            "best_model": bestModel,
+            "bestResult": bestResult,
+            "result": [{"model": "Linear", "result": predictResult(y_test, y_pred_modelLinear)},
+                       {"model": "Random Forest", "result": predictResult(y_test, y_pred_modelRFR)},
+                       {"model": "Light Gradient Boosting", "result": predictResult(y_test, y_pred_modelLGB)},
+                       {"model": "Extreme Gradient Boosting", "result": predictResult(y_test, y_pred_modelXGB)}]
+        }
     json_object = json.dumps(result, indent=4)
 
     client.query(
         q.update(
-            q.ref(q.collection("datasets"), did),
-            {"data": {"model_recommend": [result]}}
+            q.ref(q.collection("datasets"),did ),
+            {"data": {"model-recommend":[result]}}
         ))
 
     return json_object
@@ -248,6 +327,7 @@ def trainShapValue():
         shap.save_html('out.html', force_plot)
         shap.summary_plot(shap_values,X_train,show=False)
         plt.savefig("summary.png", dpi = 300, bbox_inches = 'tight')
+        plt.figure().clear()
         #
         # shap.force_plot(explainer.expected_value, shap_values[0, :], X_train.iloc[0, :],show=False)
         # plt.savefig("force.png")
@@ -255,7 +335,6 @@ def trainShapValue():
         bucket = storage_client.get_bucket(config.Config.CLOUD_STORAGE_BUCKET)
         uid = str(uuid.uuid1())
         urlsumary=""
-        # urlforce=""
         urlHtml= ""
         with open('summary.png', 'rb') as file:
             page = file.read()
@@ -269,18 +348,6 @@ def trainShapValue():
             )
             urlsumary=blob.public_url
             print("done")
-        # with open('force.png', 'rb') as file:
-        #     page = file.read()
-        #
-        #     sumaryname =uid  + "force.png"
-        #     blob = bucket.blob(sumaryname)
-        #
-        #     blob.upload_from_string(
-        #         page,
-        #         content_type="png"
-        #     )
-        #     urlforce=blob.public_url
-        #     print("done")
         with open('out.html', encoding="utf8") as file:
             page = file.read()
 
@@ -313,6 +380,38 @@ def trainShapValue():
         }
         json_object = json.dumps(errormess, indent=4)
         return json_object
+@app.route('/data-distribution', methods=["POST"])
+@cross_origin()
+def dataDistribute():
+    req_data = request.get_json()
+    # try:
+    dataUrl = req_data['dataUrl']
+    did = req_data['did']
+    data = read_csv(dataUrl)
+    plt.figure(figsize=(25, 15), constrained_layout=False)
+    data.hist(figsize=(25, 15))
+    plt.savefig("distribution.png", dpi = 200, bbox_inches = 'tight')
+    storage_client = storage.Client.from_service_account_json(config.Config.GOOGLE_APPLICATION_CREDENTIALS)
+    bucket = storage_client.get_bucket(config.Config.CLOUD_STORAGE_BUCKET)
+    uid = str(uuid.uuid1())
+    with open('distribution.png', 'rb') as file:
+        page = file.read()
+
+        distributionName = uid + "distribution.png"
+        blob = bucket.blob(distributionName)
+
+        blob.upload_from_string(
+            page,
+            content_type="png"
+        )
+    img_url = blob.public_url
+
+    client.query(
+        q.update(
+            q.ref(q.collection("datasets"), did),
+            {"data": {"distribution": img_url}}
+        ))
+    return send_file("distribution.png", mimetype='image/png')
 
 @app.route('/train-xgb', methods=["POST"])
 @cross_origin()
@@ -420,7 +519,6 @@ def trainRandomForest():
     #     print("error")
     json_object = json.dumps(result, indent=4)
     return json_object
-
 @app.route('/train-random-forest-shap', methods=["POST"])
 @cross_origin()
 def trainRandomForestShap():
@@ -455,18 +553,14 @@ def trainRandomForestShap():
         # os.remove("out.html")
     return blob.public_url
 
-@app.route('/csv-to-json', methods=["GET", "POST"])
+@app.route('/csv-to-json', methods=["GET","POST"])
 @cross_origin()
 def csvToJson():
     req_data = request.get_json()
     url = req_data['url']
-    csvfile = pd.read_csv(url)
-    print(csvfile.columns)
-
-    json_csv = csvfile.to_json(orient='records')
-
-    return json_csv
-
+    csvfile= pd.read_csv(url)
+    print(csvfile)
+    return csvfile.to_json(orient='records')
 @app.route('/favicon.ico')
 @cross_origin()
 def favicon():
