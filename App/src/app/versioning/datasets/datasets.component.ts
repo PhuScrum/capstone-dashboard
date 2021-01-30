@@ -96,7 +96,8 @@ export class DatasetsComponent implements OnInit {
 
   getSelectedData(version: string, dataSet: DATASETS[]) {
     const found = dataSet.find(item => item.version.toString() === version.toString());
-    if(found.model_recommend[0].best_model_shap){
+    console.log(found)
+    if(found.model_recommend && found.model_recommend[0].best_model_shap){
       this.shapURL = found.model_recommend[0].best_model_shap.force_plot_html;
       this.summaryURL = found.model_recommend[0].best_model_shap.summary_plot;
     } else {

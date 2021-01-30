@@ -2,7 +2,7 @@
   <div class="title">
     <h1 style="margin-bottom: 0px;">Datasets</h1>
     <input type="file" #filePicker (change)="onDatasetPicked($event)" >
-    <a class="genric-btn primary-border" (click)="filePicker.click()">Add</a>
+    <a class="genric-btn primary-border"style="height: 32px;margin-top: 7.5px;" (click)="filePicker.click()">Add</a>
   </div>
   <div class="datasets-wrapper row no-gutters">
     <div class="datasets col-12 col-sm-6 col-md-3 mb-3" *ngFor="let item of dataList">

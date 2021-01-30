@@ -1,6 +1,6 @@
 <div class="model-select">
   <form class="form-inline mb-3">
-    <div class="form-group mr-auto">
+    <div class="form-group mr-3">
       <B style="display: block;float: left;margin-right: 5px;">Model</B>
       <nz-select [(ngModel)]="selectedType" (ngModelChange)="typeChange($event)" style="width: 160px;display: block;float: right;" nzPlaceHolder="Choose Model Type" [nzOptions]="mlOpts" [ngModelOptions]="{standalone: true}"></nz-select>
     </div>
@@ -15,7 +15,7 @@
       <div class="model">
         <div nz-row>
           <div nz-col nzSpan="12" class="float-left" ><B>{{item.name}}</B></div>
-          <div nz-col nzSpan="12" class="float-right" style="justify-content: flex-end;" ><a (click)='onSelectModel(item)' class="model-link">View</a></div>
+          <div nz-col nzSpan="12" class="float-right" style="justify-content: flex-end;" ><a (click)='onSelectModel(item)' class="model-link"><i class="fas fa-chart-line"></i></a></div>
           <div nz-col nzSpan="12" class="float-left" >Type</div>
           <div nz-col nzSpan="12" class="float-right" >{{item.type}}</div>
           <div nz-col nzSpan="12" class="float-left" >Version</div>

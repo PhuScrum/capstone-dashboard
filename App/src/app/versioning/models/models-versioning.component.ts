@@ -107,6 +107,7 @@ export class ModelsVersioningComponent implements OnInit {
     this.modelService.getModels(modelName);
     this.dataListSub = this.modelService.getDataListUpdateListener()
       .subscribe((data: MODEL[]) => {
+        console.log(data)
         this.modelList = data;
         this.singleModel = data[0];
         this.convertData(data[0]);
@@ -123,7 +124,7 @@ export class ModelsVersioningComponent implements OnInit {
     if (window.location.pathname === '/versioning/model') {
       this.fetchData(modelName);
     }
-    this.htmlSrcFrame = 'https://storage.googleapis.com/capstone_rmit_2020/b8c8b198-5a7d-11eb-9a8d-44032ceb1a4eout.html';
+    // this.htmlSrcFrame = 'https://storage.googleapis.com/capstone_rmit_2020/b8c8b198-5a7d-11eb-9a8d-44032ceb1a4eout.html';
   }
 
   getIframeSrc() {

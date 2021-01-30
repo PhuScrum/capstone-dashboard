@@ -162,8 +162,8 @@
           </div>
         </nz-modal>
       </div>
-      <div class="shap-display mt-3" *ngIf="singleData.model_recommend[0].best_model_shap">
-        <div class="shap-wrapper">
+      <div class="shap-display mt-3" *ngIf="singleData.model_recommend && singleData.model_recommend[0].best_model_shap">
+        <div class="shap-wrapper" >
           <h1 class="mb-3">Shap Image</h1>
           <a class="genric-btn primary-border" (click)="viewForcePlot()">View Force Plot</a>
           <a class="genric-btn primary-border ml-2" (click)="viewSummarPlot()">View Summary Plot</a>

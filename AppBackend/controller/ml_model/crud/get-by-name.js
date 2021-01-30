@@ -5,6 +5,8 @@ const api = async (req, res) => {
     const authId = req.authUserId;
     const name = req.query.name;
 
+    console.log(name)
+
     try {
         const dbs = await client.query(
             q.Map(
