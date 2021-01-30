@@ -30,6 +30,11 @@ export class ModelsComponent implements OnInit {
     private modelService: ModelService
   ) {}
 
+  ngOnInit(): void {
+    this.fetchData();
+    this.mlOpts = mlOpts;
+  }
+
   fetchData(): void {
     this.modelService.getData();
     this.dataListSub = this.modelService.getDataListUpdateListener()
@@ -37,11 +42,6 @@ export class ModelsComponent implements OnInit {
       this.dataList = data;
       this.singleData = data[0];
     });
-  }
-
-  ngOnInit(): void {
-    this.fetchData();
-    this.mlOpts = mlOpts;
   }
 
   showModal(): void {
