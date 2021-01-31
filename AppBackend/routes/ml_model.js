@@ -1,13 +1,16 @@
 const express = require('express')
 const router = express.Router()
 
+//load middlewares
 const upload = require('../middlewares/multer')
-const ml_model_API = require('../controller/ml_model')
-const { getModelData, uploadModel, getMyModels, getByName } = ml_model_API.crud
-
 const { authMiddleware } = require('../middlewares/auth')
 const { sendUploadToGCS } = require('../middlewares/google-cloud-storage')
 
+//load controllers
+const ml_model_API = require('../controller/ml_model')
+const { getModelData, uploadModel, getMyModels, getByName } = ml_model_API.crud
+
+//defining routes
 router.get('/all', getModelData)
 router.get('/myModels', authMiddleware, getMyModels)
 router.get('/versioning', authMiddleware, getByName)
