@@ -16,9 +16,6 @@ import re
 from sklearn.multioutput import MultiOutputRegressor
 import shap
 import pickle
-import urllib.request
-shap.initjs()
-app = Flask(__name__)
 from faunadb import query as q
 from faunadb.objects import Ref
 from faunadb.client import FaunaClient
@@ -27,6 +24,10 @@ from google.cloud import storage
 import uuid
 import config
 from matplotlib import pyplot as plt
+from urllib.request import urlopen
+
+shap.initjs()
+
 client = FaunaClient(secret="fnAD7ADnJXACDd2V6pO3pXItGGVXn9FCIQVww8D0")
 app = Flask(__name__)
 app.config.from_object(config.Config)
@@ -84,16 +85,16 @@ def model_Recommend():
         multi = True
     size = req_data['size']
     did = req_data['did']
-    data=  read_csv(dataUrl)
-    X = data.drop(columns=target,axis=1)
+    data = read_csv(dataUrl)
+    X = data.drop(columns=target, axis=1)
     y = data[target]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=size, shuffle=False)
     X_train = X_train.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
     X_test = X_test.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
     modelLinear = trainLinearModel(X_train, y_train)
     modelRFR = trainRFR(X_train, y_train)
-    modelLGB = trainLGB(X_train, y_train,multi)
-    modelXGB = trainXGB(X_train, y_train,multi)
+    modelLGB = trainLGB(X_train, y_train, multi)
+    modelXGB = trainXGB(X_train, y_train, multi)
     y_pred_modelLinear = modelLinear.predict(X_test)
     y_pred_modelRFR = modelRFR.predict(X_test)
     y_pred_modelLGB = modelLGB.predict(X_test)
@@ -112,7 +113,7 @@ def model_Recommend():
     elif maxR2 == 1:
         bestModel = "Random Forest"
         bestResult = predictResult(y_test, y_pred_modelRFR)
-        if multi==False:
+        if multi == False:
             explainer = shap.TreeExplainer(modelRFR)
             shap_values = explainer.shap_values(X_train)
             force_plot = shap.force_plot(explainer.expected_value, shap_values, X_train)
@@ -190,8 +191,8 @@ def model_Recommend():
             print("done")
         result = {
             "best_model": bestModel,
-            "best_model_shap":{ "force_plot_html": urlHtml,
-                          "summary_plot":urlsumary},
+            "best_model_shap": {"force_plot_html": urlHtml,
+                                "summary_plot": urlsumary},
             "bestResult": bestResult,
             "result": [{"model": "Linear", "result": predictResult(y_test, y_pred_modelLinear)},
                        {"model": "Random Forest", "result": predictResult(y_test, y_pred_modelRFR)},
@@ -211,8 +212,8 @@ def model_Recommend():
 
     client.query(
         q.update(
-            q.ref(q.collection("datasets"),did ),
-            {"data": {"model_recommend":[result]}}
+            q.ref(q.collection("datasets"), did),
+            {"data": {"model_recommend": [result]}}
         ))
 
     return json_object
@@ -262,7 +263,7 @@ def trainLGBR():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=size, shuffle=False)
     X_train = X_train.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
     X_test = X_test.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
-    model = trainLGB(X_train, y_train,multi)
+    model = trainLGB(X_train, y_train, multi)
     y_pred = model.predict(X_test)
     result = predictResult(y_test, y_pred)
 
@@ -270,6 +271,8 @@ def trainLGBR():
     #     print("error")
     json_object = json.dumps(result, indent=4)
     return json_object
+
+
 # fnAD7ADnJXACDd2V6pO3pXItGGVXn9FCIQVww8D0
 @app.route('/train-lgb-shap', methods=["POST"])
 @cross_origin()
@@ -288,7 +291,7 @@ def trainLGBRShap():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=size, shuffle=False)
     X_train = X_train.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
     X_test = X_test.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
-    model = trainLGB(X_train, y_train,multi)
+    model = trainLGB(X_train, y_train, multi)
     y_pred = model.predict(X_test)
     result = predictResult(y_test, y_pred)
 
@@ -297,13 +300,14 @@ def trainLGBRShap():
     json_object = json.dumps(result, indent=4)
     return json_object
 
+
 @app.route('/shap-value', methods=["POST"])
 @cross_origin()
 def trainShapValue():
     req_data = request.get_json()
     # try:
     dataUrl = req_data['dataUrl']
-    sav_url= req_data['sav_url']
+    sav_url = req_data['sav_url']
     target = req_data['target']
     size = req_data['size']
     did = req_data['did']
@@ -311,22 +315,22 @@ def trainShapValue():
     X = data.drop(columns=target, axis=1)
     y = data[target]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=size, shuffle=False)
-    model = pickle.load(open(sav_url, 'rb'))
+    model = pickle.load(urlopen(sav_url))
     model_name = type(model).__name__
     print(model_name)
-    support_model = ['LGBMRegressor','XGBRegressor','RandomForestRegressor']
-    lenTranset =len(X_train)
+    support_model = ['LGBMRegressor', 'XGBRegressor', 'RandomForestRegressor']
+    lenTranset = len(X_train)
     if model_name in support_model:
-        shapcalrows= 150
-        if lenTranset>shapcalrows:
-            X_train=X_train.head(shapcalrows)
+        shapcalrows = 150
+        if lenTranset > shapcalrows:
+            X_train = X_train.head(shapcalrows)
         print("start")
         explainer = shap.TreeExplainer(model)
         shap_values = explainer.shap_values(X_train)
         force_plot = shap.force_plot(explainer.expected_value, shap_values, X_train)
         shap.save_html('out.html', force_plot)
-        shap.summary_plot(shap_values,X_train,show=False)
-        plt.savefig("summary.png", dpi = 300, bbox_inches = 'tight')
+        shap.summary_plot(shap_values, X_train, show=False)
+        plt.savefig("summary.png", dpi=300, bbox_inches='tight')
         plt.figure().clear()
         #
         # shap.force_plot(explainer.expected_value, shap_values[0, :], X_train.iloc[0, :],show=False)
@@ -334,19 +338,19 @@ def trainShapValue():
         storage_client = storage.Client.from_service_account_json(config.Config.GOOGLE_APPLICATION_CREDENTIALS)
         bucket = storage_client.get_bucket(config.Config.CLOUD_STORAGE_BUCKET)
         uid = str(uuid.uuid1())
-        urlsumary=""
-        urlHtml= ""
+        urlsumary = ""
+        urlHtml = ""
         with open('summary.png', 'rb') as file:
             page = file.read()
 
-            sumaryname =uid  + "summary.png"
+            sumaryname = uid + "summary.png"
             blob = bucket.blob(sumaryname)
 
             blob.upload_from_string(
                 page,
                 content_type="png"
             )
-            urlsumary=blob.public_url
+            urlsumary = blob.public_url
             print("done")
         with open('out.html', encoding="utf8") as file:
             page = file.read()
@@ -358,15 +362,15 @@ def trainShapValue():
                 page,
                 content_type="html"
             )
-            urlHtml= blob.public_url
+            urlHtml = blob.public_url
             print("done")
         jsonObject = {
             # "force_plot": urlforce,
-        "force_plot_html": urlHtml,
-                      "summary_plot":urlsumary}
-            # os.remove("out.html")
+            "force_plot_html": urlHtml,
+            "summary_plot": urlsumary}
+        # os.remove("out.html")
         json_object = json.dumps(jsonObject, indent=4)
-        if len(did)>0:
+        if len(did) > 0:
             client.query(
                 q.update(
                     q.ref(q.collection("models"), did),
@@ -374,12 +378,14 @@ def trainShapValue():
                 ))
         return json_object
     else:
-        errormess ={
-            "message":"This model is unsupported",
-            "model":model_name
+        errormess = {
+            "message": "This model is unsupported",
+            "model": model_name
         }
         json_object = json.dumps(errormess, indent=4)
         return json_object
+
+
 @app.route('/data-distribution', methods=["POST"])
 @cross_origin()
 def dataDistribute():
@@ -390,7 +396,7 @@ def dataDistribute():
     data = read_csv(dataUrl)
     plt.figure(figsize=(25, 15), constrained_layout=False)
     data.hist(figsize=(25, 15))
-    plt.savefig("distribution.png", dpi = 200, bbox_inches = 'tight')
+    plt.savefig("distribution.png", dpi=200, bbox_inches='tight')
     storage_client = storage.Client.from_service_account_json(config.Config.GOOGLE_APPLICATION_CREDENTIALS)
     bucket = storage_client.get_bucket(config.Config.CLOUD_STORAGE_BUCKET)
     uid = str(uuid.uuid1())
@@ -413,6 +419,7 @@ def dataDistribute():
         ))
     return send_file("distribution.png", mimetype='image/png')
 
+
 @app.route('/train-xgb', methods=["POST"])
 @cross_origin()
 def trainXGBR():
@@ -429,7 +436,7 @@ def trainXGBR():
     y = data[target]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=size, shuffle=False)
     X_train = X_train.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
-    model = trainXGB(X_train, y_train,multi)
+    model = trainXGB(X_train, y_train, multi)
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X_train)
     plot = shap.force_plot(explainer.expected_value, shap_values, X_train)
@@ -451,7 +458,7 @@ def trainXGBR():
     return blob.public_url
 
 
-@app.route('/train-xgb-shap', methods=["GET","POST"])
+@app.route('/train-xgb-shap', methods=["GET", "POST"])
 @cross_origin()
 def trainXGBRShap():
     req_data = request.get_json()
@@ -467,17 +474,17 @@ def trainXGBRShap():
     y = data[target]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=size, shuffle=False)
     X_train = X_train.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
-    model = trainXGB(X_train, y_train,multi)
+    model = trainXGB(X_train, y_train, multi)
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X_train)
     plot = shap.force_plot(explainer.expected_value, shap_values, X_train)
-    shap.save_html('out.html',plot)
+    shap.save_html('out.html', plot)
     storage_client = storage.Client.from_service_account_json(config.Config.GOOGLE_APPLICATION_CREDENTIALS)
     bucket = storage_client.get_bucket(config.Config.CLOUD_STORAGE_BUCKET)
 
     with open('out.html', encoding="utf8") as file:
         page = file.read()
-        name = str(uuid.uuid1())+"out.html"
+        name = str(uuid.uuid1()) + "out.html"
         blob = bucket.blob(name)
 
         blob.upload_from_string(
@@ -496,6 +503,7 @@ def getShap():
         page = file.read()
         # os.remove("out.html")
     return page
+
 
 @app.route('/train-random-forest', methods=["POST"])
 @cross_origin()
@@ -519,6 +527,8 @@ def trainRandomForest():
     #     print("error")
     json_object = json.dumps(result, indent=4)
     return json_object
+
+
 @app.route('/train-random-forest-shap', methods=["POST"])
 @cross_origin()
 def trainRandomForestShap():
@@ -553,14 +563,17 @@ def trainRandomForestShap():
         # os.remove("out.html")
     return blob.public_url
 
-@app.route('/csv-to-json', methods=["GET","POST"])
+
+@app.route('/csv-to-json', methods=["GET", "POST"])
 @cross_origin()
 def csvToJson():
     req_data = request.get_json()
     url = req_data['url']
-    csvfile= pd.read_csv(url)
+    csvfile = pd.read_csv(url)
     print(csvfile)
     return csvfile.to_json(orient='records')
+
+
 @app.route('/favicon.ico')
 @cross_origin()
 def favicon():
