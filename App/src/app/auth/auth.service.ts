@@ -18,6 +18,9 @@ export class AuthService {
   private tokenTimer: any;
   private userName: string = "";
 
+  //set expiration in 2 hour (3600s)
+  private expiresIn: number = 2 * 3600;
+
   private authStatusListener = new Subject<{ isLogin: boolean; userName: string }>();
 
   constructor(
@@ -56,7 +59,12 @@ export class AuthService {
       const secret = result.secret;
       const userId = result.instance['@ref'].id;
       const userName = result.user.data.name;
-      this.saveAuthData(secret, userId, true, userName)
+
+      this.setAuthTimer(this.expiresIn)
+      const now = new Date();
+      const expirationDate = new Date(now.getTime() + this.expiresIn * 1000)
+
+      this.saveAuthData(secret, userId, true, userName, expirationDate)
       this.isLogin = true;
       this.secret = secret;
       this.userId = userId;
@@ -77,6 +85,7 @@ export class AuthService {
   }
 
   onLogout() {
+    clearTimeout(this.tokenTimer)
     const localSecret = this.getSecret();
     let headers = new HttpHeaders().set('secret', localSecret);
 
@@ -100,11 +109,18 @@ export class AuthService {
     })
   }
 
-  private saveAuthData(secret: string, userId: string, isLogin: boolean, userName: string) {
+  private setAuthTimer(duration: number) {
+    this.tokenTimer = setTimeout(() => {
+      this.onLogout()
+    }, duration * 1000)
+  }
+
+  private saveAuthData(secret: string, userId: string, isLogin: boolean, userName: string, expirations: Date) {
     localStorage.setItem("secret", secret);
     localStorage.setItem("userId", userId);
     localStorage.setItem("isLogin", isLogin.toString());
-    localStorage.setItem("userName", userName)
+    localStorage.setItem("userName", userName);
+    localStorage.setItem('expiration', expirations.toString());
   }
 
   private clearAuthData() {
@@ -112,6 +128,7 @@ export class AuthService {
     localStorage.removeItem('isLogin');
     localStorage.removeItem('userId');
     localStorage.removeItem('userName');
+    localStorage.removeItem('expiration');
   }
 
   private getAuthData() {
@@ -119,37 +136,40 @@ export class AuthService {
     const userId = localStorage.getItem('userId')
     const isLogin = localStorage.getItem('isLogin')
     const userName = localStorage.getItem('userName')
+    const expirationDate = localStorage.getItem('expiration')
 
-    if(!secret || !userId) {
+    if(!secret || !userId || !expirationDate) {
       return;
     }
     return {
       secret: secret,
       isLogin: isLogin,
       userId: userId,
-      userName: userName
+      userName: userName,
+      expirationDate: new Date(expirationDate),
     }
-  }
-
-  private setAuthTimer(duration: number) {
-    // console.log("set Auth Timer:", duration)
-    this.tokenTimer = setTimeout(() => {
-      this.onLogout()
-    }, duration * 1000)
   }
 
   autoAuthUser() {
     const authInformation = this.getAuthData()
     if(!authInformation) return;
-    this.secret = authInformation.secret
-    this.isLogin = true
-    this.userId = authInformation.userId
-    this.userName = authInformation.userName
 
-    this.authStatusListener.next({
-      isLogin: this.isLogin,
-      userName: this.userName,
-    })
+    const now = new Date();
+    const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
+
+    if(expiresIn > 0) {
+      this.secret = authInformation.secret
+      this.isLogin = true
+      this.userId = authInformation.userId
+      this.userName = authInformation.userName
+
+      this.authStatusListener.next({
+        isLogin: this.isLogin,
+        userName: this.userName,
+      })
+    } else {
+      return;
+    }
   }
 
 }

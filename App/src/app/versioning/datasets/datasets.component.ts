@@ -1,4 +1,4 @@
-import { Component, OnInit,  PipeTransform, Pipe } from '@angular/core';
+import { Component, OnInit,  PipeTransform, Pipe, OnDestroy } from '@angular/core';
 import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from 'rxjs';
@@ -20,7 +20,7 @@ export class SafePipe implements PipeTransform {
   templateUrl: './datasets.component.html',
   styleUrls: ['./datasets.component.css']
 })
-export class DatasetsComponent implements OnInit {
+export class DatasetVersioningComponent implements OnInit, OnDestroy {
   hGutter = 16;
   vGutter = 16;
 
@@ -96,7 +96,6 @@ export class DatasetsComponent implements OnInit {
 
   getSelectedData(version: string, dataSet: DATASETS[]) {
     const found = dataSet.find(item => item.version.toString() === version.toString());
-    console.log(found)
     if(found.model_recommend && found.model_recommend[0].best_model_shap){
       this.shapURL = found.model_recommend[0].best_model_shap.force_plot_html;
       this.summaryURL = found.model_recommend[0].best_model_shap.summary_plot;

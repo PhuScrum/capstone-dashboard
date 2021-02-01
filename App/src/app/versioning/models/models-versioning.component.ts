@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnDestroy } from '@angular/core';
 import { EChartOption } from 'echarts';
 import { generateEchartOption } from './echart-helpers';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from "@angular/router";
 import { DomSanitizer} from '@angular/platform-browser';
 import { Data as MODEL, Crop } from 'src/data/dataType';
 import { VersioningService } from '../versioning.service';
@@ -11,7 +12,7 @@ import { VersioningService } from '../versioning.service';
   templateUrl: './models-versioning.component.html',
   styleUrls: ['./models-versioning.component.css']
 })
-export class ModelsVersioningComponent implements OnInit {
+export class ModelsVersioningComponent implements OnInit, OnDestroy {
   hGutter = 16;
   vGutter = 16;
   @Input() model!: MODEL;
@@ -52,16 +53,37 @@ export class ModelsVersioningComponent implements OnInit {
 
   currentVersion: string = '';
 
-  private dataListSub: Subscription;
+  
+  private modelListSub: Subscription;
+
+  constructor(
+    private modelService: VersioningService,
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.convertData(this.singleModel);
+  }
+
+  ngOnInit(): void {
+    // const search = window.location.search;
+    // const modelName = typeof search === 'string' && search.includes('?name=') && search.split('?name=')[1];
+    this.route.queryParams.subscribe(params => {
+      const name = params.name;
+      const version = params.version;
+      if (window.location.pathname === '/versioning/model') {
+        this.fetchData(name, version);
+      }
+    })
+    // this.htmlSrcFrame = 'https://storage.googleapis.com/capstone_rmit_2020/b8c8b198-5a7d-11eb-9a8d-44032ceb1a4eout.html';
+  }
+
   generateOutputNumber(value: number): number {
     return Number(parseFloat(value.toString()).toFixed(2));
   }
-  constructor(
-    private modelService: VersioningService,
-    private sanitizer: DomSanitizer
-  ) { }
 
-  convertData(resData: MODEL) {
+  convertData(resData: MODEL): void {
     if (resData) {
       const {
         r2_score = 0, rmse = 0, mse = 0, mae = 0,
@@ -103,28 +125,20 @@ export class ModelsVersioningComponent implements OnInit {
     }
   }
 
-  fetchData(modelName): void {
+  fetchData(modelName: string, version: string): void {
     this.modelService.getModels(modelName);
-    this.dataListSub = this.modelService.getDataListUpdateListener()
+    this.modelListSub = this.modelService.getDataListUpdateListener()
       .subscribe((data: MODEL[]) => {
-        console.log(data)
         this.modelList = data;
-        this.singleModel = data[0];
-        this.convertData(data[0]);
+        this.getSelectedModel(version, data)
       });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.convertData(this.singleModel);
-  }
-
-  ngOnInit(): void {
-    const search = window.location.search;
-    const modelName = typeof search === 'string' && search.includes('?name=') && search.split('?name=')[1];
-    if (window.location.pathname === '/versioning/model') {
-      this.fetchData(modelName);
-    }
-    // this.htmlSrcFrame = 'https://storage.googleapis.com/capstone_rmit_2020/b8c8b198-5a7d-11eb-9a8d-44032ceb1a4eout.html';
+  getSelectedModel(version: string, models: MODEL[]) {
+    const found = models.find(item => item.version.toString() === version.toString());
+    this.singleModel = found;
+    this.currentVersion = found.version;
+    this.convertData(found);
   }
 
   getIframeSrc() {
@@ -152,12 +166,6 @@ export class ModelsVersioningComponent implements OnInit {
     this.chartOption = generateEchartOption(this.cropData, this.filterOptions.target, this.chartTitle);
   }
 
-  getSelectedModel(version: string, models: MODEL[]) {
-    const found = models.find(item => item.version === version);
-    this.singleModel = found;
-    this.currentVersion = found.version;
-    this.convertData(found);
-  }
 
   onSelectVersion(version: string): void {
     this.getSelectedModel(version, this.modelList);
@@ -168,8 +176,6 @@ export class ModelsVersioningComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    if (this.dataListSub) {
-      this.dataListSub.unsubscribe()
-    }
+    this.modelListSub.unsubscribe()
   }
 }

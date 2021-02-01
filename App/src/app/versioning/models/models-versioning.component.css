@@ -17,7 +17,7 @@
 .versioning-col {
   display: flex;
   padding: 1rem;
-  height: 900px;
+  min-height: 450px;
 }
 
 .versioning-col.left-col {

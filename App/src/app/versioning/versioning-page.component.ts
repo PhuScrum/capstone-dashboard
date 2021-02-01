@@ -12,7 +12,6 @@ export class VersioningPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.isModel = window.location.pathname === '/versioning/model';
-    console.log("hnyhy",this.isModel)
   }
 
 }

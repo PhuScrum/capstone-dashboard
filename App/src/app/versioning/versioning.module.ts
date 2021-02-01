@@ -5,12 +5,12 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NgZorroAntdModule } from '../ng-zorro-antd.module';
 import { VersioningPageComponent } from './versioning-page.component';
-import { DatasetsComponent } from './datasets/datasets.component';
+import { DatasetVersioningComponent } from './datasets/datasets.component';
 import { ModelsVersioningComponent } from './models/models-versioning.component';
 import { FilterPresentComponent } from './models/filter-present/filter-present.component';
 
 @NgModule({
-  declarations: [VersioningPageComponent, DatasetsComponent, ModelsVersioningComponent, FilterPresentComponent],
+  declarations: [VersioningPageComponent, DatasetVersioningComponent, ModelsVersioningComponent, FilterPresentComponent],
   imports: [
     CommonModule,
     NgZorroAntdModule,
