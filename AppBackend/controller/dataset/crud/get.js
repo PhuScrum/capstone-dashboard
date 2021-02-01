@@ -14,10 +14,10 @@ const api = async (req, res) => {
                         q.Index('all_datasets')
                     )
                 ),
-                // ref => q.Get(ref) // lookup each result by its reference
                 q.Lambda("X", q.Get(q.Var("X")))// lookup each result by its reference
             )
         )
+        //apply map function to return only the data with its reference id
         const datasets = dbs.data.map(item => {
             return {...item.data, id: item.ref.id}
         })

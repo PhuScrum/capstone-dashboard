@@ -6,9 +6,9 @@ const { Readable } = require('stream');
 
 
 /**
- * Middleware for uploading file to GCS.
+ * function to load the csv buffer and return the descriptions
  * @param {Buffer} buffer
- * @return {Promise<{length: number, features: number}>}
+ * @return {Promise<{length: number, features: number, headers: string[]}>}
  */
 const getDesc = (buffer) => {
   //load csv info
@@ -45,6 +45,7 @@ const api = async (req, res) => {
   const {gcsUrl, fileName, originalname, version, date} = req.file
 
   try {
+    //load the csv file buffer and return the descriptions
     const desc = await getDesc(req.file.buffer)
     const data = {
       url: gcsUrl,
