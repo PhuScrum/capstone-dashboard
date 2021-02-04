@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { DATASETS } from 'src/data/dataType';
 import { VersioningService } from '../versioning.service';
 
-import { formatToAntArray, generateTableOptions } from './helpers'
+import { formatToAntArray, generateTableOptions } from '../helpers'
 
 @Pipe({ name: 'safe' })
 export class SafePipe implements PipeTransform {

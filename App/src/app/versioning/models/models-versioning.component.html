@@ -12,7 +12,7 @@
                   (click)="onSelectVersion(item.version)"
                   class="timeline-version active"
                   [class.active]="currentVersion === item.version"
-                >{{ item.version }}</span
+                  >{{ item.version }}</span
                 >
               </p>
               <p class="date">{{ item.date }}</p>
@@ -32,23 +32,67 @@
       </nz-button-group>
 
       <div class="shap-value w-100" [hidden]="!isShap">
-
         <a
           class="genric-btn primary-border genshap-btn"
-          (click)="generateShap()"
+          (click)="showModal()"
           *ngIf="singleModel && !singleModel.shap"
         >
           Generate Shap Values
         </a>
+        <nz-modal
+          class="shap-modal"
+          [(nzVisible)]="isModalVisible"
+          nzTitle="Generate Shap"
+          (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()"
+          nzClosable="false"
+        >
+          <div class="row align-items-center d-flex">
+            <label class="modal-label">Test size</label>
+            <nz-input-number
+              [(ngModel)]="testSize"
+              [nzMin]="0.1"
+              [nzMax]="0.4"
+              [nzStep]="0.1"
+            ></nz-input-number>
+          </div>
+          <div class="row mt-3">
+            <label class="modal-label">Datasets</label>
+            <nz-select
+              [(ngModel)]="selectedDataset"
+              (ngModelChange)="getSelectedDataset($event)"
+              style="width: 75%"
+              nzPlaceHolder="Please select"
+            >
+              <nz-option *ngFor="let dataset of myDatasetList" [nzValue]="dataset" [nzLabel]="dataset.fileName"></nz-option>
+            </nz-select>
+          </div>
+          <div class="row mt-3">
+            <label class="modal-label">Targets</label>
+            <nz-select
+              nzMode="multiple"
+              style="width: 75%"
+              nzPlaceHolder="Please select"
+              [nzOptions]="listOfFeatures"
+              [(ngModel)]="selectedFeatures"
+            >
+            </nz-select>
+          </div>
+          <div class="row mt-3">
+            <label class="modal-label">Sav URL</label>
+            <input nz-input placeholder="Sav URL" [(ngModel)]="savURL" style="width: 75% ;"/>
+          </div>
+        </nz-modal>
 
-        <iframe
-          [src]="forcePlotURL"
-          height="800"
-          style="width: 100%"
-          *ngIf="singleModel && singleModel.shap"
-        ></iframe>
+        <div class="plots-wrapper" *ngIf="singleModel && singleModel.shap">
+          <iframe
+            [src]="forcePlotURL"
+            height="800"
+            style="width: 100%"
+          ></iframe>
 
-        <img [src]="summaryURL" style="width: 75%">
+          <img [src]="summaryURL" style="width: 75%" />
+        </div>
       </div>
 
       <div class="regression-metrics" [hidden]="isShap">

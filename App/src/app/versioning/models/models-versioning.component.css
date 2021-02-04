@@ -76,7 +76,7 @@
 }
 
 .wrapper-down .content.right p {
-  margin-bottom: 0!important;
+  margin-bottom: 0 !important;
 }
 
 .wrapper-down .content p {
@@ -139,25 +139,37 @@ nz-select {
   width: 120px;
 }
 
-.timeline-version:hover{
+.timeline-version:hover {
   text-decoration: underline;
-  color: #F66D51;
+  color: #f66d51;
   cursor: pointer;
 }
 
-.timeline-version.active{
-  color: #F66D51;
+.timeline-version.active {
+  color: #f66d51;
   font-weight: 600;
 }
 
 .timeline-nz p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 iframe {
   border: none;
 }
 
-.genshap-btn{
-  margin-top: .5rem;
+.genshap-btn {
+  margin-top: 0.5rem;
+}
+
+.shap-modal {
+  width: 100%;
+  max-width: 620px;
+}
+
+.modal-label {
+  font-size: 16px;
+  font-weight: 700;
+  width: 23%;
+  /* margin-right: 15px; */
 }

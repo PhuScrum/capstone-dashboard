@@ -57,10 +57,9 @@ input:enabled {
 
 .primary-border:active,
 .primary-border:focus,
-.primary-border:hover,
-.primary-border:enabled {
-background: #1c6e45;
-border-color: #1c6e45;
+.primary-border:hover{
+  background: #1c6e45;
+  border-color: #1c6e45;
 }
 
 .right {
@@ -71,12 +70,27 @@ border-color: #1c6e45;
   float: left!important;
 }
 
+.ant-btn:active,
+.ant-btn:focus,
+.ant-btn:hover{
+  border: 1px solid #3a9165;
+  color: black;
+}
+
 .ant-btn-primary {
   color: #fff;
   background-color: #135132;
   border-color: #135132;
   text-shadow: 0 -1px 0 rgba(0,0,0,.12);
   box-shadow: 0 2px 0 rgba(0,0,0,.045);
+}
+
+.ant-btn-primary:active,
+.ant-btn-primary:focus,
+.ant-btn-primary:hover {
+  background: #2a9b63;
+  border-color: #2a9b63;
+  color: #fff;
 }
 
 .ant-timeline-item-head-green {

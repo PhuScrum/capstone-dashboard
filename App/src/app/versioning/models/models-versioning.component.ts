@@ -8,6 +8,8 @@ import { Data as MODEL, Crop, DATASETS } from 'src/data/dataType';
 import { VersioningService } from '../versioning.service';
 import { DatasetsService } from '../../profile/datasets/datasets.service';
 
+import { formatToAntArray } from '../helpers';
+
 @Component({
   selector: 'app-version-models',
   templateUrl: './models-versioning.component.html',
@@ -56,7 +58,17 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
 
   currentVersion: string = '';
 
+  isModalVisible: boolean = false;
+
+  testSize: number = 0.2;
+
   myDatasetList: DATASETS[] = [];
+  selectedDataset: DATASETS;
+
+  listOfFeatures: Array<{ value: string; label: string }> = [];
+  selectedFeatures: string[] = [];
+
+  savURL: string = '';
 
   private modelListSub: Subscription;
   private datasetListSub: Subscription;
@@ -136,7 +148,14 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
     .subscribe((data: DATASETS[]) => {
       console.log(data)
       this.myDatasetList = data;
+      this.getSelectedDataset(data[0]);
     })
+  }
+
+  getSelectedDataset(dataset: DATASETS) {
+    console.log(dataset)
+    this.selectedDataset = dataset;
+    this.listOfFeatures = formatToAntArray(dataset.featureList);
   }
 
   fetchData(modelName: string, version: string): void {
@@ -196,8 +215,30 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
     this.isShap = shap;
   }
 
+  showModal() {
+    this.isModalVisible = true;
+  }
+
+  handleOk(): void {
+    this.generateShap()
+    this.isModalVisible = false;
+  }
+
+  handleCancel(): void {
+    this.isModalVisible = false;
+  }
+
   generateShap() {
     console.log('get shap')
+    const body = {
+      sav_url: this.savURL,
+      dataUrl: this.selectedDataset.url,
+      target: this.selectedFeatures,
+      size: this.testSize,
+      did: this.singleModel.id
+    }
+
+    console.log(body)
   }
 
   ngOnDestroy(): void {
