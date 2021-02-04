@@ -152,8 +152,12 @@ nz-select {
 
 .timeline-nz p {
   margin-bottom: .25rem;
-} 
+}
 
 iframe {
   border: none;
+}
+
+.genshap-btn{
+  margin-top: .5rem;
 }

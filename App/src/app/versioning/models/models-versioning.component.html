@@ -8,7 +8,12 @@
             <nz-timeline-item nzColor="red" *ngFor="let item of modelList">
               <p>
                 <strong>Version: </strong>
-                <span (click)="onSelectVersion(item.version)" class="timeline-version active" [class.active]="currentVersion === item.version">{{ item.version }}</span>
+                <span
+                  (click)="onSelectVersion(item.version)"
+                  class="timeline-version active"
+                  [class.active]="currentVersion === item.version"
+                >{{ item.version }}</span
+                >
               </p>
               <p class="date">{{ item.date }}</p>
             </nz-timeline-item>
@@ -17,7 +22,7 @@
       </div>
     </div>
     <div class="versioning-col right-col">
-      <nz-button-group >
+      <nz-button-group>
         <button nz-button nzType="default" (click)="onSelectTab(false)">
           Regression Metrics
         </button>
@@ -25,63 +30,92 @@
           Shap value
         </button>
       </nz-button-group>
-      <iframe src="https://storage.googleapis.com/capstone_rmit_2020/b8c8b198-5a7d-11eb-9a8d-44032ceb1a4eout.html" [hidden]="!isShap" height="800"></iframe>
-      <div class="wrapper-up" [hidden]="isShap">
-        <!-- <div class="content"> -->
 
-        <!-- <error-outlook></error-outlook> -->
+      <div class="shap-value w-100" [hidden]="!isShap">
 
-        <filter-present [cropType]='cropType' [selectedCropType]='filterOptions.crop' (selectCropType)="selectCropType($event)" [targetType]='targetType'
-          [selectedTarget]='filterOptions.target' (selectTargetType)="selectTargetType($event)">
-        </filter-present>
+        <a
+          class="genric-btn primary-border genshap-btn"
+          (click)="generateShap()"
+          *ngIf="singleModel && !singleModel.shap"
+        >
+          Generate Shap Values
+        </a>
 
-        <div echarts [options]="chartOption" class="demo-chart"></div>
+        <iframe
+          [src]="forcePlotURL"
+          height="800"
+          style="width: 100%"
+          *ngIf="singleModel && singleModel.shap"
+        ></iframe>
 
-        <div nz-row class="mt-3">
-          <div nz-col nzSpan="8">
-            <p>MSE</p>
-            <p class="font-weight-bolder">{{mse}}</p>
-          </div>
-          <div nz-col nzSpan="8">
-            <p>MAE</p>
-            <p class="font-weight-bolder">{{mae}}</p>
-          </div>
-          <div nz-col nzSpan="8">
-            <p>Meadian Absolute Error</p>
-            <p class="font-weight-bolder">{{median_absolute_error}}</p>
-          </div>
-        </div>
+        <img [src]="summaryURL" style="width: 75%">
+      </div>
 
-        <div nz-row class="mt-4">
-          <div nz-col nzSpan="8">
-            <p>R2</p>
-            <p class="font-weight-bolder">{{r2Score.toFixed(4)}} %</p>
-            <div *ngIf="r2Score > 0">
-              <nz-progress nz-tooltip nzTitle="mockup" [nzPercent]="100" [nzSuccessPercent]="r2Score"></nz-progress>
+      <div class="regression-metrics" [hidden]="isShap">
+        <div class="wrapper-up">
+          <filter-present
+            [cropType]="cropType"
+            [selectedCropType]="filterOptions.crop"
+            (selectCropType)="selectCropType($event)"
+            [targetType]="targetType"
+            [selectedTarget]="filterOptions.target"
+            (selectTargetType)="selectTargetType($event)"
+          >
+          </filter-present>
+
+          <div echarts [options]="chartOption" class="demo-chart"></div>
+
+          <div nz-row class="mt-3">
+            <div nz-col nzSpan="8">
+              <p>MSE</p>
+              <p class="font-weight-bolder">{{ mse }}</p>
+            </div>
+            <div nz-col nzSpan="8">
+              <p>MAE</p>
+              <p class="font-weight-bolder">{{ mae }}</p>
+            </div>
+            <div nz-col nzSpan="8">
+              <p>Meadian Absolute Error</p>
+              <p class="font-weight-bolder">{{ median_absolute_error }}</p>
             </div>
           </div>
-          <div nz-col nzSpan="8"></div>
-          <div nz-col nzSpan="8">
-            <p>RMSE:</p>
-            <p class="font-weight-bolder">{{rmse}}</p>
+
+          <div nz-row class="mt-4">
+            <div nz-col nzSpan="8">
+              <p>R2</p>
+              <p class="font-weight-bolder">{{ r2Score.toFixed(4) }} %</p>
+              <div *ngIf="r2Score > 0">
+                <nz-progress
+                  nz-tooltip
+                  nzTitle="mockup"
+                  [nzPercent]="100"
+                  [nzSuccessPercent]="r2Score"
+                ></nz-progress>
+              </div>
+            </div>
+            <div nz-col nzSpan="8"></div>
+            <div nz-col nzSpan="8">
+              <p>RMSE:</p>
+              <p class="font-weight-bolder">{{ rmse }}</p>
+            </div>
           </div>
+          <!-- </div> -->
         </div>
-        <!-- </div> -->
-      </div>
-      <div class="wrapper-down" [hidden]="isShap">
-        <div class="content left">
-          <h5>Parameters: </h5>
-          <p>Type: {{ paramType }}</p>
-          <p>Estimator: 189</p>
-          <p>Min leaf split: 2</p>
-          <p>Min leaf sample: 3</p>
-          <p>{{ paramNote }}</p>
-        </div>
-        <div class="content right">
-          <p>{{ fileName }}</p>
-          <p>Features: 128</p>
-          <p>Length: 348</p>
-          <p>Irem losum</p>
+        <div class="wrapper-down">
+          <div class="content left">
+            <h5>Parameters:</h5>
+            <p>Type: {{ paramType }}</p>
+            <p>Estimator: 189</p>
+            <p>Min leaf split: 2</p>
+            <p>Min leaf sample: 3</p>
+            <p>{{ paramNote }}</p>
+          </div>
+          <div class="content right">
+            <p>{{ fileName }}</p>
+            <p>Features: 128</p>
+            <p>Length: 348</p>
+            <p>Irem losum</p>
+          </div>
         </div>
       </div>
     </div>

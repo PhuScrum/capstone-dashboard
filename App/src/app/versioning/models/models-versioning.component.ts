@@ -4,8 +4,9 @@ import { generateEchartOption } from './echart-helpers';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from "@angular/router";
 import { DomSanitizer} from '@angular/platform-browser';
-import { Data as MODEL, Crop } from 'src/data/dataType';
+import { Data as MODEL, Crop, DATASETS } from 'src/data/dataType';
 import { VersioningService } from '../versioning.service';
+import { DatasetsService } from '../../profile/datasets/datasets.service';
 
 @Component({
   selector: 'app-version-models',
@@ -17,7 +18,9 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
   vGutter = 16;
   @Input() model!: MODEL;
   isShap: boolean = false;
-  htmlSrcFrame: string = '';
+  forcePlotURL: any;
+  summaryURL: any;
+
 
   chartOption: EChartOption = {};
   chartTitle: string = '';
@@ -53,13 +56,16 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
 
   currentVersion: string = '';
 
-  
+  myDatasetList: DATASETS[] = [];
+
   private modelListSub: Subscription;
+  private datasetListSub: Subscription;
 
   constructor(
     private modelService: VersioningService,
     private sanitizer: DomSanitizer,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private datasetService: DatasetsService
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -67,16 +73,15 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // const search = window.location.search;
-    // const modelName = typeof search === 'string' && search.includes('?name=') && search.split('?name=')[1];
     this.route.queryParams.subscribe(params => {
       const name = params.name;
       const version = params.version;
       if (window.location.pathname === '/versioning/model') {
         this.fetchData(name, version);
+        this.fetchDatasetList();
       }
     })
-    // this.htmlSrcFrame = 'https://storage.googleapis.com/capstone_rmit_2020/b8c8b198-5a7d-11eb-9a8d-44032ceb1a4eout.html';
+    // this.forcePlotURL = 'https://storage.googleapis.com/capstone_rmit_2020/b8c8b198-5a7d-11eb-9a8d-44032ceb1a4eout.html';
   }
 
   generateOutputNumber(value: number): number {
@@ -125,6 +130,15 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
     }
   }
 
+  fetchDatasetList() {
+    this.datasetService.getData();
+    this.datasetListSub = this.datasetService.getDataListUpdateListener()
+    .subscribe((data: DATASETS[]) => {
+      console.log(data)
+      this.myDatasetList = data;
+    })
+  }
+
   fetchData(modelName: string, version: string): void {
     this.modelService.getModels(modelName);
     this.modelListSub = this.modelService.getDataListUpdateListener()
@@ -138,11 +152,18 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
     const found = models.find(item => item.version.toString() === version.toString());
     this.singleModel = found;
     this.currentVersion = found.version;
+    if(found.shap){
+      this.forcePlotURL = this.safeURL(found.shap[0].force_plot_html)
+      this.summaryURL = this.safeURL(found.shap[0].summary_plot)
+    } else {
+      this.forcePlotURL = this.safeURL('')
+      this.summaryURL = this.safeURL('')
+    }
     this.convertData(found);
   }
 
-  getIframeSrc() {
-    return this.sanitizer.sanitize(4, this.htmlSrcFrame)
+  safeURL(url: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url)
   }
 
   selectCropType(crop: string): void {
@@ -173,6 +194,10 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
 
   onSelectTab(shap: boolean): void {
     this.isShap = shap;
+  }
+
+  generateShap() {
+    console.log('get shap')
   }
 
   ngOnDestroy(): void {

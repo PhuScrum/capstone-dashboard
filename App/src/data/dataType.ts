@@ -26,7 +26,8 @@ export interface Data {
     note: string,
     user: string,
     type: string,
-    date: string
+    date: string,
+    shap: {summary_plot: string, force_plot_html: string}[]
 }
 
 export interface DATASETS {

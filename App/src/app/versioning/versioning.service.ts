@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { AuthService } from '../auth/auth.service';
-import { Data as MODELS, DATASETS } from '../../data/dataType'
+import { Data as MODELS, DATASETS } from '../../data/dataType';
 
 import { BACKEND_URL, ML_URL } from '../globalVar'
 
