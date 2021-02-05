@@ -1,6 +1,21 @@
 <div class="models-versioning">
   <h3>Models Versioning</h3>
-  <div class="versioning-row">
+  <!-- <div class="loading-content" *ngIf="isLoadingContent">
+    <h2 class="mr-2">Loading Content</h2>
+    <div class="spinner-group">
+      <div class="spinner-grow" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div> -->
+  <app-loading-content [isLoading]="isLoadingContent"></app-loading-content>
+  <div class="versioning-row" *ngIf="!isLoadingContent">
     <div class="versioning-col left-col">
       <div class="content">
         <div class="timeline-nz">
@@ -38,6 +53,9 @@
           *ngIf="singleModel && !singleModel.shap"
         >
           Generate Shap Values
+          <div class="spinner-border" role="status" *ngIf="isGeneratingShap">
+            <span class="sr-only">Loading...</span>
+          </div>
         </a>
         <nz-modal
           class="shap-modal"

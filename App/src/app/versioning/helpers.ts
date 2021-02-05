@@ -9,7 +9,6 @@ export const generateTableOptions = (data: Array<any>, cols = 5, rows = 5) => {
   const constructObjectFromKeys = (item: any) => {
     let obj = []
     for ( const i of keys) {
-      // obj = {...obj, [i]: item[i]}
       obj = [...obj, item[i]]
     }
     return obj

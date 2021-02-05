@@ -1,0 +1,23 @@
+h1, h2, h3, h4 ,h5, h6 ,p {
+  margin-bottom: 0;
+}
+
+.loading-content {
+  height: 400px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-content .spinner-group{
+  display: inline;
+}
+
+.loading-content .spinner-group .spinner-grow:first-child {
+  margin-right: .25rem;
+}
+
+.loading-content .spinner-group .spinner-grow:last-child {
+  margin-left: .25rem;
+}

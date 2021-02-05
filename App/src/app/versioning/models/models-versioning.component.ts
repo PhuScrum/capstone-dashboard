@@ -3,7 +3,7 @@ import { EChartOption } from 'echarts';
 import { generateEchartOption } from './echart-helpers';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from "@angular/router";
-import { DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Data as MODEL, Crop, DATASETS } from 'src/data/dataType';
 import { VersioningService } from '../versioning.service';
 import { DatasetsService } from '../../profile/datasets/datasets.service';
@@ -22,7 +22,6 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
   isShap: boolean = false;
   forcePlotURL: any;
   summaryURL: any;
-
 
   chartOption: EChartOption = {};
   chartTitle: string = '';
@@ -56,6 +55,7 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
   modelList: MODEL[] = [];
   singleModel: MODEL;
 
+  modelName: string = '';
   currentVersion: string = '';
 
   isModalVisible: boolean = false;
@@ -70,11 +70,14 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
 
   savURL: string = '';
 
+  isLoadingContent: boolean = false;
+  isGeneratingShap: boolean = false;
+
   private modelListSub: Subscription;
   private datasetListSub: Subscription;
 
   constructor(
-    private modelService: VersioningService,
+    private versioningService: VersioningService,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private datasetService: DatasetsService
@@ -85,15 +88,23 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isLoadingContent = true;
     this.route.queryParams.subscribe(params => {
       const name = params.name;
       const version = params.version;
+      this.modelName = name;
+      this.currentVersion = version;
       if (window.location.pathname === '/versioning/model') {
         this.fetchData(name, version);
         this.fetchDatasetList();
       }
     })
     // this.forcePlotURL = 'https://storage.googleapis.com/capstone_rmit_2020/b8c8b198-5a7d-11eb-9a8d-44032ceb1a4eout.html';
+  }
+
+  stopLoading() {
+    this.isLoadingContent = false;
+    this.isGeneratingShap = false;
   }
 
   generateOutputNumber(value: number): number {
@@ -145,25 +156,25 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
   fetchDatasetList() {
     this.datasetService.getData();
     this.datasetListSub = this.datasetService.getDataListUpdateListener()
-    .subscribe((data: DATASETS[]) => {
-      console.log(data)
-      this.myDatasetList = data;
-      this.getSelectedDataset(data[0]);
-    })
+      .subscribe((data: DATASETS[]) => {
+        console.log(data)
+        this.myDatasetList = data;
+        this.getSelectedDataset(data[0]);
+      })
   }
 
   getSelectedDataset(dataset: DATASETS) {
-    console.log(dataset)
     this.selectedDataset = dataset;
     this.listOfFeatures = formatToAntArray(dataset.featureList);
   }
 
   fetchData(modelName: string, version: string): void {
-    this.modelService.getModels(modelName);
-    this.modelListSub = this.modelService.getDataListUpdateListener()
+    this.versioningService.getModels(modelName);
+    this.modelListSub = this.versioningService.getModelListUpdateListener()
       .subscribe((data: MODEL[]) => {
         this.modelList = data;
-        this.getSelectedModel(version, data)
+        this.getSelectedModel(version, data);
+        this.stopLoading();
       });
   }
 
@@ -171,7 +182,7 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
     const found = models.find(item => item.version.toString() === version.toString());
     this.singleModel = found;
     this.currentVersion = found.version;
-    if(found.shap){
+    if (found.shap) {
       this.forcePlotURL = this.safeURL(found.shap[0].force_plot_html)
       this.summaryURL = this.safeURL(found.shap[0].summary_plot)
     } else {
@@ -229,19 +240,15 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
   }
 
   generateShap() {
-    console.log('get shap')
-    const body = {
-      sav_url: this.savURL,
-      dataUrl: this.selectedDataset.url,
-      target: this.selectedFeatures,
-      size: this.testSize,
-      did: this.singleModel.id
-    }
-
-    console.log(body)
+    this.isGeneratingShap = true;
+    this.versioningService.generateShap(this.savURL, this.selectedDataset.url, this.selectedFeatures, this.singleModel.id, this.testSize)
+    .subscribe(result => {
+      this.fetchData(this.modelName, this.currentVersion)
+    })
   }
 
   ngOnDestroy(): void {
-    this.modelListSub.unsubscribe()
+    this.modelListSub.unsubscribe();
+    this.datasetListSub.unsubscribe();
   }
 }

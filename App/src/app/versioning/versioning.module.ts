@@ -10,9 +10,10 @@ import { VersioningPageComponent } from './versioning-page.component';
 import { DatasetVersioningComponent } from './datasets/datasets.component';
 import { ModelsVersioningComponent } from './models/models-versioning.component';
 import { FilterPresentComponent } from './models/filter-present/filter-present.component';
+import { LoadingContentComponent } from '../loading-content/loading-content.component'
 
 @NgModule({
-  declarations: [VersioningPageComponent, DatasetVersioningComponent, ModelsVersioningComponent, FilterPresentComponent],
+  declarations: [VersioningPageComponent, DatasetVersioningComponent, ModelsVersioningComponent, FilterPresentComponent, LoadingContentComponent],
   imports: [
     CommonModule,
     NgZorroAntdModule,

@@ -62,7 +62,13 @@ export class VersioningService {
     return this.http.post(ML_URL + 'csv-to-json', {url})
   }
 
-  getDataListUpdateListener() {
+  generateShap(sav_url: string, dataUrl: string, target: string[], did: string, size = 0.2) {
+    const body = { sav_url, dataUrl, target, size, did }
+
+    return this.http.post(ML_URL + 'shap-value', body)
+  }
+
+  getModelListUpdateListener() {
     return this.modelsUpdated.asObservable();
   }
   getDataSetUpdateListener() {
