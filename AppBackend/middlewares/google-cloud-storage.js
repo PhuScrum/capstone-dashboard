@@ -67,6 +67,7 @@ exports.sendUploadToGCS = (req, res, next) => {
     stream.on('error', (err) => {
         req.file.cloudStorageError = err;
         next(err);
+        return res.status(500).json(err);
     });
 
     stream.on('finish', () => {

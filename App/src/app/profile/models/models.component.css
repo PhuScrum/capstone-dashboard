@@ -85,8 +85,3 @@
   border-color: #F66D51;
   box-shadow: none;
 }
-
-input[type="file"] {
-  visibility: hidden;
-  position: absolute;
-}

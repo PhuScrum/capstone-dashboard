@@ -75,10 +75,15 @@ export class VersioningService {
     return this.dataSetUpdated.asObservable();
   }
 
-  onSaveModelFile(model: File): Observable<any> {
-    const body = new FormData();
-    body.append('modelData', model);
+  onSaveSavFile(sav: File): Observable<{date: string, version: string, fileName: string, gcsUrl: string}>{
+    const localSecret = this.authService.getSecret()
+    let headers = new HttpHeaders().set('secret', localSecret);
 
-    return this.http.post(BACKEND_URL + 'api/model-data', body);
+    const body = new FormData();
+    body.append('savData', sav);
+    body.append('directory', 'sav');
+
+    return this.http.post<{date: string, version: string, fileName: string, gcsUrl: string}>(BACKEND_URL + 'api/model-data/upload-sav', body, {headers: headers})
+
   }
 }

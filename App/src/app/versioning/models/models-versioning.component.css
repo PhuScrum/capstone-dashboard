@@ -187,7 +187,26 @@ iframe {
   font-size: 16px;
   font-weight: 700;
   width: 23%;
-  /* margin-right: 15px; */
+  margin-bottom: 0;
 }
 
+.upload-sav-btn{
+  font-size: 14px;
+  line-height: 25px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.upload-sav-btn .spinner-border {
+  margin-left: .5rem;
+  width: .85rem;
+  height: .85rem;
+  border-width: .15em;
+}
+
+.genshap-error{
+  margin-left: .5rem;
+  color: red;
+  font-weight: 600;
+}
 

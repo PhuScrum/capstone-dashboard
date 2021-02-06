@@ -72,6 +72,9 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
 
   isLoadingContent: boolean = false;
   isGeneratingShap: boolean = false;
+  isUploadingSav: boolean = false;
+
+  isGenShapError: boolean = false;
 
   private modelListSub: Subscription;
   private datasetListSub: Subscription;
@@ -231,7 +234,8 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
   }
 
   handleOk(): void {
-    this.generateShap()
+    if(this.savURL!=="" && this.selectedFeatures.length === 1) this.generateShap();
+    else this.isGenShapError = true;
     this.isModalVisible = false;
   }
 
@@ -243,7 +247,25 @@ export class ModelsVersioningComponent implements OnInit, OnDestroy {
     this.isGeneratingShap = true;
     this.versioningService.generateShap(this.savURL, this.selectedDataset.url, this.selectedFeatures, this.singleModel.id, this.testSize)
     .subscribe(result => {
+      this.isGenShapError = false;
       this.fetchData(this.modelName, this.currentVersion)
+    }, err => {
+      this.isGenShapError = true;
+      this.stopLoading();
+    })
+  }
+
+  onSavPicked(event: Event): void {
+    this.isUploadingSav = true;
+    const file = (event.target as HTMLInputElement).files[0];
+
+    // this.modelService.onSaveModelFile(file, this.selectedType).subscribe(result => this.fetchData())
+    this.versioningService.onSaveSavFile(file)
+    .subscribe(result => {
+      this.isUploadingSav = false;
+      this.savURL = result.gcsUrl;
+    }, err => {
+      this.isUploadingSav = false;
     })
   }
 

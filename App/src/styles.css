@@ -108,9 +108,15 @@ input:enabled {
   border-width: 3px;
 }
 
-input:hover,
+input:focus,
 input:active,
-input:focus {
-  border-color: #F66D51;
-  box-shadow: none;
+input:hover{
+  box-shadow: none!important;
+  border-color: #ced4da!important;
 }
+
+input[type="file"] {
+  visibility: hidden;
+  position: absolute;
+}
+
