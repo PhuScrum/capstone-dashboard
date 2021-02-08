@@ -16,6 +16,7 @@
 
 <div echarts [options]="chartOption" class="demo-chart"></div>
 
+
 <div nz-row class="mt-3">
   <div nz-col nzSpan="8">
     <p>MSE</p>
@@ -34,7 +35,7 @@
 <div nz-row class="mt-4">
   <div nz-col nzSpan="8">
     <p>R2</p>
-    <p class = "font-weight-bolder">{{r2Score}}</p>
+    <p class = "font-weight-bolder r2Score">{{r2Score.toFixed(4)}} %</p>
     <div *ngIf="r2Score > 0">
       <nz-progress nz-tooltip nzTitle="mockup" [nzPercent]="100" [nzSuccessPercent]="r2Score" ></nz-progress>
     </div>
@@ -45,3 +46,5 @@
     <p class = "font-weight-bolder">{{rmse}}</p>
   </div>
 </div>
+
+<app-metrics-comparision></app-metrics-comparision>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service'
 
 import { Data as DataType } from '../../data/dataType'
 
@@ -9,16 +10,18 @@ const BACKEND_URL = 'http://localhost:8080/'
 @Injectable({
   providedIn: 'root'
 })
+
 export class ModelService {
   private dataList: DataType[] = [];
   private dataListUpdated = new Subject<DataType[]>();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) { }
 
   getData() {
-    this.http.get<DataType[]>( BACKEND_URL + 'api/model-data')
+    this.http.get<DataType[]>( BACKEND_URL + 'api/model-data/all')
     .subscribe(data => {
       this.dataList = data;
       this.dataListUpdated.next([...this.dataList]);
@@ -29,14 +32,16 @@ export class ModelService {
     return this.dataListUpdated.asObservable();
   }
 
-  onSaveModelFile(model: File): Observable<any> {
-    // console.log(model);
-    console.log(model)
-    
+  onSaveModelFile(model: File, type: string): Observable<any> {
+    const localSecret = this.authService.getSecret()
+    let headers = new HttpHeaders().set('secret', localSecret);
+
     const body = new FormData();
     body.append('modelData', model);
-    console.log(body);
+    body.append('directory', 'models')
+    body.append('note', 'hello world')
+    body.append('type', type)
 
-    return this.http.post(BACKEND_URL + 'api/model-data', body);
+    return this.http.post(BACKEND_URL + 'api/model-data/upload', body, {headers: headers});
   }
 }

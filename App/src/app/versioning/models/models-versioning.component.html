@@ -1,0 +1,182 @@
+<div class="models-versioning">
+  <h3>Models Versioning</h3>
+  <app-loading-content [isLoading]="isLoadingContent"></app-loading-content>
+  <div class="versioning-row" *ngIf="!isLoadingContent">
+    <div class="versioning-col left-col">
+      <div class="content">
+        <div class="timeline-nz">
+          <nz-timeline nzMode="alternate">
+            <nz-timeline-item nzColor="red" *ngFor="let item of modelList">
+              <p>
+                <strong>Version: </strong>
+                <span
+                  (click)="onSelectVersion(item.version)"
+                  class="timeline-version active"
+                  [class.active]="currentVersion === item.version"
+                  >{{ item.version }}</span
+                >
+              </p>
+              <p class="date">{{ item.date }}</p>
+            </nz-timeline-item>
+          </nz-timeline>
+        </div>
+      </div>
+    </div>
+    <div class="versioning-col right-col">
+      <nz-button-group>
+        <button nz-button nzType="default" (click)="onSelectTab(false)">
+          Regression Metrics
+        </button>
+        <button nz-button nzType="default" (click)="onSelectTab(true)">
+          Shap value
+        </button>
+      </nz-button-group>
+
+      <div class="shap-value w-100" [hidden]="!isShap">
+        <a
+          class="genric-btn primary-border genshap-btn"
+          (click)="showModal()"
+          *ngIf="singleModel && !singleModel.shap"
+        >
+          Generate Shap Values
+          <div class="spinner-border" role="status" *ngIf="isGeneratingShap">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </a>
+        <small class="genshap-error" *ngIf="isGenShapError">Generate Shap Error</small>
+        <nz-modal
+          class="shap-modal"
+          [(nzVisible)]="isModalVisible"
+          nzTitle="Generate Shap"
+          (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()"
+          nzClosable="false"
+        >
+          <div class="row align-items-center d-flex">
+            <label class="modal-label">Test size</label>
+            <nz-input-number
+              [(ngModel)]="testSize"
+              [nzMin]="0.1"
+              [nzMax]="0.4"
+              [nzStep]="0.1"
+            ></nz-input-number>
+          </div>
+          <div class="row mt-3">
+            <label class="modal-label">Datasets</label>
+            <nz-select
+              [(ngModel)]="selectedDataset"
+              (ngModelChange)="getSelectedDataset($event)"
+              style="width: 75%"
+              nzPlaceHolder="Please select"
+            >
+              <nz-option *ngFor="let dataset of myDatasetList" [nzValue]="dataset" [nzLabel]="dataset.fileName"></nz-option>
+            </nz-select>
+          </div>
+          <div class="row mt-3">
+            <label class="modal-label">Targets</label>
+            <nz-select
+              nzMode="multiple"
+              style="width: 75%"
+              nzPlaceHolder="Please select"
+              [nzOptions]="listOfFeatures"
+              [(ngModel)]="selectedFeatures"
+            >
+            </nz-select>
+          </div>
+          <div class="row mt-3">
+            <label class="modal-label">Sav URL</label>
+            <input type="file" #filePicker (change)="onSavPicked($event)">
+            <a
+              class="genric-btn primary-border upload-sav-btn"
+              (click)="filePicker.click()"
+            >
+              Add
+              <div class="spinner-border" role="status" *ngIf="isUploadingSav">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </a>
+            <input nz-input placeholder="Sav URL" [(ngModel)]="savURL" style="width: fit-content ;"/>
+          </div>
+        </nz-modal>
+
+        <div class="plots-wrapper" *ngIf="singleModel && singleModel.shap">
+          <iframe
+            [src]="forcePlotURL"
+            height="800"
+            style="width: 100%"
+          ></iframe>
+
+          <img [src]="summaryURL" style="width: 75%" />
+        </div>
+      </div>
+
+      <div class="regression-metrics" [hidden]="isShap">
+        <div class="wrapper-up">
+          <filter-present
+            [cropType]="cropType"
+            [selectedCropType]="filterOptions.crop"
+            (selectCropType)="selectCropType($event)"
+            [targetType]="targetType"
+            [selectedTarget]="filterOptions.target"
+            (selectTargetType)="selectTargetType($event)"
+          >
+          </filter-present>
+
+          <div echarts [options]="chartOption" class="demo-chart"></div>
+
+          <div nz-row class="mt-3">
+            <div nz-col nzSpan="8">
+              <p>MSE</p>
+              <p class="font-weight-bolder">{{ mse }}</p>
+            </div>
+            <div nz-col nzSpan="8">
+              <p>MAE</p>
+              <p class="font-weight-bolder">{{ mae }}</p>
+            </div>
+            <div nz-col nzSpan="8">
+              <p>Meadian Absolute Error</p>
+              <p class="font-weight-bolder">{{ median_absolute_error }}</p>
+            </div>
+          </div>
+
+          <div nz-row class="mt-4">
+            <div nz-col nzSpan="8">
+              <p>R2</p>
+              <p class="font-weight-bolder">{{ r2Score.toFixed(4) }} %</p>
+              <div *ngIf="r2Score > 0">
+                <nz-progress
+                  nz-tooltip
+                  nzTitle="mockup"
+                  [nzPercent]="100"
+                  [nzSuccessPercent]="r2Score"
+                ></nz-progress>
+              </div>
+            </div>
+            <div nz-col nzSpan="8"></div>
+            <div nz-col nzSpan="8">
+              <p>RMSE:</p>
+              <p class="font-weight-bolder">{{ rmse }}</p>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+        <div class="wrapper-down">
+          <div class="content left">
+            <h5>Parameters:</h5>
+            <p>Type: {{ paramType }}</p>
+            <p>Estimator: 189</p>
+            <p>Min leaf split: 2</p>
+            <p>Min leaf sample: 3</p>
+            <p>{{ paramNote }}</p>
+          </div>
+          <div class="content right">
+            <p>{{ fileName }}</p>
+            <p>Features: 128</p>
+            <p>Length: 348</p>
+            <p>Irem losum</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

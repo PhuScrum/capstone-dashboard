@@ -1,0 +1,47 @@
+<div class="model-profile">
+  <div class="title">
+    <h1 style="margin-bottom: 0px;">Models</h1>
+    <nz-select [(ngModel)]="selectedType" (ngModelChange)="typeChange($event)" style="width: 190px;display: block; margin-right: 8px; align-self: center;" nzPlaceHolder="Choose Model Type" [nzOptions]="mlOpts" [ngModelOptions]="{standalone: true}"></nz-select>
+    <input type="file" #filePicker (change)="onModelPicked($event)" >
+    <a class="genric-btn primary-border" style="height: 32px;margin-top: 7.5px;" (click)="filePicker.click()">Add</a>
+  </div>
+  <div class="model-wrapper row no-gutters">
+    <div class="model col-12 col-sm-6 col-md-4 col-lg-3 mb-3" *ngFor="let item of dataList">
+      <div class="model-content">
+        <div nz-row>
+          <div nz-col nzSpan="12">
+            <B class="model-title">{{item.name}}</B>
+          </div>
+          <div nz-col nzSpan="12">
+            <a (click)='onSelectModel(item)' class="model-link right">View</a>
+          </div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="12" class="model-label">Type</div>
+          <div nz-col nzSpan="12" class="model-type">{{item.type}}</div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="12" class="model-label" >Version</div>
+          <div nz-col nzSpan="12" class="float-right" style="font-size: 14px" >{{item.version}}</div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="12" class="model-label">Model Grade</div>
+          <div nz-col nzSpan="12">Great</div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="12" class="model-label">Month</div>
+          <div nz-col nzSpan="12">7</div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="12" class="model-label">Target</div>
+          <div nz-col nzSpan="12">Wheat yield</div>
+        </div>
+        <div nz-row class="button-row">
+          <div nz-col nzSpan="24">
+            <button type="button" class="btn submit-model" style="width: 100%;"> </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

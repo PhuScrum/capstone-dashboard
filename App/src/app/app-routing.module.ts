@@ -1,17 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModelPageComponent } from './model/model-page/model-page.component';
-import { ProfilePageComponent } from './profile/profile-page/profile-page.component';
-import { LoginPageComponent } from './auth/login-page/login-page.component'
+import { ProfilePageComponent } from './profile/profile-page.component';
+import { VersioningPageComponent } from './versioning/versioning-page.component';
+import { DatasetVersioningComponent } from './versioning/datasets/datasets.component';
+import { ModelsVersioningComponent } from './versioning/models/models-versioning.component'
+import { LoginPageComponent } from './auth/login-page/login-page.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: ModelPageComponent, pathMatch: 'full' },
-  { path: 'profile', component: ProfilePageComponent, pathMatch: 'full' },
+  { path: 'profile', component: ProfilePageComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+  { path: 'profile/:userId', component: ProfilePageComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+  { path: 'versioning/dataset', component: DatasetVersioningComponent, canActivate: [AuthGuard] },
+  { path: 'versioning/model', component: ModelsVersioningComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginPageComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

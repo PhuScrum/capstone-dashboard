@@ -1,0 +1,41 @@
+.profile-summary {
+  margin-top: 2.75rem ;
+}
+
+.avatar {
+  display: inline-block;
+  font-size: 1em;
+  width: 2.5em;
+  height: 2.5em;
+  text-align: center;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 1em;
+  color: white;
+  background-color: #135132 !important;
+  /* background-color: #F66D51; */
+  border: 7.6px solid #F66D51;
+  /* line-height: 2.5rem; */
+}
+
+.avatar-128 {
+  height: 100px;
+  width: 100px;
+  font-size: 50px;
+}
+
+.avatar span {
+  line-height: 1;
+}
+
+.info-section {
+    padding: 30px 30px;
+}
+
+.activities-section {
+  padding: 8px 18px;
+}
+
+dd{
+  font-size: 16px;
+}

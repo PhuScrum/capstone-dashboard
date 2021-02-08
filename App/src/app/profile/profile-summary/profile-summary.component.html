@@ -1,0 +1,35 @@
+<div class="container profile-summary">
+    <div class="row no-gutters">
+        <div class="col-12 col-md-5">
+            <div class="info-section shadow row d-flex align-items-center mx-3">
+                <div class="avatar-section col-5">
+                    <div class="avatar avatar-128"><span>{{profile.name.charAt(0)}}</span></div>
+                </div>
+                <div class="identity-section col-7">
+                    <h4>{{profile.name}}</h4>
+                    <h6>Engineering</h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-7">
+            <div class="activities-section shadow mx-3">
+                <h4>Activities</h4>
+                <div class="chart-section row no-gutters">
+                    <div class="col-8">
+                        <div echarts [options]="chartOption" [initOpts]="initOpts" class="demo-chart" style="height: unset"></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="activities-count ml-1" >
+                            <dl>
+                                <dd><strong>Models trained: </strong>{{modelCount}}</dd>
+                                <dd><strong>Dataset created: </strong>{{datasetCount}}</dd>
+                                <!-- <dd><strong>Some Metric: </strong>{{someMetric}}</dd> -->
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ const app = express()
 var bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
+const bucketCors = require('./middlewares/google-cloud-storage').configureBucketCors
 const path = require('path')
 
 app.use(bodyParser.json({ limit: '10mb', extended: true }))
@@ -18,26 +19,26 @@ app.use(morgan('dev'))
 //   .then(() => console.log('MongoDB connected'))
 //   .catch(err => console.log(err));
 
-const useCase_API = require('./controller/use_case')
-const ml_model_API = require('./controller/ml_model')
-const upload = require('./controller/ml_model/crud/multer')
-
 //Test Server
 app.get('/api', (req, res) => {
+    
     res.status(200).send('Hello, world!').end();
   });
 
 const ml_model = require('./routes/ml_model')
 const auth = require('./routes/auth')
 const user = require('./routes/user')
+const dataset = require('./routes/datasets')
 app.use('/api/model-data', ml_model)
 app.use('/api/auth', auth)
 app.use('/api/user', user)
-
+app.use('/api/dataset', dataset)
 
 // app.route('/api/model-data')
 //     .get(ml_model_API.crud.getModelData)
 //     .post(upload.single('modelData'), ml_model_API.crud.uploadModel)
+
+bucketCors();
 
 var port = process.env.PORT || 8080
   app.listen(port, () => {

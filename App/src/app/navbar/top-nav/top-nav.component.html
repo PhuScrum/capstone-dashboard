@@ -8,21 +8,29 @@
     <h3>internal dashboard</h3>
     <span>online service</span>
   </div>
+
   <div class="account">
-    <h3>Hello Jack</h3>
+    <div *ngIf="isLogin" class="user-dropdown">
+      <a nz-dropdown [nzDropdownMenu]="menu">
+        <h3>Hello {{firstName}}</h3>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item><a href="/profile/{{userId}}">Profile</a></li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item (click)="showWarning()">Sign out</li>
+        </ul>
+      </nz-dropdown-menu>
+    </div>
+    <a *ngIf="!isLogin" href="/login">
+      <h3>Login</h3>
+    </a>
   </div>
   <div class="bottom-line"></div>
 </nav>
 
-<nav class="navbar navbar-expand-lg shadow-sm" style="padding: 0 .5rem">
+<nav class="navbar navbar-expand-lg shadow-sm" style="padding: 0 .5rem" [hidden]="isVersioning">
   <ul class="navbar-nav group-1 mr-auto">
-    <li class="nav-item ">
-      <a class="nav-link" href="#">Link 1</a>
-    </li>
-
-    <li class="nav-item ">
-      <a class="nav-link" href="#">Link 2</a>
-    </li>
 
     <li class="nav-item active">
       <a class="nav-link" href="#">Models</a>

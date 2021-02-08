@@ -13,6 +13,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FilterPresentComponent } from './model-present/filter-present/filter-present.component';
 import { ErrorOutlookComponent } from './model-present/error-outlook/error-outlook.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { MetricsComparisionComponent } from './model-present/metrics-comparision/metrics-comparision.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { ErrorOutlookComponent } from './model-present/error-outlook/error-outlo
     ModelSelectComponent,
     ModelPresentComponent,
     FilterPresentComponent,
-    ErrorOutlookComponent
+    ErrorOutlookComponent,
+    MetricsComparisionComponent
   ],
   imports: [
     HttpClientModule,
@@ -30,6 +33,7 @@ import { ErrorOutlookComponent } from './model-present/error-outlook/error-outlo
     NzProgressModule,
     NzGridModule,
     NzSelectModule,
+    NzTableModule,
     NgxEchartsModule.forRoot({
       /**
        * This will import all modules from echarts.
@@ -42,6 +46,7 @@ import { ErrorOutlookComponent } from './model-present/error-outlook/error-outlo
   exports: [
     ModelPageComponent,
     ModelPresentComponent,
+    MetricsComparisionComponent
   ]
 })
 

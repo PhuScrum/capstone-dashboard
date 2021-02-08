@@ -1,0 +1,175 @@
+<div class="datasets-versioning">
+  <h3>Data Versioning</h3>
+  <div class="versioning-row">
+    <div class="versioning-col left-col">
+      <div class="content">
+        <div class="timeline-nz">
+          <nz-timeline nzMode="alternate">
+            <nz-timeline-item nzColor="red" *ngFor="let item of dataSet">
+              <p>
+                <strong>Version: </strong
+                ><span
+                  (click)="onSelectVersion(item.version)"
+                  class="timeline-version active" [class.active] = "currentVersion === item.version"
+                  >{{ item.version }}</span
+                >
+              </p>
+              <p class="date">{{ item.date }}</p>
+            </nz-timeline-item>
+          </nz-timeline>
+        </div>
+      </div>
+    </div>
+    <div class="versioning-col right-col">
+      <div class="wrapper-up">
+        <div class="content">
+          <h5 class="table-title">Dataset Preview</h5>
+          <div class="d-inline-flex align-items-center loading table-nz" *ngIf="isLoadingTable || isPageLoading">
+            <div class="loading-text">
+              <h5>Getting Data</h5>
+              <div class="spinner-grow spinner-grow-sm text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow spinner-grow-sm text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow spinner-grow-sm text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
+          <div class="table-nz" *ngIf="!isLoadingTable && !isPageLoading">
+            <nz-table #basicTable [nzData]="csvTable.data" [nzShowPagination]="false">
+              <thead>
+                <tr>
+                  <th *ngFor="let header of csvTable.headers">{{header}}</th>
+                  <th>...</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of basicTable.data">
+                  <td *ngFor="let value of data">{{value}}</td>
+                  <td>...</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </div>
+      </div>
+      <div class="wrapper-down">
+        <div class="content d-block left dataset-overview">
+          <p class="dataset-name">{{ singleData && singleData.fileName }}</p>
+          <p>Features: {{ singleData && singleData.features }}</p>
+          <p>Length: {{ singleData && singleData.length }}</p>
+          <p>Description: {{ singleData && singleData.note }}</p>
+        </div>
+        <div
+          class="content right model-recommendation"
+          *ngIf="singleData && singleData.model_recommend"
+        >
+          <div class="best-model">
+            <h5>Recommend model</h5>
+            <div class="best-model-metric" *ngIf="!isRecommendationLoading">
+              <p>Best model: {{ singleData.model_recommend[0].best_model }}</p>
+              <p>
+                r2_score:
+                {{ singleData.model_recommend[0].bestResult.r2_score.toFixed(4) }}
+              </p>
+            </div>
+            <div class="d-flex model-recommendation-loading mt-3" *ngIf="isRecommendationLoading">
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
+          <div class="other-models" *ngIf="!isRecommendationLoading">
+            <h5 style="margin-bottom: 5px">Other models</h5>
+            <ul class="list-group">
+              <li
+                class="list-unstyled"
+                *ngFor="let item of singleData.model_recommend[0].result"
+              >
+                {{ item.model }}
+              </li>
+            </ul>
+          </div>
+          <div class="re-train mt-3">
+            <a class="genric-btn primary-border" (click)="showModal()"
+              >Train Again</a
+            >
+          </div>
+        </div>
+        <div
+          class="content right no-recommendation"
+          *ngIf="singleData && !singleData.model_recommend"
+        >
+          <div class="no-model-recommendation" *ngIf="!isRecommendationLoading">
+            <h5>No model is recommended yet</h5>
+            <div class="d-inline-flex align-center">
+              <p class="mr-3">Click to train</p>
+              <a class="genric-btn primary-border" (click)="showModal()">Train</a>
+            </div>
+          </div>
+          <div class="d-inline-flex align-items-center loading" *ngIf="isRecommendationLoading">
+            <h5>Training Model</h5>
+            <div class="spinner-grow spinner-grow-sm text-secondary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow spinner-grow-sm text-secondary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow spinner-grow-sm text-secondary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+        <nz-modal
+          class="model-recommendation-modal"
+          [(nzVisible)]="isVisible"
+          nzTitle="Get Model Recommendation"
+          (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()"
+          nzClosable="false"
+        >
+          <div class="row align-items-center d-flex">
+            <label
+              style="
+                font-size: 16px;
+                font-weight: 700;
+                max-width: 13%;
+                margin-right: 15px;
+              "
+              >Test size</label
+            >
+            <nz-input-number
+              [(ngModel)]="testSize"
+              [nzMin]="0.1"
+              [nzMax]="0.4"
+              [nzStep]="0.1"
+            ></nz-input-number>
+          </div>
+          <div class="row mt-3">
+            <label
+              style="
+                font-size: 16px;
+                font-weight: 700;
+                max-width: 13%;
+                margin-right: 15px;
+              "
+              >Targets:</label
+            >
+            <nz-select nzMode="multiple" style="width: 75%" nzPlaceHolder="Please select" [nzOptions]="listOfFeatures" [(ngModel)]="selectedFeatures"> </nz-select>
+          </div>
+        </nz-modal>
+      </div>
+      <div class="shap-display mt-3" *ngIf="singleData && singleData.model_recommend && singleData.model_recommend[0].best_model_shap">
+        <div class="shap-wrapper" >
+          <h1 class="mb-3">Shap Image</h1>
+          <a class="genric-btn primary-border" (click)="viewForcePlot()">View Force Plot</a>
+          <a class="genric-btn primary-border ml-2" (click)="viewSummarPlot()">View Summary Plot</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

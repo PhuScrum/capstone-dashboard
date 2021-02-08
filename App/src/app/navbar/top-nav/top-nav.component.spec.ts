@@ -1,4 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
+// import { Component } from '@angular/core';
 
 import { TopNavComponent } from './top-nav.component';
 
@@ -6,8 +10,6 @@ describe('TopNavComponent', () => {
   let component: TopNavComponent;
   let fixture: ComponentFixture<TopNavComponent>;
 
-  // console.log('component: ', component);
-  // console.log('fixture: ', fixture);
   const increaseHeight = (componentRef) => {
     const { nativeElement = {} } = componentRef || {};
     const newEleRef = { ...componentRef };
@@ -19,7 +21,9 @@ describe('TopNavComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TopNavComponent]
+      declarations: [TopNavComponent],
+      providers: [HttpClientTestingModule, NzModalModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, NzModalService, NzModalModule],
     }).compileComponents();
   }));
 
