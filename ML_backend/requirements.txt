@@ -24,7 +24,7 @@ hpack==3.0.0
 hyper==0.7.0
 hyperframe==3.2.0
 idna==2.10
-ipython==7.16.1
+ipython==7.16.3
 ipython-genutils==0.2.0
 iso8601==0.1.13
 itsdangerous==1.1.0
